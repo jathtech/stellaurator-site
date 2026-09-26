@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact StellAurator</title>
+<meta name="description" content="Write to the StellAurator studio.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+</head>
+<body data-page="contact">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+
+<main id="top">
+  <section class="wrap page-head">
+    <div class="section-head">
+      <p class="eyebrow">Contact us</p>
+      <h1 class="title">How can we help?.</h1>
+      <p class="lede">Questions about the studio, your subscription, or a project you have in mind. Messages go straight to the StellAurator team.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="frame contact-form" id="contactForm" novalidate>
+        <label>Your name<input type="text" name="name" required autocomplete="name" maxlength="120"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email" maxlength="200"></label>
+        <label>Subject
+          <select name="subject">
+            <option>General question</option>
+            <option>My subscription</option>
+            <option>Voices and providers</option>
+            <option>A bug in the studio</option>
+            <option>Working with narrators</option>
+            <option>Press and partnerships</option>
+          </select>
+        </label>
+        <label>Message<textarea name="message" required rows="7" maxlength="4000"></textarea></label>
+        <div class="form-row">
+          <button type="submit" class="btn btn-gold" id="contactSend">Send message</button>
+          <span class="form-status" id="contactStatus" aria-live="polite"></span>
+        </div>
+        <p class="fineprint">We reply by email. Nothing you write here is shared outside the studio.</p>
+      </form>
+      <aside class="contact-aside">
+        <h3>Before you write</h3>
+        <p class="muted">The <a href="brochure.html">brochure</a> answers most questions about what the studio does, and the <a href="pricing.html">pricing page</a> explains what a subscription covers and what happens if you pause.</p>
+        <h3>Narrators and producers</h3>
+        <p class="muted">If you record for others and want to talk about seats for your clients, say so in the subject line.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  const cfg = window.STELLA.cfg;
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('contactStatus');
+  const send = document.getElementById('contactSend');
+  const say = (text, tone) => { status.textContent = text; status.dataset.tone = tone || ''; };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (!data.name.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email) || !data.message.trim()) {
+      say('Please fill in your name, a valid email, and a message.', 'error');
+      return;
+    }
+    if (!cfg.contactEndpoint) {
+      if (cfg.contactFallbackEmail) {
+        const body = encodeURIComponent(`${data.message}\n\n— ${data.name} <${data.email}>`);
+        window.location.href = `mailto:${cfg.contactFallbackEmail}?subject=${encodeURIComponent('[StellAurator] ' + data.subject)}&body=${body}`;
+        say('Opening your email app…', '');
+      } else {
+        say('The contact form is not connected yet (set contactEndpoint in config.js).', 'error');
+      }
+      return;
+    }
+    send.disabled = true;
+    say('Sending…', '');
+    try {
+      const res = await fetch(cfg.contactEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, page: location.href, sentAt: new Date().toISOString() }),
+      });
+      if (!res.ok) throw new Error(`The site replied ${res.status}`);
+      form.reset();
+      say('Sent. We will reply by email.', 'ok');
+    } catch (err) {
+      say(`Could not send: ${err.message}. Please try again in a moment.`, 'error');
+    } finally {
+      send.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

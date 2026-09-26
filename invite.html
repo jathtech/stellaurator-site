@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your StellAurator invitation</title>
+<meta name="description" content="You have been invited to record a part. StellAurator is free for performers: no account, no card.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+<style>
+  /* Three numbered steps, in the website's own gilt-on-black. */
+  .steps { counter-reset: step; display: grid; gap: 18px; margin-top: 36px; }
+  .step { position: relative; padding: 24px 26px 24px 78px; }
+  .step::after {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 24px; top: 22px;
+    width: 36px; height: 36px; display: grid; place-items: center;
+    font-family: var(--font-caps); font-size: 17px; color: var(--gilt);
+    border: 1px solid rgba(var(--glow), .5); border-radius: 999px;
+    box-shadow: 0 0 22px rgba(var(--glow), .22);
+  }
+  .step h3 { font-family: var(--font-display); font-weight: 600; font-size: 23px; margin: 0 0 6px; color: var(--ivory); }
+  .step p { color: var(--ash); font-size: 15px; margin: 0; }
+  .step .cta-row { margin-top: 16px; }
+  .codebox {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin-top: 14px; padding: 12px 14px;
+    background: rgba(var(--silver), .04); border: 1px solid rgba(var(--silver), .22); border-radius: var(--r);
+  }
+  .codebox code {
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 13.5px;
+    color: var(--ivory); word-break: break-all; flex: 1; min-width: 200px;
+  }
+  .copy {
+    font-family: var(--font-caps); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--gilt); background: transparent; border: 1px solid rgba(var(--glow), .45);
+    border-radius: var(--r); padding: 7px 14px; cursor: pointer;
+  }
+  .copy:hover { border-color: var(--candle); box-shadow: 0 0 22px rgba(var(--glow), .3); }
+  body[data-state="revoked"] .title, body[data-state="expired"] .title, body[data-state="unknown"] .title { color: #FF7A8A; }
+  body[data-state="accepted"] .title { color: var(--candle); }
+  .promise { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(var(--silver), .14); }
+  @media (max-width: 640px) { .step { padding: 22px 20px 22px 20px; } .step::after { position: static; margin-bottom: 12px; } }
+</style>
+</head>
+<body data-page="invite" data-state="fresh">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+
+<main class="wrap" style="padding-top:56px;padding-bottom:64px">
+  <div class="page-head" style="padding-top:0">
+    <p class="eyebrow" id="eyebrow">Invitation</p>
+    <h1 class="title" id="heading">One moment — reading your invitation…</h1>
+    <p class="lede" id="lede">StellAurator is free for performers. There is no account to make and nothing to pay.</p>
+  </div>
+
+  <!-- fresh / opened / accepted: the three numbered steps -->
+  <div class="steps" id="steps" hidden>
+    <article class="frame panel step is-lit">
+      <h3>Download StellAurator</h3>
+      <p>Windows 10 or 11, 64-bit. It is free for performers — you will not be asked for a card, and you do not need an account.</p>
+      <div class="cta-row"><a class="btn btn-gold" id="download" href="account.html">Download StellAurator</a></div>
+    </article>
+
+    <article class="frame panel step">
+      <h3>Open my invitation</h3>
+      <p>Once StellAurator is installed, this button hands it your invitation and connects it to the production. Your browser will ask whether it may open StellAurator — say yes.</p>
+      <div class="cta-row"><a class="btn btn-line" id="open" href="#">Open my invitation</a></div>
+    </article>
+
+    <article class="frame panel step">
+      <h3>If that button does nothing</h3>
+      <p>Open StellAurator, choose <em>I was sent a part to record…</em> on the first screen, and paste this:</p>
+      <div class="codebox">
+        <code id="code">Open this page from the link in your email to see your code.</code>
+        <button type="button" class="copy" data-copy-target="code">Copy</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- revoked / expired / unknown: nothing to do here -->
+  <div id="nosteps" hidden>
+    <div class="cta-row">
+      <a class="btn btn-line" href="contact.html">Contact StellAurator</a>
+    </div>
+  </div>
+
+  <div class="promise">
+    <p class="fineprint">
+      This invitation carries no part of the book — not a line, not a character, not a chapter.
+      When the production sends your part it goes straight from their computer to yours.
+      What you record stays on your computer until you send it back.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script type="module" src="invite.js"></script>
+</body>
+</html>

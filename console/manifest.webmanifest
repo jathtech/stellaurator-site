@@ -1,0 +1,17 @@
+{
+  "name": "StellAurator Console",
+  "short_name": "Console",
+  "description": "The owner's window onto StellAurator: accounts, downloads, licenses, support and account control. Aggregates only.",
+  "id": "/console/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050609",
+  "theme_color": "#050609",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "../assets/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "../assets/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

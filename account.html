@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator - your account</title>
+<meta name="description" content="Sign in to download StellAurator, start the free seven-day trial, or buy a plan.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+</head>
+<body data-page="account">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+<main class="wrap" style="padding-top:64px">
+  <div class="page-head">
+    <p class="eyebrow">Account</p>
+    <h1 class="title">Welcome to StellAurator.</h1>
+    <p class="lede">One account does everything: the download, the free trial, your plan and your computers.</p>
+  </div>
+
+  <div class="notes-2" style="margin-top:34px">
+    <article class="frame panel is-lit" style="padding:28px 28px 26px">
+      <h3>New here?</h3>
+      <p>Make an account and download the studio. It is free for seven days with no card, and the seven days start the first time you open the app.</p>
+      <div class="cta-row" style="margin-top:18px"><a class="btn btn-gold" data-account-link="downloads" href="#">Create account &amp; start free trial</a></div>
+    </article>
+    <article class="frame panel" style="padding:28px 28px 26px">
+      <h3>Already have an account?</h3>
+      <p>Sign in to download again, see your plan, or cancel it. In the app, the same email and password go under Settings, Account.</p>
+      <div class="cta-row" style="margin-top:18px"><a class="btn btn-line" data-account-link="downloads" href="#">Sign in</a></div>
+    </article>
+  </div>
+
+  <div class="section-head" style="margin-top:64px">
+    <p class="eyebrow">Once you are signed in</p>
+  </div>
+  <div class="grid-3" style="margin-top:18px">
+    <article class="frame panel">
+      <h3>Download</h3>
+      <p>The newest installer, and a one-time code that opens the app already signed in as you.</p>
+      <div class="cta-row"><a class="btn btn-line" data-account-link="downloads" href="#">Download StellAurator</a></div>
+    </article>
+    <article class="frame panel">
+      <h3>Your plan and billing</h3>
+      <p>Choose monthly or yearly, or cancel in two clicks. A canceled plan stays active to the end of the current billing period.</p>
+      <div class="cta-row"><a class="btn btn-line" data-account-link="purchase" href="#">Plans &amp; billing</a></div>
+    </article>
+    <article class="frame panel">
+      <h3>Your computers</h3>
+      <p>Up to three. The app lists them under Settings, Account, and removes one to make room for another. If the app has not caught up with a purchase, press <em>Check plan now</em> there.</p>
+    </article>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  // Every account action lives on the Wix site, where the member session is.
+  // config.js names it once so moving it to a subdomain is a one-line change.
+  const base = (window.STELLA_CONFIG && window.STELLA_CONFIG.accountSite) || '';
+  document.querySelectorAll('[data-account-link]').forEach((a) => {
+    a.href = base ? `${base}/${a.dataset.accountLink}` : 'pricing.html';
+  });
+})();
+</script>
+</body>
+</html>

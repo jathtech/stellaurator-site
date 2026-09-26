@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Served at https://stellaurator.com/alpha/ . Every relative address on this page (the theme, the
+     scripts, the logo, the site's own nav) is read from the site's root, as on every other page. -->
+<base href="/">
+<title>StellAurator Alpha</title>
+<meta name="description" content="The StellAurator public alpha: one month of the full audiobook studio, free, for 100 people who will tell us what breaks and what they would change.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+<style>
+  .alpha-count { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 6vw, 64px); line-height: 1.05; color: var(--ivory); }
+  .alpha-count-note { margin: 10px 0 0; color: var(--ash); font-size: 16px; }
+  .alpha-box { margin-top: 40px; padding: 34px 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: center; }
+  .alpha-usage { margin: 22px 0 0; color: var(--ash); font-size: 14.5px; max-width: 70ch; }
+  @media (max-width: 760px) { .alpha-box { grid-template-columns: 1fr; padding: 26px 20px; } }
+</style>
+</head>
+<body data-page="alpha">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+
+<main id="top">
+  <section class="wrap page-head">
+    <div class="section-head">
+      <p class="eyebrow">Public alpha</p>
+      <h1 class="title">One month of the full studio, free.</h1>
+      <p class="lede">The StellAurator alpha is for 100 people who will tell us what breaks and what they would change. Every feature is included: recording, editing, every voice and export. No card is asked for, and nothing is charged.</p>
+    </div>
+
+    <div class="frame is-lit alpha-box" data-alpha-box>
+      <div>
+        <p class="alpha-count" data-alpha-count aria-live="polite">100 keys</p>
+        <p class="alpha-count-note" data-alpha-note>One key per account, for new accounts. When the keys are gone, the free 7-day trial is still open to everyone.</p>
+      </div>
+      <a class="btn btn-gold" href="https://account.stellaurator.com/purchase?alpha=1" data-alpha-go>Get my alpha key</a>
+    </div>
+    <p class="alpha-usage" data-alpha-usage>Alpha builds send us basic usage counts after each session &mdash; how long the app was open and which features were used, never your text, audio or names. <a href="terms.html#alpha-usage">What a report holds</a>.</p>
+    <p class="alpha-usage" data-alpha-reward><strong>Record 20,000 words of your own book during the alpha and your first year is free.</strong> We count the words of the lines you record; the app reports the count, never the text.</p>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 class="title">Three steps to your key.</h2>
+    </div>
+    <ol class="steps">
+      <li><b>Create your account</b><span>Press Get my alpha key, then Create account. Use an email address and a password.</span></li>
+      <li><b>Confirm your email</b><span>Open the confirmation email from StellAurator and press the link in it. Then go back to the alpha page.</span></li>
+      <li><b>Claim your key and download</b><span>Press Claim my alpha key. Your key appears on the page and the pass is added to your account. Download the app and sign in with the same email address.</span></li>
+    </ol>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The rules</p>
+      <h2 class="title">What the alpha includes.</h2>
+    </div>
+    <div class="grid-3">
+      <article class="frame panel">
+        <h3>The full studio</h3>
+        <p>Recording, editing, casting, every supported voice and export, on up to three of your computers. The free trial locks export; the alpha does not.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Nothing is charged</h3>
+        <p>No card is asked for. The pass lasts one month from the day you claim it, or until we end the alpha, whichever comes first. It does not renew.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Your work stays yours</h3>
+        <p>Your projects and recordings stay on your computer. When the alpha ends, every book still opens and plays; subscribe to keep recording, editing and exporting.</p>
+      </article>
+    </div>
+    <p class="cta-note" style="margin-top:28px">Found something broken? Press the bug button in the app: the report comes straight to us. <a href="terms.html#privacy">Privacy</a> &middot; <a href="terms.html">License agreement</a></p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="pricing.html">Pricing</a>
+      <a href="alpha/">Alpha</a>
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  // The count comes from the back office (site/wix/README.md §13): GET <accountSite>/_functions/alphaStatus
+  // -> { total, left, open, ended }. Until it answers, the page says "100 keys".
+  const cfg = window.STELLA_CONFIG || {};
+  const site = cfg.accountSite || 'https://account.stellaurator.com';
+  const count = document.querySelector('[data-alpha-count]');
+  const note = document.querySelector('[data-alpha-note]');
+  const go = document.querySelector('[data-alpha-go]');
+  go.href = `${site}/purchase?alpha=1`;
+  fetch(`${site}/_functions/alphaStatus`, { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((s) => {
+      if (!s || !Number(s.total)) return;
+      const total = Number(s.total);
+      const left = Math.max(0, Math.min(total, Number(s.left) || 0));
+      if (s.ended) {
+        count.textContent = 'The alpha has ended';
+        note.textContent = 'Thank you to everyone who tested. The free 7-day trial is open to everyone: the whole studio, no card, and nothing is charged when it ends.';
+        go.textContent = 'Start 7-day free trial';
+        go.href = `${site}/downloads`;
+        return;
+      }
+      if (s.open && left > 0) {
+        count.textContent = `${left} of ${total} keys left`;
+        return;
+      }
+      count.textContent = `All ${total} alpha keys are taken`;
+      note.textContent = 'The free 7-day trial is open to everyone: the whole studio, no card, and nothing is charged when it ends.';
+      go.textContent = 'Start 7-day free trial';
+      go.href = `${site}/downloads`;
+    })
+    .catch(() => {});
+})();
+</script>
+</body>
+</html>

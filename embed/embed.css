@@ -1,0 +1,107 @@
+/* The account screens shown inside account.stellaurator.com (site/embed/*.html): the website's
+   own design (../theme.css) plus what a form-and-cards screen needs.
+
+   THE BOX IS 980 x 500. The Wix editor's size field stops at 500 px of height for an HTML embed
+   and its drag handles cannot be reached from automation, so these screens are composed as one
+   wide panel - a checkout panel, not a scrolling page: the brand, the title and the form on the
+   left, the cards on the right, one line of small print underneath. Below 760 px wide the two
+   columns stack (and the box scrolls). */
+html, body { background: var(--stage); }
+body { margin: 0; overflow-x: hidden; }
+.acct { box-sizing: border-box; width: 100%; max-width: 980px; min-height: 500px; margin: 0 auto; padding: 18px 8px 10px; display: grid; grid-template-columns: 318px minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 12px 30px; align-items: center; }
+.side { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.brand2 { display: flex; align-items: center; gap: 12px; }
+.brand2 img { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 18px rgba(var(--glow), .35)); }
+.brand2 a { font-family: var(--font-caps); font-size: 12.5px; letter-spacing: .32em; color: var(--gilt); }
+.side .eyebrow { margin: 6px 0 0; }
+.side h1 { margin: 0; font-size: 35px; line-height: 1.08; }
+.side .lede { margin: 0; max-width: none; font-size: 15px; line-height: 1.5; color: var(--ash); }
+.who { margin-top: 4px; }
+.who label { display: grid; gap: 6px; font-family: var(--font-caps); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--sterling); }
+.who input {
+  font: 500 16px/1.4 var(--font-body); color: var(--ivory); background: rgba(255,255,255,.035);
+  border: 1px solid rgba(var(--silver), .28); border-radius: var(--r); padding: 11px 12px; width: 100%; box-sizing: border-box;
+}
+.who input::placeholder { color: var(--pewter); }
+.who input:focus { outline: none; border-color: var(--gilt); box-shadow: 0 0 18px rgba(var(--glow), .2); }
+.who input[aria-invalid="true"] { border-color: #FF7A8A; }
+.who .hint { margin: 7px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ash); }
+.signed { margin: 2px 0 0; font-size: 14px; color: var(--ash); overflow-wrap: anywhere; }
+.signed b { color: var(--ivory); font-weight: 600; }
+.status { min-height: 20px; margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--ash); }
+.status[data-tone="error"] { color: #FF7A8A; }
+.status[data-tone="ok"], .welcome { color: #7BD48B; }
+.welcome { margin: 0; font-size: 14.5px; line-height: 1.45; }
+
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; min-width: 0; }
+.cards.one { grid-template-columns: minmax(0, 1fr); }
+.cards .price-card { display: flex; flex-direction: column; padding: 20px 20px 18px; }
+/* the yearly card's tag is taller than the word beside it: both headings take the same room */
+.cards .price-card .eyebrow { display: flex; align-items: center; min-height: 26px; margin: 0 0 8px; }
+.cards .price { font-size: 44px; }
+.cards .price small { font-size: 10.5px; margin-left: 8px; }
+.cards .includes { flex: 1; margin: 14px 0 16px; gap: 7px; }
+.cards .includes li { font-size: 13.5px; line-height: 1.4; gap: 9px; }
+.cards .btn { justify-content: center; width: 100%; box-sizing: border-box; padding: 12px 16px; font-size: 12px; }
+.btn[disabled] { opacity: .55; cursor: default; transform: none; pointer-events: none; }
+.cards p.say { margin: 0 0 16px; font-size: 15px; line-height: 1.55; color: var(--ash); }
+.cards p.say b { color: var(--ivory); }
+.rowbtns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.alpha-count { margin: 4px 0 14px; font-family: var(--font-display, 'Cormorant Garamond', serif); font-size: 26px; line-height: 1.2; color: var(--ivory); }
+.alpha-key { margin: 0 0 12px; font-family: ui-monospace, Consolas, monospace; font-size: 24px; letter-spacing: .12em; color: var(--gilt); overflow-wrap: anywhere; }
+.alpha-hint { margin: 12px 0 0; font-size: 13px; color: var(--ash); }
+.alpha-usage { margin-top: 16px; }
+.alpha-reward { margin-top: 16px; }
+.alpha-reward b { color: var(--ivory); font-weight: 600; }
+.alpha-thanks { margin: 0 0 18px; padding: 16px 20px; }
+.alpha-thanks .eyebrow { margin: 0 0 6px; }
+.alpha-thanks p:last-child { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ivory); }
+.price-card .regular { margin: 4px 0 12px; font-size: 13.5px; color: var(--ash); }
+.price-card .starts { margin: 10px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--ash); text-align: center; }
+.linkish { background: none; border: none; padding: 0; font: inherit; color: var(--gilt); cursor: pointer; text-decoration: underline; }
+
+/* ---- StellAurator Nebula, offered above the plans (docs/NEBULA_BUILD.md §14.5) ----
+   The same frame, the same gilt, the same small caps as the cards it sits over - a strip, not a
+   third card, because the plan is what the page is for and the add-on rides along with it. */
+.col2 { display: grid; gap: 14px; min-width: 0; }
+.nebula { padding: 13px 17px 13px; display: grid; gap: 8px; }
+.nebtop { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.nebula .eyebrow { margin: 0; }
+.nebline { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--ash); }
+.nebline b { color: var(--ivory); font-weight: 600; }
+.switch { display: inline-flex; border: 1px solid rgba(var(--glow), .45); border-radius: 2px; overflow: hidden; }
+.switch .chip {
+  background: none; border: 0; padding: 6px 13px; cursor: pointer; color: var(--sterling);
+  font-family: var(--font-caps); font-weight: 600; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+}
+.switch .chip + .chip { border-left: 1px solid rgba(var(--glow), .45); }
+.switch .chip.is-on { color: #1A1406; background: linear-gradient(180deg, var(--candle), var(--gilt) 45%, #C9A24C); }
+.switch .chip[disabled] { opacity: .55; cursor: default; }
+.nebpicks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; }
+.pick { display: flex; align-items: baseline; gap: 8px; font-size: 13px; line-height: 1.35; color: var(--ash); cursor: pointer; }
+.pick input { accent-color: var(--gilt); margin: 0; flex: none; }
+.pick b { color: var(--ivory); font-weight: 600; }
+.pick .amt { color: var(--gilt); }
+.pick .cur { color: var(--pewter); }
+
+.foot { grid-column: 1 / -1; border-top: 1px solid rgba(var(--silver), .12); padding-top: 9px; display: grid; gap: 4px; text-align: center; }
+.trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 22px; font-size: 12.5px; color: var(--ash); }
+.trust span::before { content: '✦'; color: var(--gilt); margin-right: 8px; }
+.fine { margin: 0; max-width: none; font-size: 12px; line-height: 1.5; color: var(--pewter); }
+.fine a, .signed a, .status a { color: var(--gilt); }
+
+/* the download screen */
+.steps3 { list-style: none; counter-reset: step; padding: 0; margin: 0 0 14px; display: grid; gap: 8px; }
+.steps3 li { counter-increment: step; display: flex; gap: 11px; font-size: 13.5px; line-height: 1.45; color: var(--ivory); }
+.steps3 li::before { content: counter(step); flex: none; width: 22px; height: 22px; border: 1px solid rgba(var(--glow), .6); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-caps); font-size: 11px; color: var(--gilt); }
+.steps3 li span { color: var(--ash); }
+.getrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: end; }
+.codecap { margin: 0; text-align: center; font-family: var(--font-caps); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sterling); }
+.code { margin: 2px 0 8px; font-family: var(--font-display); font-size: 30px; line-height: 1.1; letter-spacing: .12em; color: var(--candle); text-align: center; font-variant-numeric: tabular-nums; user-select: all; }
+.codehint { margin: 12px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ash); }
+
+@media (max-width: 760px) {
+  .acct { grid-template-columns: 1fr; padding: 16px 14px 12px; gap: 16px; }
+  .cards, .rowbtns, .getrow, .nebpicks { grid-template-columns: 1fr; }
+  .side h1 { font-size: 30px; }
+}

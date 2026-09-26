@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator Pricing</title>
+<meta name="description" content="StellAurator subscription: the complete studio, monthly or yearly.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+</head>
+<body data-page="pricing">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+
+<main id="top">
+  <section id="pricing" class="wrap page-head">
+    <div class="section-head">
+      <p class="eyebrow">Pricing</p>
+      <h1 class="title">The whole studio is free for seven days.</h1>
+      <p class="lede">Every feature, all twelve themes, and every supported voice integration are included. Try it free for seven days, no card needed; then $29 a month, or $290 a year.</p>
+    </div>
+    <div class="frame is-lit trial-first">
+      <div>
+        <h2 class="title">Try everything free for 7 days.</h2>
+        <p>No card. No automatic charge. The whole studio, including the 26 built-in voices; only exporting a finished audiobook waits for a plan. The seven days start the first time you open the app.</p>
+      </div>
+      <a class="btn btn-gold" href="#" data-download>Start free trial</a>
+    </div>
+    <p class="ready-head">Already ready to subscribe?</p>
+    <div class="plans">
+      <div class="frame price-card">
+        <p class="eyebrow">Monthly</p>
+        <div class="price">$29 <small>/ month</small></div>
+        <ul class="includes">
+          <li>Full access to the studio</li>
+          <li>All twelve themes</li>
+          <li>All supported voice integrations</li>
+          <li>Software updates</li>
+          <li>Use on three computers</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a class="btn btn-line" href="#" data-subscribe="monthly">Choose monthly</a>
+      </div>
+      <div class="frame price-card is-lit">
+        <p class="eyebrow">Yearly <span class="tag">2 months free</span></p>
+        <div class="price">$290 <small>/ year</small></div>
+        <ul class="includes">
+          <li>Full access to the studio</li>
+          <li>All twelve themes</li>
+          <li>All supported voice integrations</li>
+          <li>Software updates</li>
+          <li>Use on three computers</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a class="btn btn-gold" href="#" data-subscribe="yearly">Choose yearly</a>
+      </div>
+      <div class="plan-notes">
+        <h3>Your work remains yours</h3>
+        <p class="muted">Cancel whenever you want. Your projects and recordings remain on your computer, and StellAurator never uploads your manuscript to us. We will never hold your audiobook hostage.</p>
+        <h3>Seven days free, no card</h3>
+        <p class="muted">Download the studio and sign in: the whole of it is yours for seven days, counted from the first time you open it. No card is asked for, so nothing is charged when the trial ends. Exporting a finished audiobook needs a plan. <a href="#" data-download>Download and start the trial</a>.</p>
+        <h3>Renews until you cancel</h3>
+        <p class="muted">Plans renew automatically each month or year until you cancel. Cancel anytime from your account, in two clicks; your plan stays active to the end of the current billing period. <a href="terms.html#billing">Trial, subscription and billing terms</a>.</p>
+        <h3>Voice usage is separate</h3>
+        <p class="muted">Your subscription covers StellAurator. Cloud voice generation and other paid provider services are billed through your connected accounts. The built-in voices and the Windows voices require no provider account. <a href="https://try.elevenlabs.io/stellaurator?sid1=pricing" target="_blank" rel="sponsored noopener">Get an ElevenLabs account</a> if you want one. StellAurator is an independent affiliate of ElevenLabs and is paid a commission if you subscribe after following this link. You can also go to elevenlabs.io directly.</p>
+        <h3>Generated audio and ACX</h3>
+        <p class="muted">ACX does not accept text-to-speech narration. A performance you recorded yourself and converted with speech-to-speech is still your performance, and StellAurator keeps the original recording alongside every converted take. Every exported file that holds generated narration is marked as AI-generated, and the export dialog says how many lines are generated before you export.</p>
+        <h3>Your work stays with you</h3>
+        <p class="muted">Your projects, recordings, and exports remain on your computer when a trial or a plan ends. The studio still opens every book and plays it. Subscribe again to resume recording, editing, and creating; if you have ever paid for a plan, export stays unlocked for the work you have made.</p>
+        <p class="fineprint">Requires 64-bit Windows 10 or 11. Subscribe here, then activate the app using the same email address.</p>
+      </div>
+    </div>
+
+    <div class="frame price-card" style="margin-top:40px">
+      <p class="eyebrow">Add-on</p>
+      <h2 class="title" style="font-size:27px">StellAurator Nebula</h2>
+      <p class="muted">Our cloud storage option &mdash; carries your books between your computers. Put a book in Nebula from any of your linked computers and take it down on another, whether or not the first one is on. Sealed on your computer with keys only your computers hold. It is not a backup: the master copy of your work stays on your computer.</p>
+      <div class="price-strip" style="margin-top:22px">
+        <div><div class="price">$7 <small>/ month</small></div><p class="muted">Nebula 25 &mdash; 25 GB.</p></div>
+        <div><div class="price">$13 <small>/ month</small></div><p class="muted">Nebula 100 &mdash; 100 GB.</p></div>
+        <div><div class="price">$21 <small>/ month</small></div><p class="muted">Nebula 500 &mdash; 500 GB.</p></div>
+      </div>
+      <p class="muted" style="margin-top:18px">Nebula needs a paid plan, renews until you cancel (monthly, or yearly at half price), and is canceled separately from your subscription. <a href="terms.html#nebula">Nebula terms</a>.</p>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">After you subscribe</p>
+      <h2 class="title">Getting to your first chapter.</h2>
+    </div>
+    <div class="grid-3">
+      <article class="frame panel">
+        <h3>Sign in</h3>
+        <p>Use the same Google account or email you subscribed with on the <a href="account.html">account page</a> to see your plan and download the installer.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Activate the app</h3>
+        <p>Install StellAurator, open it, and enter the same email address. The studio checks your subscription and unlocks.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Import your manuscript</h3>
+        <p>The practice book walks you through casting, generating, recording, and export. Your own book is one import away.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script>
+  if (document.querySelector('[data-subscribe][data-unconfigured]')) {
+    document.querySelector('[data-config-note]').hidden = false;
+    document.querySelectorAll('[data-subscribe]').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+  }
+</script>
+</body>
+</html>
