@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A StellAurator Nebula link</title>
+<meta name="description" content="Someone shared one book or one file with you through StellAurator Nebula. The link carries its own key.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+<style>
+  /* One thing on this page: what the link points at. Nothing else but the wordmark
+     and a link to the site (build spec docs/NEBULA_BUILD.md §8.2). */
+  /* .btn sets its own display, which beats the browser's [hidden] rule on its own. */
+  [hidden] { display: none !important; }
+  .bar { padding: 22px 0 0; }
+  .bar .brand { display: inline-flex; align-items: center; gap: 12px; }
+  .bar .brand:hover { text-decoration: none; }
+  .bar .brand .mark { width: 36px; height: 36px; filter: drop-shadow(0 0 10px rgba(var(--glow), .4)); }
+  /* The wordmark is the only branding this page carries, so it stays at phone width, where the
+     rest of the site drops it in favor of the mark alone. */
+  .bar .brand .word { height: 18px; width: auto; display: block; }
+  main.wrap { padding: 44px 0 72px; }
+  .detail { font-size: 15.5px; color: var(--ash); margin: 16px 0 0; max-width: 68ch; }
+  .detail .sep { color: var(--pewter); }
+  .meter {
+    height: 8px; max-width: 460px; margin-top: 16px; overflow: hidden;
+    background: rgba(var(--silver), .06); border: 1px solid rgba(var(--silver), .24); border-radius: 999px;
+  }
+  .meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, rgba(var(--glow), .45), var(--candle)); }
+  .moved { font-variant-numeric: tabular-nums; margin-top: 10px; }
+  audio { width: min(460px, 100%); margin-top: 22px; }
+  .promise { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(var(--silver), .14); }
+  body[data-state="refused"] .title, body[data-state="broken"] .title { color: #FF7A8A; }
+  body[data-state="ready"] .title, body[data-state="saved"] .title { color: var(--candle); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: baseline; }
+  @media (max-width: 640px) {
+    main.wrap { padding: 28px 0 56px; }
+    .title { font-size: 34px; }
+    .cta-row .btn { width: 100%; text-align: center; }
+    audio { width: 100%; }
+  }
+</style>
+</head>
+<body data-page="nebula" data-state="reading">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="StellAurator home"><img class="mark" src="assets/logo.png" alt=""><img class="word" src="assets/wordmark.png" alt="StellAurator"></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head" style="padding-top:0">
+    <p class="eyebrow" id="eyebrow">StellAurator Nebula</p>
+    <h1 class="title" id="heading" data-nebula-heading>One moment — reading your link…</h1>
+    <p class="lede" id="lede" data-nebula-lede></p>
+    <p class="detail" id="detail" data-nebula-detail hidden></p>
+  </div>
+
+  <!-- kind 'file': save it, and play it if it is audio -->
+  <section id="file" hidden>
+    <div class="cta-row">
+      <button type="button" class="btn btn-gold" id="get" data-nebula-save>Save the file</button>
+      <a class="btn btn-gold" id="saved" data-nebula-saved download hidden>Save the file</a>
+    </div>
+    <div class="meter" id="meter" hidden><i id="meterfill"></i></div>
+    <p class="fineprint moved" id="progress" data-nebula-progress hidden></p>
+    <audio id="player" data-nebula-player controls preload="metadata" hidden></audio>
+  </section>
+
+  <!-- kind 'book': the app receives it (spec §8.3) -->
+  <section id="book" hidden>
+    <div class="cta-row">
+      <a class="btn btn-gold" id="openapp" data-nebula-openapp href="#">Open in StellAurator</a>
+      <a class="btn btn-line" id="getapp" data-nebula-getapp data-download href="account.html">Get StellAurator</a>
+    </div>
+    <p class="fineprint" style="margin-top:18px">Your browser will ask whether it may open StellAurator — say yes. If nothing happens, StellAurator is not installed on this computer yet.</p>
+  </section>
+
+  <div class="promise">
+    <p class="fineprint" id="promise">The link carries the key; StellAurator cannot open the file. Only someone who has the whole link can download it.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Site"><a href="./">stellaurator.com</a></nav>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+
+<script id="nebula-open">
+// Opening a Nebula object in a browser — docs/NEBULA_BUILD.md §3 and §8.2.
+//
+// Nothing below touches the document, so tests/nebulaPage.test.mjs lifts this block out of the
+// page and runs it in Node against an object sealed with node:crypto: the page's own code is
+// proved against the format the app writes, not a description of it.
+//
+// The format, byte for byte:
+//   'NEB1'                                     4 bytes, once, at the front
+//   frame        4-byte big-endian length | 12-byte nonce | ciphertext | 16-byte tag
+//                (the length counts the nonce, the ciphertext and the tag)
+//   nonce        4 bytes chosen once per object | 8-byte big-endian frame index
+//   AAD          'stellaurator-nebula-v1|<objectId>|<index>|<total>' as UTF-8
+//   frame 0      a sealed JSON header { name, size, sha256, kind }
+//   frames 1..n  1 MiB of plaintext each, except the last
+//
+// <total> is the NUMBER OF FRAMES in the object, frame 0 included. It has to be something a
+// reader knows before it opens frame 0, and the frame count is: every frame carries its own
+// length in the clear, so counting them needs no key (countFrames), and a reader that is
+// streaming works it out from the plaintext size the manifest gave it (framesForSize).
+(() => {
+  'use strict';
+
+  const PROTOCOL = 'stellaurator-nebula-v1';
+  const MAGIC = 'NEB1';
+  const FRAME = 1024 * 1024;   // plaintext bytes per frame
+  const LEN = 4, NONCE = 12, TAG = 16;
+
+  const utf8 = new TextEncoder();
+  const text = new TextDecoder();
+
+  /** What a frame is bound to as well as its contents: the object, the place, how many. */
+  const aadFor = (objectId, index, total) => utf8.encode(`${PROTOCOL}|${objectId}|${index}|${total}`);
+
+  /** Frames in an object of this many plaintext bytes: the header, then the 1 MiB pieces.
+      The same arithmetic as server/lib/nebulacrypto.js frameCountFor, which the app seals with. */
+  const framesForSize = (size) => Math.ceil(Math.max(0, Number(size) || 0) / FRAME) + 1;
+
+  const bytesOf = (v) => (v instanceof Uint8Array ? v : new Uint8Array(v));
+
+  /** One run of bytes out of the pieces they arrived in. */
+  function concat(parts) {
+    let n = 0;
+    for (const p of parts) n += p.length;
+    const out = new Uint8Array(n);
+    let at = 0;
+    for (const p of parts) { out.set(p, at); at += p.length; }
+    return out;
+  }
+
+  /** Walks the length prefixes of a whole object. No key, no decryption. */
+  function countFrames(sealed) {
+    const b = bytesOf(sealed);
+    if (b.length < MAGIC.length || text.decode(b.subarray(0, MAGIC.length)) !== MAGIC) {
+      throw new Error('That is not a Nebula file.');
+    }
+    const view = new DataView(b.buffer, b.byteOffset, b.byteLength);
+    let at = MAGIC.length;
+    let frames = 0;
+    while (at < b.length) {
+      if (at + LEN > b.length) throw new Error('That Nebula file is cut short.');
+      const len = view.getUint32(at);
+      if (len < NONCE + TAG || at + LEN + len > b.length) throw new Error('That Nebula file is cut short.');
+      at += LEN + len;
+      frames += 1;
+    }
+    if (frames < 1) throw new Error('That Nebula file is empty.');
+    return frames;
+  }
+
+  const hexToBytes = (hex) => {
+    const out = new Uint8Array(hex.length / 2);
+    for (let i = 0; i < out.length; i += 1) out[i] = parseInt(hex.substr(i * 2, 2), 16);
+    return out;
+  };
+
+  /** base64url or base64, padded or not. */
+  function fromBase64Url(value) {
+    let s = String(value || '').trim().replace(/-/g, '+').replace(/_/g, '/');
+    while (s.length % 4) s += '=';
+    const raw = atob(s);
+    const out = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i += 1) out[i] = raw.charCodeAt(i);
+    return out;
+  }
+
+  /** A 32-byte key, however it was written down: raw bytes, 64 hex characters, or base64url. */
+  function keyBytes(value) {
+    if (value instanceof Uint8Array) return value;
+    if (value instanceof ArrayBuffer) return new Uint8Array(value);
+    const s = String(value || '').trim();
+    return /^[0-9a-fA-F]{64}$/.test(s) ? hexToBytes(s) : fromBase64Url(s);
+  }
+
+  const importKeyRaw = (key) =>
+    crypto.subtle.importKey('raw', keyBytes(key), { name: 'AES-GCM' }, false, ['decrypt']);
+
+  /** One frame back to plaintext. A frame moved, changed or replayed elsewhere throws. */
+  async function openFrame({ cryptoKey, objectId, index, total, frame }) {
+    const raw = bytesOf(frame);
+    if (raw.length < NONCE + TAG) throw new Error('That piece of the file did not read.');
+    const nonce = raw.subarray(0, NONCE);
+    const view = new DataView(nonce.buffer, nonce.byteOffset, NONCE);
+    if (Number(view.getBigUint64(4)) !== index) throw new Error('That piece of the file is out of place.');
+    const plain = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: nonce, additionalData: aadFor(objectId, index, total), tagLength: TAG * 8 },
+      cryptoKey,
+      raw.subarray(NONCE),
+    );
+    return new Uint8Array(plain);
+  }
+
+  /** Hands out exact byte counts from a stream that arrives in whatever pieces it likes. */
+  function byteReader(read) {
+    const queue = [];
+    let have = 0;
+    let ended = false;
+    return {
+      get have() { return have; },
+      get ended() { return ended; },
+      async fill(n) {
+        while (have < n && !ended) {
+          const next = await read();
+          if (!next) { ended = true; break; }
+          const chunk = bytesOf(next);
+          if (chunk.length) { queue.push(chunk); have += chunk.length; }
+        }
+        return have >= n;
+      },
+      take(n) {
+        const out = new Uint8Array(n);
+        let filled = 0;
+        while (filled < n) {
+          const head = queue[0];
+          const need = n - filled;
+          if (head.length <= need) { out.set(head, filled); filled += head.length; queue.shift(); }
+          else { out.set(head.subarray(0, need), filled); queue[0] = head.subarray(need); filled += need; }
+        }
+        have -= n;
+        return out;
+      },
+    };
+  }
+
+  /**
+   * Opens one Nebula object, frame by frame.
+   *
+   * @param {object}   p
+   * @param {string}   p.objectId  the object's id, as the AAD names it
+   * @param {Uint8Array|string} p.key  the 32-byte key: LK for a link manifest, the object key for a file
+   * @param {number}   p.total     how many frames the object has, frame 0 included
+   * @param {Function} p.read      async () => Uint8Array | null; null is the end of the object
+   * @param {Function} [p.onBytes] called with the plaintext bytes opened so far
+   * @returns {Promise<{ header: object, parts: Uint8Array[], bytes: number, frames: number }>}
+   */
+  async function openObject({ objectId, key, total, read, onBytes = null }) {
+    const cryptoKey = await importKeyRaw(key);
+    const reader = byteReader(read);
+    if (!(await reader.fill(MAGIC.length)) || text.decode(reader.take(MAGIC.length)) !== MAGIC) {
+      throw new Error('That is not a Nebula file.');
+    }
+    let header = null;
+    const parts = [];
+    let bytes = 0;
+    let index = 0;
+    while (await reader.fill(LEN)) {
+      const prefix = reader.take(LEN);
+      const len = new DataView(prefix.buffer, prefix.byteOffset, LEN).getUint32(0);
+      if (len < NONCE + TAG) throw new Error('That Nebula file is cut short.');
+      if (!(await reader.fill(len))) throw new Error('That Nebula file is cut short.');
+      const plain = await openFrame({ cryptoKey, objectId, index, total, frame: reader.take(len) });
+      if (index === 0) header = JSON.parse(text.decode(plain));
+      else { parts.push(plain); bytes += plain.length; if (onBytes) onBytes(bytes); }
+      index += 1;
+    }
+    if (reader.have > 0) throw new Error('That Nebula file is cut short.');
+    if (!header) throw new Error('That Nebula file is empty.');
+    if (index !== total) throw new Error('That Nebula file is cut short.');
+    if (header.size != null && Number(header.size) !== bytes) {
+      throw new Error('That Nebula file is not as long as it says it is.');
+    }
+    return { header, parts, bytes, frames: index };
+  }
+
+  /** The same, for an object already in hand whole — a link manifest is small. */
+  async function openObjectBytes({ objectId, key, sealed, total = 0, onBytes = null }) {
+    const b = bytesOf(sealed);
+    let handed = false;
+    return openObject({
+      objectId,
+      key,
+      total: total || countFrames(b),
+      onBytes,
+      read: async () => { if (handed) return null; handed = true; return b; },
+    });
+  }
+
+  // ---- what the link says, and what the page says back ------------------------------------
+
+  /** `#g=<grantId>&k=<LK base64url>`. The key is read here, in the browser, and sent nowhere. */
+  function readLinkHash(href) {
+    let hash = '';
+    try { hash = new URL(String(href || '')).hash || ''; } catch { hash = ''; }
+    const pick = (name) => {
+      const found = new RegExp(`(?:^|[#&])${name}=([^&]*)`).exec(hash);
+      if (!found) return '';
+      try { return decodeURIComponent(found[1]).trim(); } catch { return found[1].trim(); }
+    };
+    return { grantId: pick('g'), key: pick('k') };
+  }
+
+  /** The link that hands a book to the app. It never leaves this computer. */
+  const appLink = (grantId, key) =>
+    `stellaurator://nebula/open/${encodeURIComponent(grantId)}/${encodeURIComponent(key)}`;
+
+  /** An object is stored at m/<memberId>/o/<objectId>, so a presigned URL ends in its id. */
+  function objectIdFromUrl(url) {
+    try {
+      const parts = new URL(String(url), 'https://stellaurator.com/').pathname.split('/').filter(Boolean);
+      return parts.length ? decodeURIComponent(parts[parts.length - 1]) : '';
+    } catch { return ''; }
+  }
+
+  /** The sizes the app says: 640 MB, 2.1 GB, 25 GB. */
+  function humanBytes(n) {
+    const v = Number(n) || 0;
+    if (v >= 1024 ** 3) return `${Number((v / 1024 ** 3).toFixed(1))} GB`;
+    if (v >= 1024 ** 2) return `${Math.round(v / 1024 ** 2)} MB`;
+    if (v >= 1024) return `${Math.round(v / 1024)} KB`;
+    return `${v} bytes`;
+  }
+
+  /** October 1 — the day the link ends, in the reader's own language. */
+  function expiryWords(at) {
+    const when = at instanceof Date ? at : new Date(at);
+    if (!at || Number.isNaN(when.getTime())) return '';
+    try { return when.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }); }
+    catch { return when.toISOString().slice(0, 10); }
+  }
+
+  /** Why a link will not open. The four sentences are the build spec's, word for word. */
+  const REFUSALS = {
+    expired: 'This Nebula link has expired.',
+    stopped: 'This link was stopped by the person who made it.',
+    limit: 'This link has reached its download limit.',
+    paused: 'This link is paused this month.',
+    unknown: 'This Nebula link was not recognized.',
+  };
+  const refusalSentence = (reason) => REFUSALS[String(reason || 'unknown')] || REFUSALS.unknown;
+
+  /** What to do about it, under the sentence. */
+  const REFUSAL_NEXT = {
+    expired: 'A link ends by itself on the day the person who made it chose. Ask them for a new link.',
+    stopped: 'Ask them for a new link if you still need this.',
+    limit: 'A link stops after the number of downloads the person who made it chose. Ask them for a new link.',
+    paused: 'The person who made this link has moved as much through Nebula as their plan allows this month. The link works again on the first of next month.',
+    unknown: 'An email program may have cut the link short. Copy the whole link out of the message and open it again, or ask the person who sent it for a new one.',
+  };
+  const refusalNext = (reason) => REFUSAL_NEXT[String(reason || 'unknown')] || REFUSAL_NEXT.unknown;
+
+  /** The player only appears for things a browser can play. */
+  const AUDIO_TYPES = {
+    mp3: 'audio/mpeg', m4a: 'audio/mp4', m4b: 'audio/mp4',
+    wav: 'audio/wav', flac: 'audio/flac', ogg: 'audio/ogg',
+  };
+  function audioTypeFor(name) {
+    const found = /\.([A-Za-z0-9]+)$/.exec(String(name || ''));
+    return (found && AUDIO_TYPES[found[1].toLowerCase()]) || '';
+  }
+
+  /** A name to save under: the file's own, with any folder in it dropped. */
+  const safeName = (name) => String(name || 'file').split(/[\\/]/).pop().replace(/^\.+/, '').trim() || 'file';
+
+  const toHex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+
+  /** SHA-256 of what arrived, to hold against the sha256 inside the sealed header. */
+  const sha256Hex = async (bytes) => toHex(await crypto.subtle.digest('SHA-256', bytes));
+
+  globalThis.NebulaOpen = {
+    PROTOCOL, MAGIC, FRAME, LEN, NONCE, TAG,
+    aadFor, framesForSize, countFrames, concat, keyBytes, fromBase64Url, importKeyRaw,
+    openFrame, openObject, openObjectBytes, byteReader,
+    readLinkHash, appLink, objectIdFromUrl,
+    humanBytes, expiryWords, refusalSentence, refusalNext,
+    audioTypeFor, safeName, sha256Hex,
+  };
+})();
+</script>
+
+<script>
+// The page itself: read the link, ask the back office about the grant, open what it points at.
+// The key never goes into a request, a log, or any link but the stellaurator:// one.
+(() => {
+  'use strict';
+  const N = globalThis.NebulaOpen;
+  const el = (id) => document.getElementById(id);
+  const cfg = window.STELLA_CONFIG || {};
+  const endpoint = cfg.accountSite ? `${cfg.accountSite}/_functions/nebulaLinkOpen` : '';
+
+  const say = ({ state, heading, lede = '', detail = '' }) => {
+    document.body.dataset.state = state;
+    el('heading').textContent = heading;
+    el('lede').textContent = lede;
+    el('lede').hidden = !lede;
+    el('detail').innerHTML = detail;
+    el('detail').hidden = !detail;
+  };
+  const dots = (...bits) => bits.filter(Boolean).join('<span class="sep"> · </span>');
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  async function ask(body) {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      cache: 'no-store',
+    });
+    if (!res.ok) throw new Error(`The back office replied ${res.status}`);
+    return res.json();
+  }
+
+  const fetchBytes = (url) => fetch(url, { cache: 'no-store', credentials: 'omit' });
+
+  /** Fetch and open one object, a frame at a time, so a 640 MB file is never held twice. */
+  async function openFromUrl({ url, objectId, key, total = 0, onBytes = null }) {
+    const res = await fetchBytes(url);
+    if (!res.ok) throw new Error(`The storage replied ${res.status}`);
+    // With no frame count in hand the whole object has to be here, so that its frames can be
+    // counted: that is the link manifest, which is small. A file's count comes from its size.
+    // A browser without a streaming body (older Safari) also takes the object whole.
+    if (!total || !res.body || !res.body.getReader) {
+      return N.openObjectBytes({ objectId, key, sealed: new Uint8Array(await res.arrayBuffer()), total, onBytes });
+    }
+    const reader = res.body.getReader();
+    return N.openObject({
+      objectId,
+      key,
+      total,
+      onBytes,
+      read: async () => { const { value, done } = await reader.read(); return done ? null : value; },
+    });
+  }
+
+  async function start() {
+    const { grantId, key } = N.readLinkHash(window.location.href);
+    if (!grantId || !key) {
+      say({
+        state: 'broken',
+        heading: 'Part of this link is missing.',
+        lede: 'The address is missing the part after the # sign, which carries the key. Copy the whole link out of the message you were sent and open it again.',
+      });
+      return;
+    }
+    if (!endpoint) {
+      say({
+        state: 'broken',
+        heading: 'This page is not connected to StellAurator yet.',
+        lede: 'Try the link again later, or ask the person who sent it to send the file another way.',
+      });
+      return;
+    }
+
+    let grant;
+    try {
+      grant = await ask({ grantId });          // the key is NOT in this request
+    } catch {
+      say({
+        state: 'broken',
+        heading: 'StellAurator could not be reached just now.',
+        lede: 'Check your connection and open the link again.',
+      });
+      return;
+    }
+
+    if (!grant || !grant.ok) {
+      const reason = (grant && grant.reason) || 'unknown';
+      say({ state: 'refused', heading: N.refusalSentence(reason), lede: N.refusalNext(reason) });
+      el('promise').hidden = true;
+      return;
+    }
+
+    const expires = N.expiryWords(grant.expiresAt);
+    const from = 'from a StellAurator user';
+
+    if (grant.kind === 'book') {
+      // The app fetches the manifest and the objects. Fetching it here would spend one of the
+      // link's downloads and tell the page nothing it needs (spec §5, §8.3).
+      say({
+        state: 'ready',
+        heading: 'This link is a StellAurator book.',
+        lede: 'Open StellAurator to receive it.',
+        detail: dots(N.humanBytes(grant.bytes), from, expires && `link expires ${esc(expires)}`),
+      });
+      el('openapp').href = N.appLink(grantId, key);
+      el('book').hidden = false;
+      el('promise').textContent = 'The link carries the key; StellAurator cannot open the book. Only someone who has the whole link can receive it.';
+      return;
+    }
+
+    // kind 'file': the manifest names the one file and carries its object key in the clear.
+    let manifest;
+    try {
+      const manifestId = grant.manifestObjectId || N.objectIdFromUrl(grant.manifestUrl);
+      const opened = await openFromUrl({ url: grant.manifestUrl, objectId: manifestId, key, total: 0 });
+      manifest = JSON.parse(new TextDecoder().decode(N.concat(opened.parts)));
+    } catch {
+      say({
+        state: 'broken',
+        heading: 'The key in this link does not open what it points at.',
+        lede: 'Copy the whole link out of the message and open it again. If it still does not open, ask the person who sent it for a new link.',
+      });
+      return;
+    }
+
+    const file = (manifest.files || [])[0];
+    if (!file) {
+      say({
+        state: 'broken',
+        heading: 'This link does not name a file.',
+        lede: 'Ask the person who sent it for a new link.',
+      });
+      return;
+    }
+
+    say({
+      state: 'ready',
+      heading: manifest.label || N.safeName(file.name),
+      detail: dots(N.humanBytes(file.size || manifest.bytes), from, expires && `link expires ${esc(expires)}`),
+    });
+    el('file').hidden = false;
+    el('get').addEventListener('click', () => { save(grantId, file); }, { once: true });
+  }
+
+  async function save(grantId, file) {
+    const get = el('get');
+    get.disabled = true;
+    get.textContent = 'Getting the file…';
+    el('meter').hidden = false;
+    el('progress').hidden = false;
+
+    const total = Number(file.size) || 0;
+    let painted = 0;
+    const onBytes = (done) => {
+      const now = Date.now();
+      if (now - painted < 150 && done < total) return;
+      painted = now;
+      el('progress').textContent = `${N.humanBytes(done)} of ${N.humanBytes(total)}`;
+      el('meterfill').style.width = `${total ? Math.min(100, (done / total) * 100) : 0}%`;
+    };
+    onBytes(0);
+
+    try {
+      const answer = await ask({ grantId, objectIds: [file.objectId] });
+      if (!answer || !answer.ok) {
+        const reason = (answer && answer.reason) || 'unknown';
+        say({ state: 'refused', heading: N.refusalSentence(reason), lede: N.refusalNext(reason) });
+        el('file').hidden = true;
+        el('promise').hidden = true;
+        return;
+      }
+      const url = (answer.urls || {})[file.objectId];
+      if (!url) throw new Error('The back office named no address for that file.');
+
+      const opened = await openFromUrl({
+        url, objectId: file.objectId, key: N.keyBytes(file.key),
+        total: N.framesForSize(file.size), onBytes,
+      });
+
+      const name = N.safeName(opened.header.name || file.name);
+      const blob = new Blob(opened.parts, { type: N.audioTypeFor(name) });
+      opened.parts.length = 0;
+
+      const got = await N.sha256Hex(await blob.arrayBuffer());
+      const want = String(opened.header.sha256 || '').toLowerCase();
+      document.body.setAttribute('data-nebula-sha256', got);
+      document.body.setAttribute('data-nebula-verified', want && got === want ? 'yes' : 'no');
+      if (want && got !== want) {
+        say({
+          state: 'broken',
+          heading: 'The file did not arrive whole.',
+          lede: 'Nothing was saved. Open the link again to try once more.',
+        });
+        el('file').hidden = true;
+        return;
+      }
+
+      const href = URL.createObjectURL(blob);
+      const link = el('saved');
+      link.href = href;
+      link.download = name;
+      link.hidden = false;
+      get.hidden = true;
+      el('progress').textContent = `${N.humanBytes(blob.size)} — ready to save`;
+      el('meterfill').style.width = '100%';
+      document.body.dataset.state = 'saved';
+
+      const type = N.audioTypeFor(name);
+      if (type) {
+        const player = el('player');
+        player.src = href;
+        player.hidden = false;
+      }
+    } catch {
+      say({
+        state: 'broken',
+        heading: 'The file could not be downloaded.',
+        lede: 'Check your connection and open the link again.',
+      });
+      el('file').hidden = true;
+    }
+  }
+
+  start();
+})();
+</script>
+</body>
+</html>

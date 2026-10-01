@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator - choose your plan</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="../theme.css">
+<!--
+  The face of account.stellaurator.com/purchase.
+
+  The Wix page holds the account, the checkout and every rule; this page is only what it
+  looks like, in the website's own design, and is shown inside that page (an HTML embed
+  whose address is this file). They talk by postMessage:
+    this page -> Wix   { t:'ready' } { t:'buy', plan, email, nebula:{ tier, period }|null }
+                       { t:'claim', email }
+                       { t:'cancel' } { t:'confirm-cancel' } { t:'keep' } { t:'signin' }
+                       { t:'alpha-signup' } { t:'alpha-recheck' } { t:'alpha-resend' } { t:'alpha-claim' }
+    Wix -> this page   { t:'state', view, signedIn, email, wanted, busy, message, tone,
+                         sub:{ planName, stopping, endsAt }, confirmCancel, links,
+                         nebula:{ tiers, on, tier, period, endsAt } | null,
+                         alpha:{ phase, total, left, open, ended, key, email, canResend } | null,
+                         offer:{ strip, startsAt, monthly, yearly } | null }
+  Nothing here decides anything: a press is a request, the state that comes back is the
+  answer. Opened on its own (no Wix around it) it shows the plans with the buttons leading
+  to the real page, and ?demo=pass|subscriber|stopping|signedin|nebula shows the other faces.
+
+  The public alpha (site/wix/README.md §13) is view 'alpha', reached with ?alpha=1 on the Wix page.
+  ?demo=alpha-signedout|alpha-unverified|alpha-ready|alpha-claimed|alpha-full|alpha-has-plan shows it.
+
+  StellAurator Nebula, the cloud storage add-on, is offered in a strip above the two plan
+  cards (docs/NEBULA_BUILD.md §14.5): a Monthly / Yearly switch, the three sizes, and
+  "No Nebula for now" chosen until somebody chooses otherwise. The choice rides along with
+  the plan on the buy message; the Wix page buys the plan first and Nebula straight after.
+  Wix side: site/wix/pages/purchase.js.
+-->
+<link rel="stylesheet" href="embed.css">
+</head>
+<body>
+<div class="acct" id="app" aria-live="polite"></div>
+
+<script>
+(function () {
+  var SITE = 'https://stellaurator.com/';
+  var ACCOUNT = 'https://account.stellaurator.com';
+  var inWix = window.parent !== window;
+  var params = new URLSearchParams(location.search);
+  // every field the page may push must be named here: the listener below copies only keys it already knows
+  var state = { view: 'plans', gold: false, signedIn: false, email: '', wanted: '', busy: false, message: '', tone: '', sub: null, confirmCancel: false, nebula: null, alpha: null, offer: null };
+  var typed = '';
+  var invalid = false;
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  // ---- StellAurator Nebula (docs/NEBULA_BUILD.md §14.5) ----
+  // The three sizes and both their prices come from the Wix page, which reads the site's own tier
+  // table (site/wix/nebulaLogic.js TIERS). The copy below is what a standalone look at this design
+  // uses, and it is the same table.
+  var NEBULA_TIERS = [
+    { id: 'nebula25', name: 'Nebula 25', gb: 25, priceLine: '$7 a month', yearOfferLine: '$42 a year (50% off)' },
+    { id: 'nebula100', name: 'Nebula 100', gb: 100, priceLine: '$13 a month', yearOfferLine: '$78 a year (50% off)' },
+    { id: 'nebula500', name: 'Nebula 500', gb: 500, priceLine: '$21 a month', yearOfferLine: '$126 a year (50% off)' }
+  ];
+  var NEBULA_LINE = 'Our cloud storage option - carries your books between your computers.';
+  var nebPeriod = 'month';   // the Monthly / Yearly switch
+  var nebTier = '';          // '' is "No Nebula for now", which is how the page opens
+
+  function esc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function send(msg) { if (inWix) window.parent.postMessage(msg, '*'); }
+  function day(t) { try { return new Date(t).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }); } catch (e) { return ''; } }
+
+  // what the studio DOES - never 'what the trial holds back' (that is a trial matter, said where the trial is described)
+  var INCLUDES = ['Act every part; hear each character in their own voice', 'Cast, direct and edit every take', 'Mix, score and master in one window', 'Publish-ready audio: ACX MP3s and chaptered M4B'];
+
+  function side(eyebrow, title, lede, hint) {
+    return '<aside class="side">'
+      + '<div class="brand2"><a href="' + SITE + '" target="_top" aria-label="StellAurator website"><img src="../assets/logo.png" alt=""></a><a href="' + SITE + '" target="_top">STELLAURATOR</a></div>'
+      + '<p class="eyebrow">' + esc(eyebrow) + '</p>'
+      + '<h1 class="title">' + esc(title) + '</h1>'
+      + (lede ? '<p class="lede">' + lede + '</p>' : '')
+      + (state.signedIn ? '<p class="signed">Signed in as <b>' + esc(state.email) + '</b></p>'
+        : hint === null ? ''
+        : '<div class="who"><label for="email">Your email address'
+          + '<input id="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="you@example.com" value="' + esc(typed) + '"' + (invalid ? ' aria-invalid="true"' : '') + '></label>'
+          + '<p class="hint">' + hint + '</p></div>')
+      + '<p class="status" role="status" data-tone="' + esc(state.tone || '') + '">' + esc(state.message || '') + '</p>'
+      + '</aside>';
+  }
+
+  function card(plan, lit) {
+    var monthly = plan === 'monthly';
+    // The alpha thanks (README §13): an alpha tester sees the alpha price first, the regular price
+    // after it, and the day the plan starts on the button itself.
+    var o = state.offer && state.offer[plan];
+    if (o) {
+      return '<div class="frame price-card is-lit" data-alpha-price="' + plan + '">'
+        + '<p class="eyebrow">' + (monthly ? 'Monthly' : 'Yearly') + ' <span class="tag">alpha price</span></p>'
+        + '<div class="price">' + esc(o.price) + ' <small>' + (monthly ? '/ month for ' + esc(o.cycles) + ' months' : 'first year') + '</small></div>'
+        + '<p class="regular">Then ' + esc(o.regular) + (monthly ? ' a month' : ' a year') + '. ' + esc(o.line) + '.</p>'
+        + '<ul class="includes">' + INCLUDES.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>'
+        + '<button class="btn btn-gold" data-buy="' + plan + '"' + (state.busy ? ' disabled' : '') + '>Lock in the alpha price</button>'
+        + '<p class="starts">' + esc(o.button) + '</p>'
+        + '</div>';
+    }
+    return '<div class="frame price-card' + (lit ? ' is-lit' : '') + '">'
+      + '<p class="eyebrow">' + (monthly ? 'Monthly' : 'Yearly <span class="tag">2 months free</span>') + '</p>'
+      + '<div class="price">' + (monthly ? '$29 <small>/ month</small>' : '$290 <small>/ year</small>') + '</div>'
+      + '<ul class="includes">' + INCLUDES.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>'
+      + '<button class="btn ' + (lit ? 'btn-gold' : 'btn-line') + '" data-buy="' + plan + '"' + (state.busy ? ' disabled' : '') + '>' + (monthly ? 'Choose monthly' : 'Choose yearly') + '</button>'
+      + '</div>';
+  }
+
+  /** The sizes the page pushed, or the table above when it has not pushed one. */
+  function nebulaTiers() {
+    var n = state.nebula;
+    return n && n.tiers && n.tiers.length ? n.tiers : NEBULA_TIERS;
+  }
+
+  /** '$7 a month', or '$42 a year (50% off)' - the discount is named here and nowhere else. */
+  function nebulaPrice(tier) {
+    if (nebPeriod !== 'year') return tier.priceLine || '';
+    return tier.yearOfferLine || tier.yearPriceLine || '';
+  }
+
+  function nebulaPick(value, label, note, on) {
+    return '<label class="pick" for="neb-' + esc(value || 'none') + '">'
+      + '<input type="radio" name="nebula" id="neb-' + esc(value || 'none') + '" value="' + esc(value) + '"'
+      + (on ? ' checked' : '') + (state.busy ? ' disabled' : '') + '>'
+      + '<span>' + label + (note ? ' <span class="cur">' + esc(note) + '</span>' : '') + '</span></label>';
+  }
+
+  /**
+   * The Nebula strip, above the plan cards. Nothing here is shown until the page pushes a `nebula`
+   * state - an account site whose six plans have not been made yet offers nothing.
+   */
+  function nebulaSection() {
+    var n = state.nebula;
+    if (!n) return '';
+    var tiers = nebulaTiers();
+    var have = !!n.on;
+    var mine = null;
+    for (var i = 0; i < tiers.length; i += 1) if (tiers[i].id === n.tier) mine = tiers[i];
+    var renews = have && n.endsAt ? day(n.endsAt) : '';
+    var said = have
+      ? 'You have <b>' + esc((mine && mine.name) || 'Nebula') + '</b>'
+        + (n.period === 'year' ? ', paid for the year' : '') + '.'
+        + (renews ? ' It renews ' + esc(renews) + '.' : '')
+        + ' ' + esc(NEBULA_LINE)
+      : esc(NEBULA_LINE);
+    var picks = tiers.map(function (t) {
+      var current = have && t.id === n.tier && (n.period || 'month') === nebPeriod;
+      return nebulaPick(t.id, '<b>' + esc(t.name) + '</b> — ' + esc(t.gb) + ' GB — <span class="amt">' + esc(nebulaPrice(t)) + '</span>',
+        current ? '(current)' : '', nebTier === t.id);
+    }).join('');
+    var chip = function (period, label) {
+      return '<button type="button" class="chip' + (nebPeriod === period ? ' is-on' : '') + '" data-period="' + period + '"'
+        + (state.busy ? ' disabled' : '') + ' aria-pressed="' + (nebPeriod === period ? 'true' : 'false') + '">' + label + '</button>';
+    };
+    return '<section class="frame nebula" aria-labelledby="nebtitle">'
+      + '<div class="nebtop"><p class="eyebrow" id="nebtitle">' + (have ? 'Your Nebula' : 'Add Nebula') + '</p>'
+      + '<div class="switch" role="group" aria-label="Pay for Nebula monthly or yearly">'
+      + chip('month', 'Monthly') + chip('year', 'Yearly') + '</div></div>'
+      + '<p class="nebline">' + said + '</p>'
+      + '<div class="nebpicks">' + picks
+      + nebulaPick('', have ? '<b>Keep ' + esc((mine && mine.name) || 'Nebula') + '</b>' : '<b>No Nebula for now</b>', '', !nebTier)
+      + '</div></section>';
+  }
+
+  function foot(withTrust) {
+    return '<div class="foot">'
+      + (withTrust ? '<div class="trust"><span>Secure checkout: cards, Apple Pay, Google Pay, PayPal</span><span>Renews until you cancel, in two clicks</span><span>Your work stays yours</span></div>' : '')
+      + '<p class="fine">New here? The whole studio is free for seven days, no card: <a href="' + ACCOUNT + '/downloads" target="_top">download it and start the trial</a>. '
+      + 'By continuing you agree to the <a href="' + SITE + 'terms.html#billing" target="_blank" rel="noopener">subscription terms</a>, the <a href="' + SITE + 'terms.html" target="_blank" rel="noopener">license</a> and the <a href="' + SITE + 'terms.html#privacy" target="_blank" rel="noopener">privacy policy</a>. '
+      + '<a href="' + SITE + '" target="_top">Back to the website</a></p></div>';
+  }
+
+  // ---- the public alpha (README §13) ----
+  // Said before anybody claims, on this page and on the website's alpha page.
+  // The alpha reward (the words are site/wix/alphaLogic.js REWARD_LINE and REWARD_HOW).
+  var ALPHA_REWARD = 'Record 20,000 words of your own book during the alpha and your first year is free.';
+  var ALPHA_REWARD_HOW = 'We count the words of the lines you record; the app reports the count, never the text.';
+  var ALPHA_USAGE = 'Alpha builds send us basic usage counts after each session — how long the app was open and which features were used, never your text, audio or names.';
+
+  function alphaCountLine(a) {
+    if (!a || !a.total) return '';
+    if (a.ended) return '';
+    return a.left > 0 ? a.left + ' of ' + a.total + ' alpha keys left' : 'All ' + a.total + ' alpha keys are taken.';
+  }
+
+  function alphaView() {
+    var a = state.alpha || { phase: 'loading', total: 0, left: 0 };
+    var dis = state.busy ? ' disabled' : '';
+    var btn = function (kind, label, gold) { return '<button class="btn ' + (gold ? 'btn-gold' : 'btn-line') + '" data-alpha="' + kind + '"' + dis + '>' + esc(label) + '</button>'; };
+    var link = function (href, label) { return '<a class="btn btn-gold" href="' + href + '" target="_top">' + esc(label) + '</a>'; };
+    var body = '';
+    if (a.phase === 'signedout') {
+      body = '<p class="say">Create an account, confirm your email, then claim your key.</p>'
+        + btn('signup', 'Create account', true)
+        + '<p class="hint alpha-hint">Already have an account? <button class="linkish" data-signin="1">Sign in</button></p>';
+    } else if (a.phase === 'unverified') {
+      body = '<p class="say">Check your inbox for the confirmation email from StellAurator, then come back to this page.'
+        + (a.email ? ' We sent it to <b>' + esc(a.email) + '</b>.' : '') + '</p>'
+        + '<div class="rowbtns">' + btn('recheck', "I've confirmed it", true) + (a.canResend ? btn('resend', 'Resend the email', false) : '') + '</div>';
+    } else if (a.phase === 'ready') {
+      body = '<p class="say">Your email address is confirmed. One key per account.</p>' + btn('claim', 'Claim my alpha key', true);
+    } else if (a.phase === 'claimed') {
+      body = '<p class="alpha-key" data-alpha-key>' + esc(a.key) + '</p>'
+        + '<p class="say">Your alpha pass is on your account — one month of the full studio. Download the app, then sign in to it'
+        + (a.email ? ' with <b>' + esc(a.email) + '</b>' : '') + '.</p>'
+        + link(ACCOUNT + '/downloads', 'Download the app');
+    } else if (a.phase === 'full') {
+      body = '<p class="say">All ' + (a.total ? esc(a.total) + ' ' : '') + 'alpha keys are taken. The free 7-day trial is open to everyone, with no card.</p>'
+        + link(ACCOUNT + '/downloads', 'Start the free trial');
+    } else if (a.phase === 'ended') {
+      body = '<p class="say">The alpha has ended. Thank you to everyone who tested. The free 7-day trial is open to everyone, with no card.</p>'
+        + link(ACCOUNT + '/downloads', 'Start the free trial');
+    } else if (a.phase === 'has-plan') {
+      body = '<p class="say">You already have a plan; the alpha is for new accounts.</p>' + link(ACCOUNT + '/downloads', 'Download the app');
+    } else {
+      body = '<p class="say">One moment…</p>';
+    }
+    var count = alphaCountLine(a);
+    return side('Public alpha', 'Join the alpha',
+        'One month of the full studio, free, for people who will tell us what breaks and what they would change. No card, and nothing is charged.', null)
+      + '<div class="cards one"><div class="frame price-card is-lit" data-alpha-phase="' + esc(a.phase) + '">'
+      + '<p class="eyebrow">Alpha pass</p>'
+      + '<div class="price">$0 <small>for one month</small></div>'
+      + (count ? '<p class="alpha-count" data-alpha-count>' + esc(count) + '</p>' : '')
+      + body
+      + (a.phase !== 'ended' ? '<p class="fine alpha-reward"><b>' + esc(ALPHA_REWARD) + '</b> ' + esc(ALPHA_REWARD_HOW) + '</p>' : '')
+      + '<p class="fine alpha-usage">' + esc(ALPHA_USAGE) + '</p>'
+      + '</div></div>' + foot(false);
+  }
+
+  function render() {
+    var el = document.getElementById('app');
+    var was = (document.activeElement && document.activeElement.id) || '';
+    var focusEmail = was === 'email';
+    var html = '';
+    if (state.view === 'alpha') {
+      html = alphaView();
+    } else if (state.view === 'pass' || state.view === 'test') {
+      var pass = state.view === 'pass';
+      var gold = pass && !!state.gold;      // a GOLD-… key: a perpetual license, not a three-month pass
+      html = side(gold ? 'Gold license' : pass ? 'Invitation' : 'Family test', gold ? 'Your Gold license' : pass ? 'Your alpha pass' : 'Your free year',
+          gold ? 'StellAurator, for good. It never ends and never renews. No card, no password to make, nothing to confirm.'
+            : pass ? 'Three free months of the full studio. No card, no password to make, nothing to confirm.' : 'One free year of the full studio. Nothing to pay.',
+          gold ? 'Your license and your sign-in go to this address. A key works once, for one person.' : 'Your pass and your sign-in go to this address.')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + '<p class="eyebrow">' + (gold ? 'StellAurator Gold' : pass ? 'Alpha pass' : 'Family test') + '</p>'
+        + '<div class="price">' + (gold ? 'Perpetual <small>yours to keep</small>' : '$0 <small>' + (pass ? 'for three months' : 'for one year') + '</small>') + '</div>'
+        + '<ul class="includes">' + INCLUDES.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('')
+        + (gold ? '<li>Free updates for the supported life of StellAurator</li><li>For one person, on up to three of their computers</li>' : '<li>It simply ends: nothing is ever charged</li>') + '</ul>'
+        + '<button class="btn btn-gold" data-claim="1"' + (state.busy ? ' disabled' : '') + '>' + (gold ? 'Claim my Gold license' : pass ? 'Claim my alpha pass' : 'Claim my free year') + '</button>'
+        + '</div></div>' + foot(false);
+    } else if (state.view === 'subscriber' && state.sub) {
+      var s = state.sub;
+      var when = s.endsAt ? day(s.endsAt) : '';
+      html = side('Your subscription', s.planName || 'StellAurator', '', null)
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + '<p class="eyebrow">' + (s.stopping ? 'Canceled' : 'Active') + '</p>'
+        + '<p class="say">'
+        + (s.stopping ? 'Your plan has been canceled' + (when ? ' and stays active until <b>' + esc(when) + '</b>' : '') + '. Nothing more will be charged. Your projects and recordings stay on your computer.'
+          : state.confirmCancel ? 'Cancel your subscription? It stays active to the end of the period you paid for, and nothing more is charged. Your projects and recordings stay on your computer either way.'
+          : 'Your plan is active and renews automatically. You can stop it here at any time; it stays active to the end of the period you paid for.')
+        + '</p>'
+        + (s.stopping ? '<a class="btn btn-gold" href="' + ACCOUNT + '/downloads" target="_top">Download the app</a>' : state.confirmCancel
+          ? '<div class="rowbtns"><button class="btn btn-line" data-confirm-cancel="1"' + (state.busy ? ' disabled' : '') + '>Yes, cancel</button><button class="btn btn-gold" data-keep="1"' + (state.busy ? ' disabled' : '') + '>Keep my plan</button></div>'
+          : '<div class="rowbtns"><button class="btn btn-line" data-cancel="1"' + (state.busy ? ' disabled' : '') + '>Cancel subscription</button><a class="btn btn-gold" href="' + ACCOUNT + '/downloads" target="_top">Download the app</a></div>')
+        + '</div></div>' + foot(false);
+    } else {
+      html = side('Choose your subscription', 'The complete studio, whichever plan you choose.', '',
+          'No password to make, nothing to confirm: your receipt and sign-in go here. Already have a plan? <button class="linkish" data-signin="1">Sign in</button>')
+        + '<div class="col2">' + nebulaSection()
+        + (state.offer ? '<section class="frame alpha-thanks" data-alpha-thanks><p class="eyebrow">Alpha thanks</p><p>' + esc(state.offer.strip) + '</p></section>' : '')
+        + '<div class="cards">' + card('monthly', state.wanted === 'monthly') + card('yearly', state.wanted !== 'monthly') + '</div></div>'
+        + foot(true);
+    }
+    el.innerHTML = html;
+    var input = document.getElementById('email');
+    if (input) {
+      input.addEventListener('input', function () { typed = input.value; if (invalid) { invalid = false; input.removeAttribute('aria-invalid'); } });
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); act(state.view === 'plans' ? { buy: state.wanted === 'monthly' ? 'monthly' : 'yearly' } : { claim: true }); } });
+      if (focusEmail) { input.focus(); input.setSelectionRange(input.value.length, input.value.length); }
+    }
+    // A radio or the switch was what the person was on: the rebuilt one keeps the focus.
+    if (was && was !== 'email') { var again = document.getElementById(was); if (again) again.focus(); }
+  }
+
+  // An email is needed before anything that makes an account; said here, at once.
+  function emailOk() {
+    if (state.signedIn) return true;
+    var v = typed.trim();
+    if (EMAIL.test(v)) return true;
+    invalid = true; state.message = v ? 'That does not look like an email address.' : 'Type your email address first - that is all it takes.'; state.tone = 'error';
+    render();
+    var input = document.getElementById('email'); if (input) input.focus();
+    return false;
+  }
+
+  /** The Nebula choice that rides along with the plan, or null when none was made (§14.5). */
+  function nebulaChoice() {
+    if (!state.nebula || !nebTier) return null;
+    return { tier: nebTier, period: nebPeriod };
+  }
+
+  function act(a) {
+    if (state.busy) return;
+    if (!inWix) { window.top.location.href = ACCOUNT + '/purchase' + (a.buy ? '?plan=' + a.buy : state.view === 'alpha' ? '?alpha=1' : ''); return; }
+    if (a.alpha) { send({ t: 'alpha-' + a.alpha }); return; }
+    if (a.buy) { if (emailOk()) send({ t: 'buy', plan: a.buy, email: typed.trim().toLowerCase(), nebula: nebulaChoice() }); }
+    else if (a.claim) { if (emailOk()) send({ t: 'claim', email: typed.trim().toLowerCase() }); }
+    else if (a.cancel) send({ t: 'cancel' });
+    else if (a.confirmCancel) send({ t: 'confirm-cancel' });
+    else if (a.keep) send({ t: 'keep' });
+    else if (a.signin) send({ t: 'signin' });
+  }
+
+  // The size chosen for Nebula, and the Monthly / Yearly switch: both are this page's own business
+  // until a plan is bought, so neither sends anything to Wix.
+  document.addEventListener('change', function (e) {
+    var r = e.target;
+    if (!r || r.name !== 'nebula') return;
+    nebTier = String(r.value || '');
+    render();
+  });
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || b.disabled) return;
+    if (b.dataset.period) { nebPeriod = b.dataset.period === 'year' ? 'year' : 'month'; render(); return; }
+    if (b.dataset.alpha) { act({ alpha: b.dataset.alpha }); return; }
+    if (b.dataset.buy) act({ buy: b.dataset.buy });
+    else if (b.dataset.claim) act({ claim: true });
+    else if (b.dataset.confirmCancel) act({ confirmCancel: true });
+    else if (b.dataset.cancel) act({ cancel: true });
+    else if (b.dataset.keep) act({ keep: true });
+    else if (b.dataset.signin) act({ signin: true });
+  });
+
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!d || d.t !== 'state') return;
+    Object.keys(state).forEach(function (k) { if (k in d) state[k] = d[k]; });
+    if (state.signedIn) invalid = false;
+    render();
+  });
+
+  // standalone faces, for looking at the design without Wix around it
+  var demo = params.get('demo');
+  if (demo === 'pass') state.view = 'pass';
+  if (demo === 'signedin') { state.signedIn = true; state.email = 'author@example.com'; }
+  if (demo === 'subscriber' || demo === 'stopping' || demo === 'confirm') {
+    state.view = 'subscriber'; state.signedIn = true; state.email = 'author@example.com';
+    state.sub = { planName: 'StellAurator Monthly', stopping: demo === 'stopping', endsAt: '2026-10-18T07:00:00Z' };
+    state.confirmCancel = demo === 'confirm';
+  }
+  if (params.get('plan')) state.wanted = params.get('plan');
+  // ?demo=offer: the plans as an alpha tester sees them (the words come from site/wix/alphaLogic.js offerLines).
+  if (demo === 'offer') {
+    state.signedIn = true; state.email = 'author@example.com';
+    state.offer = {
+      strip: 'As an alpha tester: 20% off your first three months, or an extra 10% off your first year. Yours any time while the alpha runs.',
+      startsAt: '2026-10-25T18:00:00Z',
+      monthly: { plan: 'monthly', price: '$23.20', regular: '$29', cycles: 3, line: '$23.20 / month for 3 months, then $29', button: 'Starts Oct 25, $23.20 a month for 3 months, then $29' },
+      yearly: { plan: 'yearly', price: '$261', regular: '$290', cycles: 1, line: '$261 first year, then $290', button: 'Starts Oct 25, $261 for the first year, then $290 a year' }
+    };
+  }
+  // The public alpha, for a look without Wix around it: ?demo=alpha-<phase>, or ?alpha=1 standalone,
+  // which asks the back office for the real count.
+  if (demo && demo.indexOf('alpha') === 0) {
+    var phase = demo.slice(6) || 'signedout';
+    state.view = 'alpha';
+    state.signedIn = phase !== 'signedout' && phase !== 'full';
+    state.email = state.signedIn ? 'author@example.com' : '';
+    state.alpha = { phase: phase, total: 100, left: phase === 'full' || phase === 'ended' ? 0 : 37, open: phase !== 'full' && phase !== 'ended', ended: phase === 'ended', key: 'ALPHA-7K2M-9QXD', email: state.email, canResend: true };
+  } else if (!inWix && params.get('alpha') === '1') {
+    state.view = 'alpha';
+    state.alpha = { phase: 'signedout', total: 0, left: 0, open: true, key: '', email: '', canResend: false };
+    fetch(ACCOUNT + '/_functions/alphaStatus').then(function (r) { return r.json(); }).then(function (s) {
+      if (!s || !s.total) return;
+      state.alpha.total = s.total; state.alpha.left = s.left; state.alpha.open = !!s.open;
+      state.alpha.ended = !!s.ended;
+      if (s.ended) state.alpha.phase = 'ended';
+      else if (!s.open) state.alpha.phase = 'full';
+      render();
+    }).catch(function () {});
+  }
+  // The Nebula strip, for a look at the design with no Wix around it. ?demo=nebula-on shows what
+  // somebody who already has Nebula sees.
+  if (!inWix || demo === 'nebula' || demo === 'nebula-on') {
+    state.nebula = demo === 'nebula-on'
+      ? { tiers: NEBULA_TIERS, on: true, tier: 'nebula25', period: 'month', endsAt: '2026-10-24T07:00:00Z' }
+      : { tiers: NEBULA_TIERS, on: false, tier: '', period: '', endsAt: null };
+  }
+
+  render();
+  send({ t: 'ready' });
+  // the Wix page may finish loading after this one: say "ready" until it answers
+  var tries = 0;
+  var again = setInterval(function () { tries += 1; if (tries > 240) clearInterval(again); else send({ t: 'ready' }); }, 750);
+  window.addEventListener('message', function (e) { if (e.data && e.data.t === 'state') clearInterval(again); });
+})();
+</script>
+</body>
+</html>
