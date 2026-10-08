@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator - Audiobook Production Studio for Windows</title>
+<meta name="description" content="Turn your manuscript into a finished audiobook on your Windows computer: voices, recording, clean-up, music, and the files Audible needs. Free 7-day trial.">
+<link rel="canonical" href="https://stellaurator.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StellAurator">
+<meta property="og:url" content="https://stellaurator.com/">
+<meta property="og:title" content="StellAurator - Audiobook Production Studio for Windows">
+<meta property="og:description" content="Turn your manuscript into a finished audiobook on your Windows computer: voices, recording, clean-up, music, and the files Audible needs. Free 7-day trial.">
+<meta property="og:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="StellAurator audiobook production studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StellAurator - Audiobook Production Studio for Windows">
+<meta name="twitter:description" content="Turn your manuscript into a finished audiobook on your Windows computer: voices, recording, clean-up, music, and the files Audible needs. Free 7-day trial.">
+<meta name="twitter:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stellaurator.com/#organization",
+      "name": "StellAurator",
+      "url": "https://stellaurator.com/",
+      "logo": "https://stellaurator.com/assets/logo.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://stellaurator.com/#website",
+      "name": "StellAurator",
+      "url": "https://stellaurator.com/",
+      "publisher": {
+        "@id": "https://stellaurator.com/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://stellaurator.com/#software",
+      "name": "StellAurator",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Windows 10, Windows 11",
+      "url": "https://stellaurator.com/",
+      "image": "https://stellaurator.com/assets/og/stellaurator-og.jpg",
+      "description": "Turn your manuscript into a finished audiobook on your Windows computer: voices, recording, clean-up, music, and the files Audible needs. Free 7-day trial.",
+      "publisher": {
+        "@id": "https://stellaurator.com/#organization"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Monthly plan",
+          "price": "29",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "29",
+            "priceCurrency": "USD",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "MON",
+              "unitText": "month"
+            }
+          },
+          "url": "https://account.stellaurator.com/purchase",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Yearly plan",
+          "price": "290",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "290",
+            "priceCurrency": "USD",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "ANN",
+              "unitText": "year"
+            }
+          },
+          "url": "https://account.stellaurator.com/purchase",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+</head>
+<body data-page="home">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+<main id="top">
+
+  <section class="wrap hero hero-home">
+    <video id="introVideo" class="hero-video" autoplay muted playsinline preload="metadata" poster="assets/intro-poster.jpg" aria-label="StellAurator">
+      <source src="assets/intro.mp4" type="video/mp4">
+    </video>
+    <div class="hero-copy">
+      <p class="eyebrow">An audiobook studio for Windows</p>
+      <h1 class="display">Turn your manuscript into<br>a finished <em class="gilt-text">audiobook</em>.</h1>
+      <p class="lede">StellAurator is a program for your Windows computer. You bring the book. It helps you give every character a voice, record the reading yourself or let a computer voice read it, clean up every recording as you go, add music, check the finished chapters, and save the files Audible asks for. Your book never leaves your computer.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#" data-download>Start 7-day free trial</a>
+        <a class="btn btn-line" href="alpha/">Join the alpha</a>
+        <a class="btn btn-line" href="#how">See how it works</a>
+      </div>
+      <p class="cta-note">No credit card required. Nothing is charged when the trial ends, and your work stays yours.</p>
+    </div>
+  </section>
+
+  <!-- Hear it: a before / after of the actor pass. Rendered only when assets/demo/demo.json lists
+       clips (see assets/demo/README.txt) - an audio product should be heard, but never with stand-ins. -->
+  <section id="hear" class="wrap demo" hidden>
+    <div class="section-head">
+      <p class="eyebrow">Hear it</p>
+      <h2 class="title">One performer plays every voice.</h2>
+      <p class="lede">Each pair is the same recording: first as it was read, then in the voice of the character. The timing, the emphasis and the pauses are the reader&rsquo;s own.</p>
+    </div>
+    <div class="demo-grid" id="demoGrid"></div>
+  </section>
+
+  <section class="wrap" style="margin-top:72px">
+    <div class="section-head">
+      <p class="eyebrow">The studio</p>
+      <h2 class="title">Everything happens in one place, from the first recording to the finished files.</h2>
+      <p class="lede">One window holds your script, your cast, every recording and the chapter timeline. The strip across the top shows where the book stands and what comes next. Nothing is ever lost: every recording is kept until you delete it, and every fix can be undone.</p>
+    </div>
+    <figure class="frame frame-showcase is-lit" style="margin-top:34px">
+      <img src="assets/shot-studio.jpg" srcset="assets/shot-studio.jpg 1x, assets/shot-studio@2x.jpg 2x" data-full="assets/shot-studio@2x.jpg" alt="The StellAurator studio: the strip across the top, the chapter list at left, the script with one row per line and its recordings, and the chapter timeline across the bottom." width="1600" height="1100">
+      <figcaption>The studio, on the practice book that comes with StellAurator.</figcaption>
+    </figure>
+    <figure class="frame strip" style="margin-top:18px">
+      <img src="assets/shot-stages.jpg" srcset="assets/shot-stages.jpg 1x, assets/shot-stages@2x.jpg 2x" data-full="assets/shot-stages@2x.jpg" alt="The strip across the top of the studio: the four parts of the work, the steps of the open one, and a line saying how far the book is." width="1600" height="92" loading="lazy">
+      <figcaption>The strip at the top: where the book stands, what comes next, and how many chapters are recorded, finished and waiting to be recorded again.</figcaption>
+    </figure>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="how" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 class="title">From manuscript to finished audiobook, step by step.</h2>
+      <p class="lede">Every step happens in the studio. Stop whenever you like and pick up where you left off.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Bring in your manuscript</b><span>A Word file or a plain text file. The studio splits it into chapters and lines and works out who is speaking. If it is not sure about a line, it asks you instead of guessing.</span></li>
+      <li><b>Cast the characters</b><span>Give each character a voice, a color and a face. Twenty-six voices come with the studio. Or read every part yourself.</span></li>
+      <li><b>Record</b><span>Read from the on-screen script, one line or a whole chapter at a time, or bring in recordings you already made.</span></li>
+      <li><b>Clean up</b><span>Every recording is checked the moment it lands: clicks, pops, hard P sounds, breaths, hum and background hiss. The studio suggests the fixes, you hear them right away, and nothing changes until you say so.</span></li>
+      <li><b>Change the voice, if you want</b><span>Read the whole book in your own voice, then let a voice service turn each line into the character&rsquo;s voice. Your timing and feeling stay exactly as you read them.</span></li>
+      <li><b>Add music</b><span>The studio finds the moments where music belongs. Add your own music and sound effects, or let it make them.</span></li>
+      <li><b>Finish</b><span>Say what the book is for, press one button, and the studio tidies every chapter, checks it against Audible&rsquo;s rules and tells you what it found.</span></li>
+      <li><b>Listen and save</b><span>Hear each chapter exactly as listeners will. Mark any line to record again. Then save the files Audible asks for, or one file with chapters for other stores.</span></li>
+    </ol>
+    <figure class="frame strip">
+      <img src="assets/shot-library.jpg" srcset="assets/shot-library.jpg 1x, assets/shot-library@2x.jpg 2x" data-full="assets/shot-library@2x.jpg" alt="The StellAurator library: the recent books listed with their cast size, chapters, how much is done and when each was last changed." width="1270" height="873" loading="lazy">
+      <figcaption>Your library. Each book keeps its own cast, recordings, history and settings.</figcaption>
+    </figure>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="yours" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Your manuscript</p>
+      <h2 class="title">Your unpublished book stays yours.</h2>
+      <p class="lede">StellAurator is a program on your own computer, not a website you upload a book to. We never see your manuscript or your recordings.</p>
+    </div>
+    <div class="grid-3">
+      <article class="frame panel">
+        <h3>It stays on your computer</h3>
+        <p>Your manuscript, your recordings and your finished files are files on your own computer. Your account with us knows your email address and your plan, nothing about your book.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Your sign-ins stay with you</h3>
+        <p>If you connect a voice service or an AI service, its sign-in stays on your computer. Your words go only to the services you choose, under your own account with them.</p>
+      </article>
+      <article class="frame panel">
+        <h3>We will never hold it hostage</h3>
+        <p>When a trial or a plan ends, the studio switches to read-only: every book still opens and plays, and nothing is deleted. If you have ever paid, saving your finished files stays unlocked for the work you made.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="features" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Inside the studio</p>
+      <h2 class="title">What each part of the studio does.</h2>
+    </div>
+
+    <p class="group-head">Casting</p>
+    <div class="showcase">
+      <h3>Give every character a voice and a face.</h3>
+      <p>The cast list shows every speaker the studio found in your manuscript. Each one gets a color, a voice, and a face from a gallery of 445 portraits.</p>
+      <p>Open <b>Character Tags</b>, click a character and click a face, or press <b>Best fit auto assign</b> to do the whole cast at once. Anyone without a voice is flagged, and so is any line the studio was not sure about, so you know what is left before you record a line or have one read.</p>
+      <ul class="spec">
+        <li><b>445 portraits</b> across seven galleries: sci-fi crew, deep space, fantasy folk, city at night, masquerade couples, every age, and more</li>
+        <li><b>Best fit auto assign</b>, or assign at random</li>
+        <li>A voice, a color, a gender and pronouns for each character; nicknames are understood, so &ldquo;Okoye&rdquo; and &ldquo;Captain Okoye&rdquo; are one person</li>
+        <li>A line the studio is not sure about asks <b>Who says this?</b> with the names it weighed, instead of guessing</li>
+        <li>A warning for anyone still without a voice, before you spend a single credit</li>
+      </ul>
+      <figure class="frame frame-showcase">
+        <img src="assets/shot-tags.jpg" srcset="assets/shot-tags.jpg 1x, assets/shot-tags@2x.jpg 2x" data-full="assets/shot-tags@2x.jpg" alt="The Character Tags board: the book&rsquo;s characters down the left with the face each one wears, the filters that narrow the gallery, and the faces not yet used on the right." width="1120" height="1030" loading="lazy">
+        <figcaption>Assigning faces, with all 445 portraits in the pool.</figcaption>
+      </figure>
+    </div>
+
+
+    <p class="group-head">Recording</p>
+    <div class="split">
+      <div>
+        <h3>Read every part yourself, at your own pace.</h3>
+        <p>Your voice does not have to sound like the character. Open the on-screen script and act the scene out, every part, back to back. The line you are reading sits in a highlighted band; the rest of the chapter fades above and below it, moving at the pace you set.</p>
+        <p>Afterwards, if you want, a voice service can turn each line into the voice of the character who spoke it. Your timing, your emphasis and your pauses stay exactly as you read them.</p>
+        <ul class="spec">
+          <li>A count-in before recording starts; adjustable pace, text size and band</li>
+          <li>Record one line, one character&rsquo;s lines, or the whole chapter in one go</li>
+          <li>The click of the key or mouse that stops a recording is removed from it</li>
+          <li>Each new recording is chosen for its line automatically, unless you chose one yourself</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/prompter.jpg" srcset="assets/prompter.jpg 1x, assets/prompter@2x.jpg 2x" data-full="assets/prompter@2x.jpg" alt="The on-screen script: the line being read held in a highlighted band, the rest of the chapter fading above and below, the pace and the recording controls at the bottom." width="984" height="1064" loading="lazy">
+        <figcaption>The on-screen script, ready to read.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split flip">
+      <div>
+        <h3>Hear yourself clearly while you record.</h3>
+        <p>The studio talks to your microphone directly, through the software that came with it, so you hear yourself in your headphones with nothing added and the least possible delay. It shares your headphones with your other programs, so nothing else goes quiet while the studio is open. A <b>Reduced delay</b> switch gives you the shortest delay your equipment can manage.</p>
+        <ul class="spec">
+          <li>Works with studio microphones and with ordinary USB microphones</li>
+          <li>Live meters that show how loud you are and how much background hiss there is, a Level check and a Test recording</li>
+          <li>One volume setting for every recording you make on this computer; the untouched original kept if you ask</li>
+          <li>Any microphone Windows can see works too</li>
+        </ul>
+      </div>
+      <figure class="frame split-art tall">
+        <img src="assets/shot-recording.jpg" srcset="assets/shot-recording.jpg 1x, assets/shot-recording@2x.jpg 2x" data-full="assets/shot-recording@2x.jpg" alt="Settings, Recording: the microphone, the quality settings, the volume, the live level meter and the headphone controls." width="824" height="1024" loading="lazy">
+        <figcaption>Settings &rsaquo; Recording.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3>Bring in the recordings you already made.</h3>
+        <p>A chapter you recorded somewhere else becomes a chapter of recordings here. Drop the file in, say which chapter it is, and the studio cuts it into your lines: on the pauses, which is free and stays on your computer, or on the words, through a service you connect that can write down what it hears.</p>
+        <p>Your file is never changed. The studio only divides it. Where the recording and the manuscript disagree, you choose, line by line.</p>
+        <ul class="spec">
+          <li>Most common sound files (mp3, wav, flac, m4a, m4b and ogg)</li>
+          <li>Cut on the pauses for free, with nothing leaving your computer</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-import.jpg" alt="Bring your recordings: the chapter a file was cut into, its lines sorted into matched, uncertain and not found, and the leftover audio listed with its time." width="1275" height="900" loading="lazy">
+        <figcaption>What matched, what did not, and what is left over.</figcaption>
+      </figure>
+    </div>
+
+
+    <p class="group-head">Clean-up</p>
+    <div class="split flip">
+      <div>
+        <h3>Every recording is checked the moment it lands.</h3>
+        <p>When a recording lands, the studio looks it over for clicks, pops, hard P sounds, breaths, hum and background hiss, and suggests a set of fixes under it. Press <b>Review</b> and you hear the fixed recording right away, before and after, with every fix marked on the sound wave. Drag across a breath you meant to keep and it is kept. <b>Apply</b> does the rest.</p>
+        <p>A fix is a layer over the recording, never a new file. Every fix can be switched off or removed later, and the recording underneath stays exactly what you recorded.</p>
+        <ul class="spec">
+          <li>Clicks and pops mended, hard P sounds tamed, breaths quieted but never cut, background hiss reduced only where it is loud enough to matter</li>
+          <li>Background sounds (another voice, a child, a dog, a door) are found and the line is marked to record again, because no fix can lift a voice out from under yours</li>
+          <li>One fix of each kind per recording; doing it again changes the fix instead of stacking another</li>
+          <li>Turn the suggestions off for a book, or choose what they look for</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-clippool.jpg" srcset="assets/shot-clippool.jpg 1x, assets/shot-clippool@2x.jpg 2x" data-full="assets/shot-clippool@2x.jpg" alt="One script line with its controls and its recording: the sound wave, the length, the lock, and the fixes suggested for it with a Review button." width="1284" height="250" loading="lazy">
+        <figcaption>One line and its recording, with the fixes the studio suggested.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3>Keep every recording and choose between them.</h3>
+        <p>Each line keeps every recording. Have a computer voice read one, record another, change the voice on a third: each stays with its sound wave and length until you delete it, and you pick the one you want.</p>
+        <p>A spool is one complete reading of the book: the recording you picked for every line, wound together. Spools A and B let you build two complete readings of the same book side by side and save either one, so you can try a different narrator without losing the first.</p>
+        <ul class="spec">
+          <li>As many recordings per line as you like</li>
+          <li>Pick the one you want; the newest one is picked for you unless you chose</li>
+          <li>Two versions of the book, or as many more as you add</li>
+          <li>Filters: computer voice, voice-changed, as recorded, not yet picked, accepted</li>
+        </ul>
+      </div>
+      <figure class="frame split-art tall">
+        <img src="assets/shot-takes.jpg" srcset="assets/shot-takes.jpg 1x, assets/shot-takes@2x.jpg 2x" data-full="assets/shot-takes@2x.jpg" alt="The recordings of two lines: each with its sound wave, length, lock and the fixes suggested for it." width="395" height="440" loading="lazy">
+        <figcaption>Every recording stays, with its lock and its suggested fixes.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split flip">
+      <div>
+        <h3>Your recordings are tidied as they are saved.</h3>
+        <p>Every recording is tidied on its way in. Low rumble is removed, harsh S sounds are softened, and the loudness is evened out. Three sliders warm, sharpen or brighten the tone. Auto-level brings every recording to the same loudness without changing how you said it, or leaves the level alone.</p>
+        <ul class="spec">
+          <li>Removes rumble, softens harsh S sounds, evens out loudness</li>
+          <li>Three tone sliders: warmth, presence, air</li>
+          <li>The click of pressing Stop is trimmed off the end</li>
+          <li>A pronunciation guide for names the voices get wrong</li>
+        </ul>
+      </div>
+      <figure class="frame split-art tall">
+        <img src="assets/shot-tuning.jpg" srcset="assets/shot-tuning.jpg 1x, assets/shot-tuning@2x.jpg 2x" data-full="assets/shot-tuning@2x.jpg" alt="The tidy-up settings: the rumble cut, the leveling, the S softener, the three tone sliders, the end-of-recording trim and the level choice." width="284" height="668" loading="lazy">
+        <figcaption>The tidy-up settings, applied as a recording is saved.</figcaption>
+      </figure>
+    </div>
+
+
+    <p class="group-head">Fixing by hand</p>
+    <div class="split">
+      <div>
+        <h3>When you want to fix a recording yourself, every tool is there.</h3>
+        <p>The repair screen is where the suggestions come from, open for you to use by hand on one recording or on every selected line. The tools sit on the right in groups. Choose one and it opens right under the recording, with before and after, a compare button, the settings, what has been done so far, and Keep.</p>
+        <ul class="spec">
+          <li>Before and after on every tool, lined up so the same moment sits at the same place, with a compare button at the same loudness</li>
+          <li>Keep for this recording, for the selected lines, or for the whole chapter</li>
+          <li>Your own sequence of fixes, saved and run as one</li>
+          <li>A detailed sound picture with a box you draw around the sound you want gone</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-restoration.jpg" srcset="assets/shot-restoration.jpg 1x, assets/shot-restoration@2x.jpg 2x" data-full="assets/shot-restoration@2x.jpg" alt="The repair screen: the lines on the left with one recording open and its other recordings as small cards, the tool open under the recording with before and after, and the tools on the right." width="1600" height="1100" loading="lazy">
+        <figcaption>The repair screen: choose a tool on the right, use it under the recording.</figcaption>
+      </figure>
+    </div>
+
+    <figure class="frame strip">
+      <img src="assets/shot-timeline.jpg" srcset="assets/shot-timeline.jpg 1x, assets/shot-timeline@2x.jpg 2x" data-full="assets/shot-timeline@2x.jpg" alt="The chapter timeline: a row of colored blocks, one per line, with the sound effects and music rows beneath, laid out across the chapter." width="1600" height="188" loading="lazy">
+      <figcaption>The chapter timeline. Every line is a block you can move and retime; music and sound effects get their own rows underneath. Switch between one chapter and the whole book.</figcaption>
+    </figure>
+
+
+    <p class="group-head">Music</p>
+    <div class="split flip">
+      <div>
+        <h3>The studio finds where music belongs.</h3>
+        <p>Auto Score reads each chapter and finds the moments where music belongs: where a scene turns, where the tension peaks, where a quiet moment needs something underneath. For each one it writes a note with a mood and one sentence saying why, and ties it to the words it belongs to, so it stays in the right place when you edit the chapter.</p>
+        <p>Give the book a musical identity first: your own words, ready-made descriptions such as low droning dramatic or orchestral adventurous, and films, series and games whose music is close to what you want, which the studio turns into plain musical descriptions. Every piece of music is written to that identity, as loosely or as tightly as you set for each chapter.</p>
+        <p>Add your own music and sound effects under the lines: music runs under a scene, a short hit sits between two lines, and every one is a marker on the timeline. Print the list of music moments for a composer.</p>
+        <ul class="spec">
+          <li>A musical identity for the whole book, followed loosely or tightly per chapter</li>
+          <li>Music under a scene, swells and short hits, each with a mood and a strength</li>
+          <li>Every music moment is tied to the words you quote, not to a time</li>
+          <li>Your own music and effects, as rows under the lines</li>
+          <li>Silence after any line, for a stretch where only the music plays</li>
+          <li>A printable list of music moments</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-cuesheet.jpg" alt="The list of music moments for one chapter: each with its time, kind, mood, the words it belongs to and the reason it is there, above a printable plain-text sheet." width="1600" height="1100" loading="lazy">
+        <figcaption>The list of music moments for one chapter.</figcaption>
+      </figure>
+    </div>
+
+
+    <p class="group-head">Finishing and saving</p>
+    <div class="showcase">
+      <h3>Say what the book is for, and the studio finishes the chapter.</h3>
+      <p>Choose what the book is for: <b>Clean narration</b>, <b>Audiobook master</b> for Audible&rsquo;s ACX, <b>Podcast</b>, or your own recipe. The Finish screen then takes the chapter, or the whole book, through five steps. <b>Diagnose</b> reads every recording and tells you what it found, in words and numbers. <b>Plan</b> says what will be done. <b>Apply</b> does it, as layers you can remove. <b>Check</b> measures the chapter again and names the tool for anything still wrong. <b>Export</b> saves the files.</p>
+      <ul class="spec">
+        <li>For each chapter: how loud it is, its loudest moments, its background hiss, and a pass or fail against Audible&rsquo;s rules, before and after</li>
+        <li>For each recording: its loudest moment, its quietest, and whether its level was adjusted</li>
+        <li>Every step is one press to take back</li>
+      </ul>
+      <figure class="frame frame-showcase">
+        <img src="assets/shot-finish.jpg" srcset="assets/shot-finish.jpg 1x, assets/shot-finish@2x.jpg 2x" data-full="assets/shot-finish@2x.jpg" alt="The Finish screen: the choices for what the book is for, the chapter&rsquo;s numbers, and the five numbered steps Diagnose, Plan, Apply, Check and Export, each with its button and its report." width="1600" height="1100" loading="lazy">
+        <figcaption>Finish, with Audiobook master for ACX chosen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3>Hear each chapter exactly as listeners will.</h3>
+        <p>Proof listen plays one chapter exactly as it will be saved, pauses and all, and ticks off each line as you hear it. The pauses between lines are yours to set while you listen, for the whole book, and the next pause uses the new length right away.</p>
+        <p>When every line has been heard, <b>Sign off chapter</b> appears. Change a line afterwards and only that line needs another listen, so you always know what is left.</p>
+        <ul class="spec">
+          <li>A tick per line as you hear it, up to one and a half times speed</li>
+          <li>The book&rsquo;s pauses, set at the top while you listen</li>
+          <li>Sign-off per chapter</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-prooflisten.jpg" srcset="assets/shot-prooflisten.jpg 1x, assets/shot-prooflisten@2x.jpg 2x" data-full="assets/shot-prooflisten@2x.jpg" alt="Proof listen: the line sounding now in the center, the chapter&rsquo;s lines down the right with a tick against each one already heard, the pause control in the header, and the mark, speed and sign-off controls below." width="1600" height="1100" loading="lazy">
+        <figcaption>Proof listen, with the chapter ready to hear.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split flip">
+      <div>
+        <h3>Mark a line to record again without stopping.</h3>
+        <p>One button on every line, or the <b>F</b> key while anything is playing, marks a line to record again (narrators call this a pickup) without stopping playback. A background sound the studio found marks its line the same way.</p>
+        <p>Every marked line lands in <b>Pickups</b>. From there you can have the voice read them again, record them yourself, or send them to the actor who read them.</p>
+        <ul class="spec">
+          <li>Mark from the line, from the review window, while proof listening, or with <b>F</b> mid-playback</li>
+          <li>The voice reads again &middot; Record again &middot; Send to the actor</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-pickups.jpg" srcset="assets/shot-pickups.jpg 1x, assets/shot-pickups@2x.jpg 2x" data-full="assets/shot-pickups@2x.jpg" alt="The Pickups list: every line marked to record again, each with the reason, who marked it and when, its recording, and the three buttons above." width="1600" height="1100" loading="lazy">
+        <figcaption>The Pickups list.</figcaption>
+      </figure>
+    </div>
+
+    <div class="split">
+      <div>
+        <h3>Save the files Audible asks for, or one file with chapters.</h3>
+        <p>Save one file per chapter in exactly the form Audible&rsquo;s ACX asks for, or one file with chapters and cover art for other stores, or both in one go. You choose which recordings are used: the ones you picked, the alternates, or a whole version of the book.</p>
+        <p>The pauses between lines are measured and corrected on the way out, so the pause after a sentence, after a paragraph and after a section break is exactly the length you set.</p>
+        <ul class="spec">
+          <li>ACX: one file per chapter, in the form ACX requires</li>
+          <li>One file with chapters and cover art for other stores</li>
+          <li>Use only the recordings you picked, or fall back to the newest</li>
+          <li>Warnings for anything not yet picked, not yet voice-changed, or not yet proof-listened</li>
+        </ul>
+      </div>
+      <figure class="frame split-art tall">
+        <img src="assets/shot-export.jpg" srcset="assets/shot-export.jpg 1x, assets/shot-export@2x.jpg 2x" data-full="assets/shot-export@2x.jpg" alt="The export window: the warnings about lines not yet picked or voice-changed, the choice of what to save (Audible / ACX, one file with chapters, both, or custom), and the export button." width="544" height="446" loading="lazy">
+        <figcaption>The export window.</figcaption>
+      </figure>
+    </div>
+
+    <article class="frame panel" style="margin-top:34px">
+      <h3>Generated voices, changed voices, and Audible&rsquo;s rules</h3>
+      <p>ACX does not accept computer-generated narration. A performance you recorded yourself and then changed into a character&rsquo;s voice is still your performance, and the studio keeps your original recording alongside every changed one.</p>
+      <p>Every saved file says what it holds: a file with a computer-generated voice is marked as containing AI-generated narration; a file with a reading you recorded and changed is marked as containing a Speech to Speech modified human performance. The export window tells you how many lines are computer-read or voice-changed before you save. If a platform has given you written permission for a changed performance, attach the letter under Settings &rsaquo; Legal and a copy travels with the files.</p>
+    </article>
+
+
+    <p class="group-head">Your computers</p>
+    <div class="split flip">
+      <div>
+        <h3>Use it on up to three of your computers.</h3>
+        <p>Sign in on a second computer and the first one asks whether to let it receive your books. Say yes and the two know each other from then on; there is no code to type.</p>
+        <p>Send a book straight to another of your computers and it arrives in that library, or keep a book in step across them. While your main computer is on, open its library from the other one and browse, listen and read your notes.</p>
+        <ul class="spec">
+          <li>Three computers, one person, listed under Settings &rsaquo; Account</li>
+          <li>Send a book directly, over your home network or the internet</li>
+          <li>Remove a computer and it loses access everywhere</li>
+        </ul>
+      </div>
+      <figure class="frame split-art">
+        <img src="assets/shot-computers.jpg" alt="Settings, Account: the computers on this account listed with their names and when each last checked in, and the control that removes one." width="800" height="230" loading="lazy">
+        <figcaption>Your computers, under Settings &rsaquo; Account.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="voices" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Voices</p>
+      <h2 class="title">The voices your characters can use.</h2>
+    </div>
+    <div class="notes-2 voice-split">
+      <div class="frame panel">
+        <h3>Twenty-six voices are included</h3>
+        <p>They come with the studio, need no account and no internet connection, and the voices built into Windows are there too. They read a line out loud for you. Nothing else in the studio needs a voice service: recording, clean-up, finishing, music, proof listening and saving all work with nothing connected.</p>
+      </div>
+      <div class="frame panel">
+        <h3>A voice service of your own is optional</h3>
+        <p>Turning your own reading into a character&rsquo;s voice needs a voice service that can do that: the services marked below, or one that runs on your own computer. You sign up with them directly and pay them directly; what you use there is separate from your StellAurator plan.</p>
+      </div>
+    </div>
+    <div class="plaques">
+      <div class="plaque"><b>Built-in voices</b><span><em>Reads for you</em> · No internet needed · No account · 26 voices</span></div>
+      <div class="plaque"><b>ElevenLabs</b><span><em>Reads for you</em> · <em>Changes a voice</em> · Writes down what was said · Copies a voice</span></div>
+      <div class="plaque"><b>Murf</b><span><em>Reads for you</em> · <em>Changes a voice</em></span></div>
+      <div class="plaque"><b>Cartesia</b><span><em>Reads for you</em> · <em>Changes a voice</em> · Writes down what was said</span></div>
+      <div class="plaque"><b>Resemble</b><span><em>Reads for you</em> · <em>Changes a voice</em> · Writes down what was said</span></div>
+      <div class="plaque"><b>Respeecher</b><span><em>Reads for you</em> · <em>Changes a voice</em></span></div>
+      <div class="plaque"><b>Windows voices</b><span><em>Reads for you</em> · No internet needed · No account</span></div>
+    </div>
+    <p class="fineprint affiliate-note" style="margin-top:18px"><a href="https://try.elevenlabs.io/stellaurator?sid1=index" target="_blank" rel="sponsored noopener"><span class="el-mark"><img src="assets/brand/elevenlabs/elevenlabs-logo-white.svg" alt="" aria-hidden="true" width="108" height="14"></span>Get an ElevenLabs account</a> if you want its voices. StellAurator is an independent affiliate of ElevenLabs and is paid a commission if you subscribe after following this link. You can also go to elevenlabs.io directly.</p>
+    <div class="cast-names">
+      <h3>The twenty-six built-in voices</h3>
+      <p class="muted">Olivia, Emma, Ava, Amelia, Charlotte, Mia, Sophia, Evelyn, Isabella and Harper. Noah, Oliver, Theodore, James, Henry, Liam, William, Elijah, Lucas and Mateo. Luna, Jazzy, Raven, Willow, Juniper and Phoenix.</p>
+    </div>
+    <div class="notes-2">
+      <div>
+        <h3>Your sign-ins stay on your computer</h3>
+        <p class="muted">The sign-in details for those services stay on your computer. A paid voice service bills you directly; what you use there is separate from your StellAurator subscription.</p>
+      </div>
+      <div>
+        <h3>AI help is optional, and you decide what it is told</h3>
+        <p class="muted">Connect an AI service if you like: Anthropic, OpenAI, xAI, Gemini, Groq, OpenRouter, or Ollama on your own computer. It can work out who is speaking, describe your cast, brief a narrator, and find where music belongs. You can read and change every instruction it is given.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="themes" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Themes</p>
+      <h2 class="title">Themes restyle the whole studio.</h2>
+      <p class="lede">Each theme changes the icons, the panels, the buttons, the sliders, the cast tags and the portrait art on every screen.</p>
+      <p class="lede">Twelve themes come with the studio, all included. More are on the way.</p>
+    </div>
+    <div class="theme-grid">
+        <figure class="frame">
+          <img src="assets/themes/gilded.jpg" srcset="assets/themes/gilded.jpg 1x, assets/themes/gilded@2x.jpg 2x" data-full="assets/themes/gilded@2x.jpg" alt="The StellAurator studio in the Gilded theme." width="780" height="536" loading="lazy">
+          <figcaption>Gilded</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/vivid.jpg" srcset="assets/themes/vivid.jpg 1x, assets/themes/vivid@2x.jpg 2x" data-full="assets/themes/vivid@2x.jpg" alt="The StellAurator studio in the Vivid theme." width="780" height="536" loading="lazy">
+          <figcaption>Vivid</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/fantasy.jpg" srcset="assets/themes/fantasy.jpg 1x, assets/themes/fantasy@2x.jpg 2x" data-full="assets/themes/fantasy@2x.jpg" alt="The StellAurator studio in the Fantasy theme." width="780" height="536" loading="lazy">
+          <figcaption>Fantasy</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/scifi.jpg" srcset="assets/themes/scifi.jpg 1x, assets/themes/scifi@2x.jpg 2x" data-full="assets/themes/scifi@2x.jpg" alt="The StellAurator studio in the Sci-fi theme." width="780" height="536" loading="lazy">
+          <figcaption>Sci-fi</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/noir.jpg" srcset="assets/themes/noir.jpg 1x, assets/themes/noir@2x.jpg 2x" data-full="assets/themes/noir@2x.jpg" alt="The StellAurator studio in the Neo-Noir theme." width="780" height="536" loading="lazy">
+          <figcaption>Neo-Noir</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/romance.jpg" srcset="assets/themes/romance.jpg 1x, assets/themes/romance@2x.jpg 2x" data-full="assets/themes/romance@2x.jpg" alt="The StellAurator studio in the Romance theme." width="780" height="536" loading="lazy">
+          <figcaption>Romance</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/horror.jpg" srcset="assets/themes/horror.jpg 1x, assets/themes/horror@2x.jpg 2x" data-full="assets/themes/horror@2x.jpg" alt="The StellAurator studio in the Horror theme." width="780" height="536" loading="lazy">
+          <figcaption>Horror</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/ivory.jpg" srcset="assets/themes/ivory.jpg 1x, assets/themes/ivory@2x.jpg 2x" data-full="assets/themes/ivory@2x.jpg" alt="The StellAurator studio in the Gilded Ivory theme." width="780" height="536" loading="lazy">
+          <figcaption>Gilded Ivory</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/silverline.jpg" srcset="assets/themes/silverline.jpg 1x, assets/themes/silverline@2x.jpg 2x" data-full="assets/themes/silverline@2x.jpg" alt="The StellAurator studio in the Silverline theme." width="780" height="536" loading="lazy">
+          <figcaption>Silverline</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/chromaluxe.jpg" srcset="assets/themes/chromaluxe.jpg 1x, assets/themes/chromaluxe@2x.jpg 2x" data-full="assets/themes/chromaluxe@2x.jpg" alt="The StellAurator studio in the Chromaluxe theme." width="780" height="536" loading="lazy">
+          <figcaption>Chromaluxe</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/steampunk.jpg" srcset="assets/themes/steampunk.jpg 1x, assets/themes/steampunk@2x.jpg 2x" data-full="assets/themes/steampunk@2x.jpg" alt="The StellAurator studio in the Steampunk theme." width="780" height="536" loading="lazy">
+          <figcaption>Steampunk</figcaption>
+        </figure>
+        <figure class="frame">
+          <img src="assets/themes/celestial.jpg" srcset="assets/themes/celestial.jpg 1x, assets/themes/celestial@2x.jpg 2x" data-full="assets/themes/celestial@2x.jpg" alt="The StellAurator studio in the Celestial Aura theme." width="780" height="536" loading="lazy">
+          <figcaption>Celestial Aura</figcaption>
+        </figure>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="nebula" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Add-on</p>
+      <h2 class="title">StellAurator Nebula.</h2>
+      <p class="lede">Our online storage option. It carries your books between your own computers. Put a book in Nebula from any of your linked computers and take it down on another, whether or not the first one is on.</p>
+    </div>
+    <div class="grid-3">
+      <article class="frame panel">
+        <h3>Locked before it leaves your computer</h3>
+        <p>Anything you put in Nebula is locked before it leaves your computer, with keys that exist only on your own computers. We cannot open it, then or later. It is not a backup: the master copy of your work stays on your own disk.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Three sizes, monthly or yearly</h3>
+        <p>Nebula 25 at $7 a month, Nebula 100 at $13, Nebula 500 at $21, or yearly at half price. An add-on to a paid plan, canceled on its own. When Nebula ends you have 60 days to take your books down.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Share one book or one file by a link</h3>
+        <p>Share a single book or a single file by a link that carries its own key. Whoever holds it can download that one thing and nothing else, until it expires, reaches the download count you set, or you stop it.</p>
+      </article>
+    </div>
+    <figure class="frame strip">
+      <img src="assets/shot-nebula.jpg" alt="The Nebula panel: the plan and how much of it is used, the books and files on the shelf with where each was put there from, the live links, and the computers that hold the key." width="1120" height="840" loading="lazy">
+      <figcaption>The Nebula panel, under Settings, once Nebula is on.</figcaption>
+    </figure>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="pricing" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Pricing</p>
+      <h2 class="title">The whole studio is free for seven days.</h2>
+      <p class="lede">Try everything for seven days with no card. Then $29 a month, or $290 a year with two months free. One plan, every feature, three of your computers.</p>
+    </div>
+    <div class="price-strip frame is-lit">
+      <div><div class="price">$0 <small>for 7 days</small></div><p class="muted">No card. Nothing is charged when it ends.</p></div>
+      <div><div class="price">$29 <small>/ month</small></div><p class="muted">Cancel anytime, in two clicks.</p></div>
+      <div><div class="price">$290 <small>/ year</small></div><p class="muted">Two months free.</p></div>
+    </div>
+    <div class="cta-row" style="margin-top:28px">
+      <a class="btn btn-gold" href="#" data-download>Start 7-day free trial</a>
+      <a class="btn btn-line" href="pricing.html">See full pricing</a>
+    </div>
+    <p class="cta-note">Your work remains yours. Cancel whenever you want: your projects and recordings stay on your computer, and StellAurator never uploads your manuscript to us.</p>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section id="faq" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Questions</p>
+      <h2 class="title">Questions before you start.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Does it clean up my recordings?</summary><p>Yes, as they land. Every recording is checked for clicks, pops, hard P sounds, breaths, hum and background hiss, the fixes are suggested under it, and Review plays the fixed recording right away. Finish does the same for a whole chapter, checks it against Audible&rsquo;s rules, and saves it. Every fix can be undone, and the original is never changed.</p></details>
+      <details><summary>Do I need ElevenLabs or another paid voice service?</summary><p>No. StellAurator is a recording studio. Computer voices and voice changing are optional, and twenty-six voices come with it and work without the internet. A paid voice service is needed only for its own voices or to turn your reading into a character&rsquo;s voice, and it bills you directly. <a href="https://try.elevenlabs.io/stellaurator?sid1=index" target="_blank" rel="sponsored noopener">Get an ElevenLabs account</a> if you want one. StellAurator is an independent affiliate of ElevenLabs and is paid a commission if you subscribe after following this link. You can also go to elevenlabs.io directly.</p></details>
+      <details><summary>What happens after the seven days?</summary><p>Nothing is charged: we never asked for a card. When the trial ends, your books stay on your computer and still open and play. Recording, generating and editing wait for a plan. Subscribe when you want to carry on recording, editing and exporting.</p></details>
+      <details><summary>Do I lose my projects if I cancel or stop paying?</summary><p>No. Your projects, recordings and finished files are files on your own computer and nothing is ever deleted. If you have ever paid for a plan, saving your finished files stays unlocked for the work you made.</p></details>
+      <details><summary>Can I cancel?</summary><p>Anytime, in two clicks on your account page. Your plan stays active to the end of the current billing period.</p></details>
+      <details><summary>Can I sell the audiobooks I make?</summary><p>Yes. What you make is yours, and the files are the ones Audible&rsquo;s ACX and the other stores ask for. You are responsible for the rights to your text and to any real person&rsquo;s voice you use. Files with computer-generated narration are marked that way, and Audible&rsquo;s ACX does not accept computer-generated narration.</p></details>
+      <details><summary>Does StellAurator upload my manuscript?</summary><p>No. It stays on your computer. Text is sent only to the voice and AI services you choose to connect, under your own account with them.</p></details>
+      <details><summary>How many computers can I use it on?</summary><p>Three, for one person. The studio lists them under Settings, Account, and you can remove one to make room for another. Link them and you can send a book from one to another.</p></details>
+      <details><summary>Is it safe to install?</summary><p>The installer is signed, so Windows shows the publisher when you run it.</p></details>
+      <details><summary>Is it Windows only?</summary><p>Yes: 64-bit Windows 10 or 11.</p></details>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <section class="wrap cta-band">
+    <h2 class="title">Start your 7-day trial.</h2>
+    <p class="lede">No card required. A practice book comes with the studio and walks you through casting, recording, clean-up and saving your files.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#" data-download>Start 7-day free trial</a>
+      <a class="btn btn-line" href="alpha/">Join the alpha</a>
+      <a class="btn btn-line" href="contact.html">Ask a question</a>
+    </div>
+    <p class="cta-note">The installer is signed, so Windows shows the publisher when you run it. 64-bit Windows 10 or 11.</p>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="pricing.html">Pricing</a>
+      <a href="alpha/">Alpha</a>
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p class="trademark" data-elevenlabs-attribution>ElevenLabs and the ElevenLabs logo are registered trademarks or trademarks of ElevenLabs, Inc. Used with permission. StellAurator is not sponsored by, endorsed by, or affiliated with ElevenLabs except as an independent participant in the ElevenLabs Creator Affiliate Program.</p>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  // The logo animation opens the page as a picture, never as a gate: it plays once, muted, and
+  // rests on its last frame (the wordmark). With reduced motion the poster stands in for it.
+  const v = document.getElementById('introVideo');
+  if (v) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+    else { const p = v.play && v.play(); if (p && p.catch) p.catch(() => {}); }
+  }
+  // Hear it: assets/demo/demo.json -> [{ "line": "...", "character": "...", "performed": "a.mp3", "converted": "b.mp3" }]
+  fetch('assets/demo/demo.json').then((r) => (r.ok ? r.json() : [])).then((clips) => {
+    if (!Array.isArray(clips) || !clips.length) return;
+    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    document.getElementById('demoGrid').innerHTML = clips.slice(0, 6).map((c) => '<article class="frame panel demo-card">'
+      + '<p class="demo-line">&ldquo;' + esc(c.line) + '&rdquo;</p>'
+      + '<div class="demo-pair"><label>As performed<audio controls preload="none" src="assets/demo/' + esc(c.performed) + '"></audio></label>'
+      + '<label>As ' + esc(c.character || 'the character') + '<audio controls preload="none" src="assets/demo/' + esc(c.converted) + '"></audio></label></div></article>').join('');
+    document.getElementById('hear').hidden = false;
+    // one at a time
+    document.querySelectorAll('#demoGrid audio').forEach((a) => a.addEventListener('play', () => document.querySelectorAll('#demoGrid audio').forEach((o) => { if (o !== a) o.pause(); })));
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>
