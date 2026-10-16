@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Books made with StellAurator</title>
+<meta name="description" content="Audiobooks their authors made with StellAurator, with links straight to their stores. Listing is free, and StellAurator earns nothing from the links.">
+<link rel="canonical" href="https://stellaurator.com/books.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StellAurator">
+<meta property="og:url" content="https://stellaurator.com/books.html">
+<meta property="og:title" content="Books made with StellAurator">
+<meta property="og:description" content="Audiobooks their authors made with StellAurator, with links straight to their stores. Listing is free, and StellAurator earns nothing from the links.">
+<meta property="og:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="StellAurator audiobook production studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Books made with StellAurator">
+<meta name="twitter:description" content="Audiobooks their authors made with StellAurator, with links straight to their stores. Listing is free, and StellAurator earns nothing from the links.">
+<meta name="twitter:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+<script src="pixel.js"></script>
+<script src="analytics.js"></script>
+<style>
+  /* Books made with StellAurator (site/wix/README.md section 19). The list is drawn by books.js. */
+  .shelf-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin: 26px 0 18px; }
+  .shelf-filter { display: flex; flex-wrap: wrap; gap: 8px; }
+  .shelf-filter button { font-family: var(--font-caps); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sterling); background: transparent; border: 1px solid rgba(var(--silver), .28); border-radius: var(--r); padding: 8px 12px; cursor: pointer; }
+  .shelf-filter button[aria-pressed="true"] { color: var(--gilt); border-color: rgba(var(--glow), .7); }
+  .shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+  .shelf-card { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .shelf-card img, .shelf-card .nocover { width: 96px; height: 144px; object-fit: cover; border-radius: var(--r); border: 1px solid rgba(var(--silver), .2); background: rgba(255, 255, 255, .03); }
+  .shelf-card h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 23px; line-height: 1.15; color: var(--ivory); overflow-wrap: anywhere; }
+  .shelf-card .by { margin: 4px 0 0; color: var(--ivory); font-size: 15px; }
+  .shelf-card .fmt { margin: 4px 0 0; font-size: 12.5px; color: var(--pewter); }
+  .shelf-card .desc { margin: 10px 0 0; white-space: pre-line; overflow-wrap: anywhere; }
+  .shelf-card .badge { display: inline-block; margin-top: 8px; padding: 3px 9px; border: 1px solid rgba(var(--glow), .55); border-radius: var(--r); font-family: var(--font-caps); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gilt); }
+  .shelf-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .shelf-links .btn { padding: 8px 12px; font-size: 11px; }
+  .shelf-empty { max-width: 760px; }
+  @media (max-width: 480px) { .shelf { grid-template-columns: 1fr; } .shelf-card { grid-template-columns: 72px minmax(0, 1fr); } .shelf-card img, .shelf-card .nocover { width: 72px; height: 108px; } }
+</style>
+</head>
+<body data-page="books">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+
+<main id="top">
+  <section class="wrap page-head">
+    <div class="section-head">
+      <p class="eyebrow">For listeners and readers</p>
+      <h1 class="title">Books made with StellAurator</h1>
+      <p class="lede">Every book here was made with StellAurator by its author. Listing is free, and StellAurator earns nothing from these links.</p>
+    </div>
+
+    <div class="shelf-bar">
+      <div class="shelf-filter" role="group" aria-label="Show by format" data-shelf-filter hidden>
+        <button type="button" data-format="" aria-pressed="true">All</button>
+        <button type="button" data-format="audiobook" aria-pressed="false">Audiobook</button>
+        <button type="button" data-format="ebook" aria-pressed="false">Ebook</button>
+        <button type="button" data-format="print" aria-pressed="false">Print</button>
+      </div>
+      <a class="btn btn-line" href="https://account.stellaurator.com/my-books" data-shelf-add>Are you an author? Add your book</a>
+    </div>
+
+    <!-- Only entries with placement 'made-with' are drawn here. When paid placements come, they will be a
+         separate section labeled Sponsored, never mixed into this list. -->
+    <div class="shelf" data-shelf aria-live="polite"><p class="muted">Finding the books&hellip;</p></div>
+  </section>
+
+  <section class="wrap closing">
+    <div class="frame panel" style="max-width:820px;margin:0 auto;text-align:center">
+      <h2 class="title">Made your audiobook with StellAurator?</h2>
+      <p class="lede" style="margin:14px auto 0">Add it here for free. Your links go straight to your stores, and a book appears after we look at it, usually within a few days.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:24px">
+        <a class="btn btn-gold" href="https://account.stellaurator.com/my-books">Add your book</a>
+        <a class="btn btn-line" href="/terms.html#bookshelf">How listing works</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Legal links">
+      <a href="/studio.html">The studio</a>
+      <a href="/narrators.html">For narrators</a>
+      <a href="/voices.html">Voices</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/terms.html">License agreement</a>
+      <a href="/terms.html#billing">Subscription terms</a>
+      <a href="/terms.html#privacy">Privacy</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:narrator@stellaurator.com">narrator@stellaurator.com</a>
+    </nav>
+    <p class="trademark" data-elevenlabs-attribution>ElevenLabs and the ElevenLabs logo are registered trademarks or trademarks of ElevenLabs, Inc. Used with permission. StellAurator is not sponsored by, endorsed by, or affiliated with ElevenLabs except as an independent participant in the ElevenLabs Creator Affiliate Program.</p>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script src="books.js"></script>
+</body>
+</html>

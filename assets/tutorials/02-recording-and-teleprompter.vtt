@@ -1,0 +1,590 @@
+WEBVTT
+
+1
+00:00:03.213 --> 00:00:04.193
+We're ready to record.
+
+2
+00:00:05.223 --> 00:00:08.603
+Here we go. So there's a couple of ways we
+can record. We can start by
+
+3
+00:00:08.603 --> 00:00:12.743
+hitting the record this line button, which
+is the easiest and simplest way
+
+4
+00:00:12.743 --> 00:00:13.663
+to just record a line.
+
+5
+00:00:22.543 --> 00:00:25.423
+the bell beneath the cedars all
+
+6
+00:00:27.503 --> 00:00:29.703
+right so we've got our first got
+
+7
+00:00:31.553 --> 00:00:37.803
+our first uh recorded line uh it's already
+detected some issues
+
+8
+00:00:37.803 --> 00:00:42.603
+uh and so what we can do we can go ahead
+and apply the recommended fixes and
+
+9
+00:00:42.603 --> 00:00:46.513
+it'll fix it just like that okay go
+
+10
+00:00:48.083 --> 00:00:49.943
+ahead and listen to it again it
+
+11
+00:00:53.073 --> 00:00:58.323
+sounds like it's clipping so i'm probably
+going to want to adjust some
+
+12
+00:00:58.323 --> 00:01:04.223
+levels So we're going to come up here and
+we're going to
+
+13
+00:01:04.223 --> 00:01:07.063
+adjust the
+
+14
+00:01:09.173 --> 00:01:13.593
+input.
+
+15
+00:01:15.033 --> 00:01:19.773
+Okay. We're going to drop everything down
+by about three decibels.
+
+16
+00:01:22.003 --> 00:01:22.603
+Okay.
+
+17
+00:01:27.733 --> 00:01:30.433
+And then we'll go ahead and turn the de
+-esser on.
+
+18
+00:01:32.153 --> 00:01:32.633
+Okay.
+
+19
+00:01:39.053 --> 00:01:44.393
+Now, something else that I can do. I'm
+going to come into the actual
+
+20
+00:01:44.393 --> 00:01:49.413
+recording settings here, and I'm actually
+going to take a quick look at what
+
+21
+00:01:49.413 --> 00:01:53.573
+we've got. So we're going to do a level
+check.
+
+22
+00:01:54.813 --> 00:01:57.493
+Level check. Hello, ABC, one, two, three.
+
+23
+00:01:59.543 --> 00:02:00.583
+All right. Nothing's happening.
+
+24
+00:02:02.743 --> 00:02:07.043
+There is going to be some issues with me
+streaming and doing this at the
+
+25
+00:02:07.043 --> 00:02:10.323
+same time, but that's okay. One, two,
+three.
+
+26
+00:02:14.093 --> 00:02:14.813
+There we go.
+
+27
+00:02:15.233 --> 00:02:17.373
+okay now
+
+28
+00:02:18.393 --> 00:02:22.873
+we can dial in our our levels here right
+now it's it's acting a little funny
+
+29
+00:02:22.873 --> 00:02:28.913
+just because uh i am streaming at the same
+time so this will actually be a
+
+30
+00:02:28.913 --> 00:02:31.413
+lot better you'll have you'll actually see
+where the peak is when you're
+
+31
+00:02:31.413 --> 00:02:36.453
+talking uh the rms will all be right there
+um you'll see
+
+32
+00:02:37.523 --> 00:02:44.173
+The room noise everything will be right
+here very easy to see So I'm gonna
+
+33
+00:02:44.173 --> 00:02:49.393
+go ahead and drop the gain down to about
+91 % So that's what we're gonna do
+
+34
+00:02:49.393 --> 00:02:52.373
+here And
+
+35
+00:02:55.253 --> 00:02:58.973
+then we have there's some different some
+different
+
+36
+00:03:01.663 --> 00:03:06.783
+like drivers that i can use like i can use
+the native drivers but um that's
+
+37
+00:03:06.783 --> 00:03:12.823
+mostly important for lag free uh pass
+through which is right here you can
+
+38
+00:03:12.823 --> 00:03:18.073
+actually turn it on the pass through all
+right cool should basically be set
+
+39
+00:03:18.073 --> 00:03:20.153
+up now i'm going to go ahead and read this
+again actually i'm going to
+
+40
+00:03:20.153 --> 00:03:23.553
+delete this line delete and we're just
+going to read this again real quick
+
+41
+00:03:23.553 --> 00:03:24.413
+the
+
+42
+00:03:31.963 --> 00:03:34.363
+bell beneath the cedars the
+
+43
+00:03:36.923 --> 00:03:39.083
+bell beneath the cedars all
+
+44
+00:03:44.783 --> 00:03:46.363
+right so that was a lot
+
+45
+00:03:47.233 --> 00:03:49.333
+The bell beneath the cedars.
+
+46
+00:03:53.003 --> 00:03:57.843
+All right. So something else it does is
+that automatically takes a sample of
+
+47
+00:03:57.843 --> 00:04:04.323
+your words and it will clip a certain
+silent before and after.
+
+48
+00:04:04.603 --> 00:04:09.243
+This is what it actually recorded. And
+this is what it clipped it to
+
+49
+00:04:09.243 --> 00:04:15.053
+automatically. So. Now when I listen back.
+The bell beneath the cedars.
+
+50
+00:04:16.683 --> 00:04:20.643
+Boom. We'll go ahead and apply the
+recommended fixes.
+
+51
+00:04:22.343 --> 00:04:29.263
+Done. And we can do bulk repair later. The
+bell beneath the cedars. Perfect.
+
+52
+00:04:30.123 --> 00:04:33.623
+And then we're going to go ahead and lock
+our take. So this is the lock
+
+53
+00:04:33.623 --> 00:04:37.743
+button here. Now I can't quite see these
+that well. So what I can actually
+
+54
+00:04:37.743 --> 00:04:41.263
+do. If I hold down the control button. I
+can actually.
+
+55
+00:04:42.593 --> 00:04:48.583
+enlarge the buttons on that particular
+section. I can do the same thing over
+
+56
+00:04:48.583 --> 00:04:55.143
+here, here, here, and that's about it.
+
+57
+00:04:57.273 --> 00:04:58.073
+But yeah,
+
+58
+00:04:59.223 --> 00:05:02.763
+it's a little bit easier to deal with. So
+we're gonna go ahead and lock
+
+59
+00:05:02.763 --> 00:05:06.443
+that. So that's processed and locked. We
+are good to go.
+
+60
+00:05:07.763 --> 00:05:08.303
+Excellent.
+
+61
+00:05:10.053 --> 00:05:14.593
+Now, if I wanted to do a continuous read
+-through, you can actually click
+
+62
+00:05:14.593 --> 00:05:15.853
+the teleprompter button.
+
+63
+00:05:17.303 --> 00:05:19.123
+All right, so what we're going to do here,
+
+64
+00:05:20.213 --> 00:05:23.093
+start recording. You can actually do a
+rehearsal real quick if you want.
+
+65
+00:05:23.753 --> 00:05:27.313
+Written by ChachiPT, narrated by a whomon.
+
+66
+00:05:28.383 --> 00:05:33.303
+Okay, so a ghost story set in Washington
+Territory, 1890. So there's a
+
+67
+00:05:33.303 --> 00:05:39.033
+couple of things that you can do. So if I
+wanted to... For example pause
+
+68
+00:05:39.033 --> 00:05:45.573
+hold down the down button here all the
+controls right here I don't have a
+
+69
+00:05:45.573 --> 00:05:50.133
+back button. So that's probably something
+I'm gonna need to do soon, but You
+
+70
+00:05:51.123 --> 00:05:57.923
+can do restart line prompter settings
+you've got you can do automatic pauses
+
+71
+00:05:57.923 --> 00:05:59.123
+and
+
+72
+00:06:00.463 --> 00:06:07.223
+You can change the type of Reading you do
+you've got the
+
+73
+00:06:07.903 --> 00:06:11.983
+bounce it. Well, it's not bouncing but the
+ball slide and the flood.
+
+74
+00:06:13.673 --> 00:06:18.653
+I personally like the slide, but actually
+flood is probably a little easier
+
+75
+00:06:18.653 --> 00:06:25.413
+for most people. The ball is probably the
+most strict in terms
+
+76
+00:06:25.413 --> 00:06:31.923
+of like you, it forces you to read at the
+right speed. It does not literally
+
+77
+00:06:31.923 --> 00:06:36.463
+forces you just as a lot easier to stay on
+the correct word with that ball
+
+78
+00:06:37.363 --> 00:06:41.253
+floating through there. So we're going to
+go ahead and close the prompter.
+
+79
+00:06:42.533 --> 00:06:46.333
+We haven't actually recorded anything, so
+you need to make sure that you hit
+
+80
+00:06:46.333 --> 00:06:47.213
+stop and you hit save.
+
+81
+00:06:47.433 --> 00:06:48.420
+I'm going to go ahead and record this
+time.
+
+82
+00:06:52.520 --> 00:06:58.170
+Written by ChatGPT. Narrated by the Humon.
+A ghost story set in Washington
+
+83
+00:06:58.170 --> 00:07:05.050
+Territory, 1889. Chapter 1. Three knocks.
+The first time the dead
+
+84
+00:07:05.050 --> 00:07:08.830
+boy knocked, Nell McMurcer mistook him for
+his father.
+
+85
+00:07:09.090 --> 00:07:10.390
+were no branches near the door.
+
+86
+00:07:11.820 --> 00:07:16.340
+Outside, rain ticked against the roof and
+fell from the eaves in long silver
+
+87
+00:07:16.340 --> 00:07:17.000
+strings.
+
+88
+00:07:18.080 --> 00:07:21.020
+Okay, so I just screwed up pretty bad
+there. What I'm going to do is I'm
+
+89
+00:07:21.020 --> 00:07:22.420
+going to hit the restart line button.
+
+90
+00:07:26.660 --> 00:07:30.180
+Now, what it's doing now is it's actually
+going through and finding where
+
+91
+00:07:30.180 --> 00:07:32.370
+all the... I'll explain in a second.
+
+92
+00:07:34.020 --> 00:07:37.960
+Outside, rain ticked against the roof and
+fell from the eaves in long silver
+
+93
+00:07:37.960 --> 00:07:38.420
+strings.
+
+94
+00:07:38.837 --> 00:07:43.937
+Let's redo that line. So now it's going
+through, it's finding every line
+
+95
+00:07:43.967 --> 00:07:50.407
+as it's separated, and it's actually
+putting them where they belong. He was
+
+96
+00:07:50.407 --> 00:07:53.907
+about Nell's age, 12 or perhaps 13, with
+hair flattened against his forehead
+
+97
+00:07:53.907 --> 00:07:55.887
+and a coat much too large for him.
+
+98
+00:07:56.367 --> 00:07:59.427
+And that's where I would just stop right
+there.
+
+99
+00:08:01.027 --> 00:08:05.877
+And I'd go ahead and we'd go ahead and
+just finish and save.
+
+100
+00:08:07.377 --> 00:08:10.557
+Probably that's another note I'm going to
+add right there. That finish and
+
+101
+00:08:10.557 --> 00:08:12.137
+save button just looks like a stop button
+to me.
+
+102
+00:08:13.217 --> 00:08:15.617
+So I'm going to add a big save button
+right there.
+
+103
+00:08:20.367 --> 00:08:25.267
+Now we're going to close this and we'll
+see that each line has a recording.
+
+104
+00:08:27.477 --> 00:08:27.997
+All right.
+
+105
+00:08:29.817 --> 00:08:31.657
+So if I come down here.
+
+106
+00:08:34.967 --> 00:08:40.527
+A ghost story set in Washington Territory,
+1889. Beautiful. All right. So,
+
+107
+00:08:40.707 --> 00:08:45.407
+and then you can see it continues on to
+the next line. Chapter one, three
+
+108
+00:08:45.407 --> 00:08:45.827
+knocks.
+
+109
+00:08:47.227 --> 00:08:53.887
+And so this is all one long take. And it
+keeps the pauses if that's what you
+
+110
+00:08:53.887 --> 00:08:58.107
+did. Now, you can actually change that. So
+if I come in here, I can actually
+
+111
+00:08:58.107 --> 00:08:59.107
+change the pauses,
+
+112
+00:09:00.487 --> 00:09:05.107
+change where it actually, I can cut out
+some of the space in there. I can
+
+113
+00:09:05.107 --> 00:09:10.617
+also, you know, just go through and repair
+the clicks and noise.
+
+114
+00:09:11.147 --> 00:09:14.407
+Meanwhile, we'll come over here and take a
+look at some of the buttons on
+
+115
+00:09:14.407 --> 00:09:21.217
+the side over here. We've got listen.
+That's going to basically play what
+
+116
+00:09:21.217 --> 00:09:21.937
+you've recorded.
+
+117
+00:09:23.487 --> 00:09:27.467
+Next unrecorded, just literally take you
+to the next line that was
+
+118
+00:09:27.467 --> 00:09:34.187
+unrecorded. And you can actually change it
+to different actual things. So
+
+119
+00:09:34.187 --> 00:09:37.767
+next unlocked, for example, would be
+you've got something recorded, but you
+
+120
+00:09:37.767 --> 00:09:39.187
+haven't locked anything in for it.
+
+121
+00:09:40.507 --> 00:09:47.237
+You've got a line that's been recorded,
+but you haven't processed it
+
+122
+00:09:47.237 --> 00:09:51.557
+through the voice changer yet. That may be
+part of your workflow, may not
+
+123
+00:09:51.557 --> 00:09:56.017
+be. Flag for review. So you're going to be
+doing pickups and this will be
+
+124
+00:09:56.017 --> 00:09:58.757
+part of that, et cetera.
+
+125
+00:10:00.257 --> 00:10:05.857
+This will show you it. Generated does not
+mean that it was created by an AI.
+
+126
+00:10:06.097 --> 00:10:09.517
+Generated means that it exists, that
+you've recorded it.

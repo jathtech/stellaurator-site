@@ -1,0 +1,433 @@
+WEBVTT
+
+1
+00:00:03.183 --> 00:00:07.763
+Hello, everybody. My name is Michael. I am
+also known as J .T. Michael
+
+2
+00:00:07.763 --> 00:00:14.083
+Starr, the author of Starlock, Enchanted
+Star. This is my novel here,
+
+3
+00:00:14.103 --> 00:00:15.643
+as you can see.
+
+4
+00:00:16.903 --> 00:00:23.373
+This is written entirely by me, and it's a
+
+5
+00:00:23.373 --> 00:00:27.813
+hard science book. I think it's a great,
+great novel.
+
+6
+00:00:29.323 --> 00:00:34.683
+As such, people don't really like to read
+hard copies as much as they used
+
+7
+00:00:34.683 --> 00:00:39.793
+to. So I decided it would probably be a
+good idea for me to turn it into an
+
+8
+00:00:39.793 --> 00:00:46.623
+audiobook. And I figured, why don't I just
+record it myself? So
+
+9
+00:00:46.623 --> 00:00:52.783
+I actually started developing an app.
+Originally, it was called just
+
+10
+00:00:52.783 --> 00:00:53.923
+Audiobook Studio.
+
+11
+00:01:01.533 --> 00:01:04.333
+basically go based on the manuscript
+itself.
+
+12
+00:01:06.023 --> 00:01:06.423
+Um,
+
+13
+00:01:08.833 --> 00:01:12.073
+and what it would do, and
+
+14
+00:01:13.193 --> 00:01:16.313
+you'll see, see what I'm talking about,
+but I decided basically got to the
+
+15
+00:01:16.313 --> 00:01:19.353
+point where I was just developing it and I
+wasn't reading my, I wasn't
+
+16
+00:01:19.353 --> 00:01:24.013
+making my audio book. Um, not as much. I
+mean, it's, it, I still, I just, I
+
+17
+00:01:24.013 --> 00:01:30.833
+am making it slowly over time, but, uh,
+now I'm basically ready to
+
+18
+00:01:30.833 --> 00:01:36.633
+just Get to work on it because I think the
+app is basically done I'm gonna
+
+19
+00:01:36.633 --> 00:01:40.533
+continue working on it. It's still an
+alpha I'm still gonna be doing active
+
+20
+00:01:40.533 --> 00:01:45.753
+updates for a long time to make sure that
+everybody's happy with it But here
+
+21
+00:01:45.753 --> 00:01:51.853
+we go Start out. This is the first screen
+you enter when you first start the
+
+22
+00:01:51.853 --> 00:01:57.593
+Book when you start first to open the open
+app And you'll notice there's
+
+23
+00:01:57.593 --> 00:02:03.993
+four books here That's how many you see in
+the main menu. You've got the
+
+24
+00:02:03.993 --> 00:02:07.293
+library that holds the rest of the books.
+You can sort by series and titles
+
+25
+00:02:07.293 --> 00:02:08.933
+and stuff like that. You can do a search.
+
+26
+00:02:09.973 --> 00:02:13.643
+You can open a file from here.
+
+27
+00:02:13.977 --> 00:02:18.707
+you'll get a get
+
+28
+00:02:20.017 --> 00:02:26.657
+like some tutorials here you can you could
+follow a path you can have it
+
+29
+00:02:26.657 --> 00:02:29.997
+actually show you different things you can
+kind of explain to put in some
+
+30
+00:02:29.997 --> 00:02:33.677
+questions about how you plan on using it
+and they'll help guide you in that
+
+31
+00:02:33.677 --> 00:02:35.677
+way specific to your needs
+
+32
+00:02:35.973 --> 00:02:40.983
+Another cool thing about this is that...
+If you were sent a part that you're
+
+33
+00:02:40.983 --> 00:02:45.423
+going to be doing reading, like you were
+hired as a voice actor, maybe
+
+34
+00:02:45.423 --> 00:02:50.083
+you're reading just one character or
+you're even just the main narrator, you
+
+35
+00:02:50.083 --> 00:02:57.013
+can actually receive the part directly.
+And I don't know
+
+36
+00:02:57.013 --> 00:02:59.753
+if it's good for the main narrator. It's
+probably not good for the main
+
+37
+00:02:59.753 --> 00:03:04.253
+narrator, but you could theoretically do
+it. They would send you the part
+
+38
+00:03:04.253 --> 00:03:10.553
+and you would type in a code. and it would
+open it up off of the cloud, or
+
+39
+00:03:10.553 --> 00:03:12.833
+you can actually get it shared directly.
+
+40
+00:03:13.993 --> 00:03:17.873
+There's a couple of different ways to do
+that, but we're going to go ahead
+
+41
+00:03:17.873 --> 00:03:21.273
+and start out by creating a new audiobook,
+and we're going to call this
+
+42
+00:03:21.273 --> 00:03:26.473
+audiobook The Bell Beneath the Cedars.
+This is...
+
+43
+00:03:28.743 --> 00:03:34.483
+This is a 10 ,000 word manuscript written
+by ChatGPT just for the purposes
+
+44
+00:03:34.483 --> 00:03:40.903
+of demonstration here. We're going to call
+it GPT1.
+
+45
+00:03:41.833 --> 00:03:43.033
+It's book one.
+
+46
+00:03:44.713 --> 00:03:48.953
+We're going to leave automatically
+identify characters. Now, this one's
+
+47
+00:03:48.953 --> 00:03:54.053
+interesting because there's two ways that
+it can do it. You can either have
+
+48
+00:03:54.053 --> 00:03:57.713
+automatic detection that's built into the
+app, or you can attach it to an
+
+49
+00:03:57.713 --> 00:04:04.473
+API through ChatGPT, OpenAI, Anthropic,
+Grok, et
+
+50
+00:04:04.473 --> 00:04:07.753
+cetera. And it'll be a little bit more
+accurate.
+
+51
+00:04:09.073 --> 00:04:10.753
+The character identification,
+
+52
+00:04:13.693 --> 00:04:17.773
+isn't perfect either, even with the API,
+but it at least gives you a strong
+
+53
+00:04:17.773 --> 00:04:20.913
+basis. It creates most of the characters.
+So we're going to go ahead and
+
+54
+00:04:20.913 --> 00:04:26.733
+create, and we're going to open the new
+book. All right. Now,
+
+55
+00:04:27.453 --> 00:04:31.653
+normally you could start by uploading the
+file. Right now it accepts docx
+
+56
+00:04:31.653 --> 00:04:36.613
+text files, and I think PDF, but I'll have
+to double check on that.
+
+57
+00:04:37.873 --> 00:04:44.203
+Or we can just go ahead and paste in Let
+me, hold on. Paste in the
+
+58
+00:04:44.203 --> 00:04:46.163
+manuscript. That's what we're going to do
+today. We're going to go ahead and
+
+59
+00:04:46.163 --> 00:04:52.543
+just copy and paste. All right. And let
+
+60
+00:04:55.333 --> 00:04:57.273
+me just make sure that I got the whole
+thing.
+
+61
+00:05:00.343 --> 00:05:03.443
+Yeah, looks like I got the whole thing.
+All right, we'll go ahead and import
+
+62
+00:05:03.443 --> 00:05:08.323
+the manuscript. It's going to process the
+manuscript, read it. It's going to
+
+63
+00:05:08.323 --> 00:05:11.503
+detect the speakers. It's going to detect
+the chapters. It's going to
+
+64
+00:05:11.503 --> 00:05:12.343
+detect...
+
+65
+00:05:14.763 --> 00:05:21.643
+You know differences in lines dialogue
+It's gonna It's
+
+66
+00:05:22.123 --> 00:05:26.803
+gonna do a bunch of sorting for you right
+off the bat. It's just gonna place
+
+67
+00:05:26.803 --> 00:05:31.633
+it so that very easy to parse through and
+read at will
+
+68
+00:05:31.787 --> 00:05:37.687
+All right, here we go. So this is your
+manuscript. We're going to start out
+
+69
+00:05:37.687 --> 00:05:42.267
+by kind of just taking a look here. The
+bell beneath the cedars. That's the
+
+70
+00:05:42.267 --> 00:05:47.487
+title. Okay. Um, we're going to go ahead
+and we're going to add an author.
+
+71
+00:05:47.627 --> 00:05:52.917
+We're going to create a new line below
+written and written by
+
+72
+00:05:53.967 --> 00:05:59.617
+chat GPT narrated by
+
+73
+00:06:00.007 --> 00:06:01.367
+a
+
+74
+00:06:02.767 --> 00:06:03.887
+human.
+
+75
+00:06:06.057 --> 00:06:10.017
+I mean, you can do what you want, really.
+All right, so now we have our new
+
+76
+00:06:10.017 --> 00:06:11.437
+line there. Cool.
+
+77
+00:06:13.197 --> 00:06:17.027
+We've got 44 lines to review. Review in
+order.
+
+78
+00:06:18.087 --> 00:06:20.347
+So, the boy.
+
+79
+00:06:21.397 --> 00:06:26.417
+Who is the boy? Douglas in the scene. Fits
+the exchange before and after.
+
+80
+00:06:26.817 --> 00:06:29.477
+Nell in the scene. Elias Vale may be in
+the scene.
+
+81
+00:06:29.673 --> 00:06:35.393
+If it's not sure, it'll let you, it'll
+tell you who the likeliest target is.
+
+82
+00:06:36.013 --> 00:06:39.633
+And we can go ahead and select the
+likeliest target
+
+83
+00:06:40.187 --> 00:06:44.667
+Now, if I was the author of this, I would
+actually know who's speaking. And
+
+84
+00:06:44.667 --> 00:06:48.467
+this would be a lot easier. So we just
+kind of go through here and make sure
+
+85
+00:06:48.467 --> 00:06:51.047
+that we've
+
+86
+00:06:52.107 --> 00:06:55.647
+granted every line a
+
+87
+00:06:56.167 --> 00:06:57.793
+So this definitely needs some work.
+
+88
+00:06:59.263 --> 00:07:03.463
+That's a great thing about being a
+developer. I can update this. So this is
+
+89
+00:07:03.463 --> 00:07:08.583
+going to be taken a look at. We may not
+want to have it go through it like
+
+90
+00:07:08.583 --> 00:07:13.603
+that, but we'll just go ahead and for now,
+we're just going to assign all
+
+91
+00:07:13.603 --> 00:07:15.083
+the characters as most likely.
