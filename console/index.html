@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StellAurator Console</title>
+<meta name="description" content="The owner's window onto StellAurator: accounts, downloads, licenses and account control.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050609">
+<meta name="color-scheme" content="dark">
+<!-- iOS gives an added-to-home-screen page its own window from these two -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Console">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../assets/logo.png">
+<link rel="apple-touch-icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="console.css">
+</head>
+<body>
+<!--
+  The StellAurator Console (docs/OWNER_CONSOLE.md).
+
+  A page, installable: "Add to Home Screen" gives it an icon and a window of its own, and changes
+  nothing else - there is no second installer, no second code signature and no update channel,
+  because a reload IS the update.
+
+  It talks to one thing, the back office, and it proves who it is with a key made in this browser
+  whose private half cannot be read back out of it. Everything it shows is an aggregate: no book,
+  no chapter, no line and no recording has ever existed on that back office to be asked for.
+
+  Everything below is built by console.js. The markup here is the shell and the one message that
+  has to be readable when JavaScript has not run.
+-->
+<main id="console" class="wrap">
+  <noscript>
+    <section class="panel is-wide">
+      <h2>The Console needs JavaScript</h2>
+      <p class="note">It signs every request with a key kept in this browser, which is not something a page can do without it. Turn JavaScript on for stellaurator.com and reload.</p>
+    </section>
+  </noscript>
+</main>
+
+<footer class="foot">
+  <p>StellAurator Console · owner only · every page you open is written to the audit ledger.</p>
+  <p class="note">Aggregates only. No manuscript, line, cue, character or recording exists on the back office to be looked at.</p>
+</footer>
+
+<script type="module" src="console.js"></script>
+</body>
+</html>

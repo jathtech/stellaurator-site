@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="/">
+<title>ACX Audio Requirements Explained - StellAurator Guide</title>
+<meta name="description" content="Audible's ACX audio requirements explained: RMS, peaks, noise floor, MP3 format, room tone, file length, credits and the retail sample.">
+<link rel="canonical" href="https://stellaurator.com/guides/acx-requirements.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StellAurator">
+<meta property="og:url" content="https://stellaurator.com/guides/acx-requirements.html">
+<meta property="og:title" content="ACX Audio Requirements Explained - StellAurator Guide">
+<meta property="og:description" content="Audible's ACX audio requirements explained: RMS, peaks, noise floor, MP3 format, room tone, file length, credits and the retail sample.">
+<meta property="og:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="StellAurator audiobook production studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ACX Audio Requirements Explained - StellAurator Guide">
+<meta name="twitter:description" content="Audible's ACX audio requirements explained: RMS, peaks, noise floor, MP3 format, room tone, file length, credits and the retail sample.">
+<meta name="twitter:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+<script src="pixel.js"></script>
+<script src="analytics.js"></script>
+</head>
+<body data-page="guides">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+
+<main id="top">
+  <section class="wrap page-head guide">
+    <div class="section-head">
+      <p class="eyebrow"><a href="/guides/">Guides</a> &middot; Delivery</p>
+      <h1 class="title">Audible&rsquo;s ACX audio requirements, explained</h1>
+      <p class="lede">What each of ACX&rsquo;s Audio Submission Requirements measures and how to meet it, for an audiobook recorded at home. The requirements are as ACX published them in October 2026.</p>
+      <p class="guide-meta">By StellAurator &middot; Updated October 12, 2026</p>
+    </div>
+
+    <nav class="guide-toc" aria-label="On this page">
+      <a href="/guides/acx-requirements.html#about">What they are for</a>
+      <a href="/guides/acx-requirements.html#rms">Loudness</a>
+      <a href="/guides/acx-requirements.html#peak">Peaks</a>
+      <a href="/guides/acx-requirements.html#noise">Noise floor</a>
+      <a href="/guides/acx-requirements.html#format">File format</a>
+      <a href="/guides/acx-requirements.html#channels">Mono or stereo</a>
+      <a href="/guides/acx-requirements.html#room-tone">Room tone</a>
+      <a href="/guides/acx-requirements.html#length">File length</a>
+      <a href="/guides/acx-requirements.html#files">One section per file</a>
+      <a href="/guides/acx-requirements.html#credits">Credits</a>
+      <a href="/guides/acx-requirements.html#sample">Retail sample</a>
+      <a href="/guides/acx-requirements.html#consistency">Consistency</a>
+      <a href="/guides/acx-requirements.html#narration">Human narration</a>
+      <a href="/guides/acx-requirements.html#stellaurator">Checking in StellAurator</a>
+    </nav>
+
+    <div class="frame panel picks-glance">
+      <p class="eyebrow">The requirements at a glance</p>
+      <ul>
+        <li><b>Loudness:</b> between -23 dB and -18 dB RMS.</li>
+        <li><b>Peaks:</b> below -3 dB.</li>
+        <li><b>Noise floor:</b> below -60 dB RMS.</li>
+        <li><b>File format:</b> MP3, constant bit rate (CBR), 192 kbps or higher, 44.1 kHz.</li>
+        <li><b>Channels:</b> mono or stereo, the same for every file.</li>
+        <li><b>Room tone:</b> 1 to 5 seconds recommended at the start and end of each file; no more than 5 seconds.</li>
+        <li><b>File length:</b> no longer than 120 minutes per file.</li>
+        <li><b>Files:</b> each chapter or section in its own file, the credits in theirs.</li>
+        <li><b>Retail sample:</b> five minutes or less, from the audiobook, with no explicit material.</li>
+        <li><b>Narration:</b> by a human unless ACX has authorized otherwise.</li>
+      </ul>
+    </div>
+
+    <div id="about" class="guide-body">
+      <h2>What the requirements are for</h2>
+      <p>ACX (Audiobook Creation Exchange) is the service through which audiobooks are submitted for sale on Audible, Amazon and Apple Books. Every file is reviewed against its <a href="https://help.acx.com/s/article/acx-audio-submission-requirements" target="_blank" rel="noopener">Audio Submission Requirements</a> before the book goes on sale. Software measures some of them. ACX&rsquo;s reviewers judge consistency and extra sounds by ear.</p>
+    </div>
+
+    <div id="rms" class="guide-body">
+      <h2>Loudness: -23 dB to -18 dB RMS</h2>
+      <p>RMS (root mean square) is the average level of the whole file, not its loudest moment. ACX requires every file to measure between -23 dB and -18 dB RMS.</p>
+      <p>The range exists so that a listener does not have to change the volume from one chapter to the next, or from one book to the next. A file below -23 dB is too quiet for a car or a train. A file above -18 dB got there by hard compression.</p>
+      <p>How to meet it: record at a healthy level, with peaks around -12 dB to -6 dB while you read, and raise or lower the whole chapter to the target afterwards. A small amount of compression evens out the louder and quieter passages. Raising the level raises the noise floor with it, so measure the two together.</p>
+    </div>
+
+    <div id="peak" class="guide-body">
+      <h2>Peaks: below -3 dB</h2>
+      <p>The peak is the single loudest sample in the file. ACX requires it to stay below -3 dB, which leaves room for the conversion to the formats Audible streams and sells. A peak that touches 0 dB can distort in that conversion.</p>
+      <p>How to meet it: avoid clipping while recording, since a clipped peak cannot be repaired cleanly. A limiter set to -3 dB, or slightly below, holds the peaks under the line after the level has been raised to the RMS target.</p>
+    </div>
+
+    <div id="noise" class="guide-body">
+      <h2>Noise floor: below -60 dB RMS</h2>
+      <p>The noise floor is the level of the recording when nobody is speaking: the room, the computer fan, the street and the microphone&rsquo;s own hiss. ACX requires it to measure below -60 dB RMS, measured in the pauses between words.</p>
+      <p>This requirement is the hardest one to meet in a home room, and it is decided mostly before recording. A quiet room, a microphone close to the mouth and a microphone that picks up little of the room do more than any noise reduction afterwards. Heavy noise reduction lowers the measured floor but can leave the voice thin or watery, which ACX&rsquo;s reviewers also hear.</p>
+      <p>How to meet it: turn off fans and appliances, record in a treated space, keep the microphone a hand&rsquo;s width from the mouth, and use gentle noise reduction only where it is needed. The <a href="/guides/room-treatment.html">room treatment guide</a> covers what works at each budget, and the <a href="/guides/microphones.html">microphone guide</a> lists microphones that reject an untreated room.</p>
+    </div>
+
+    <div id="format" class="guide-body">
+      <h2>File format: MP3, 192 kbps or higher, constant bit rate, 44.1 kHz</h2>
+      <p>Every file must be an MP3 at a constant bit rate (CBR) of 192 kbps or higher, at a sample rate of 44.1 kHz. 256 kbps and 320 kbps are also accepted. ACX requires a constant bit rate so that its own encoding process runs without errors; a variable bit rate (VBR) file is not accepted.</p>
+      <p>How to meet it: record and edit at any quality you like, and export the finished chapters as 44.1 kHz CBR MP3. A recording made at 48 kHz is converted to 44.1 kHz on export.</p>
+    </div>
+
+    <div id="channels" class="guide-body">
+      <h2>Mono or stereo, the same for every file</h2>
+      <p>A file is mono or stereo, and every file of one book is the same. A single voice is recorded in mono. A stereo file of a mono recording doubles the file size and adds nothing.</p>
+    </div>
+
+    <div id="room-tone" class="guide-body">
+      <h2>Room tone at the start and end of each file</h2>
+      <p>Room tone is the sound of the recording space with nobody speaking. ACX recommends between 1 and 5 seconds of room tone at the beginning and the end of each file, and states that room tone spacing must not exceed 5 seconds.</p>
+      <p>The pause is room tone and not digital silence, because a file that drops to nothing sounds as if the audio has cut out. The head gives the listener a moment before the first word; the tail separates one chapter from the next.</p>
+      <p>How to meet it: record a few seconds of the room at the start of each session, and place the room&rsquo;s own sound, not silence, at the head and tail of each chapter.</p>
+    </div>
+
+    <div id="length" class="guide-body">
+      <h2>File length: no longer than 120 minutes</h2>
+      <p>No file is longer than 120 minutes. A chapter or section longer than that is split into two files, and the second file carries a secondary header so the listener knows the chapter continues, for example &ldquo;Chapter 12, continued&rdquo;.</p>
+    </div>
+
+    <div id="files" class="guide-body">
+      <h2>One section per file, and the file names</h2>
+      <p>Each chapter or section is its own file, uploaded individually, and each file is labeled with its chapter or section title, such as &ldquo;Prologue&rdquo; or &ldquo;Chapter 1&rdquo;. File names use standard US letters and numbers, nothing else.</p>
+    </div>
+
+    <div id="credits" class="guide-body">
+      <h2>Opening and closing credits</h2>
+      <p>The opening credits state the audiobook&rsquo;s title, its author or authors and its narrator or narrators, and must match the book&rsquo;s metadata and cover art. The closing credits signal the end of the book. ACX recommends &ldquo;You have been listening to&rdquo; followed by the title, the authors and the narrators, ending with &ldquo;The End.&rdquo;</p>
+      <p>The opening and closing credits are separate files from the chapters. Music is allowed in the credits if it does not cover the narration.</p>
+    </div>
+
+    <div id="sample" class="guide-body">
+      <h2>The retail sample</h2>
+      <p>The retail sample is the excerpt a customer can play before buying. It must be five minutes or less, it must come from the audiobook itself, and it must not contain explicit material, such as violent or pornographic passages. ACX asks for the first five minutes of the audiobook as the sample.</p>
+    </div>
+
+    <div id="consistency" class="guide-body">
+      <h2>Consistency and extra sounds</h2>
+      <p>These two requirements are judged by ear. The sound of the book must be consistent from file to file: in level, tone, background noise, the spacing between lines and the pronunciation of names. And there must be no extra sounds: plosives (popped P and B sounds), microphone pops, mouse clicks, excessive mouth noise and outtakes are all removed.</p>
+      <p>How to meet it: record every session in the same place, with the same microphone at the same distance and the same settings, and listen to the whole book before submitting it. A change of room or microphone halfway through a book is audible.</p>
+    </div>
+
+    <div id="narration" class="guide-body">
+      <h2>Human narration</h2>
+      <p>ACX requires the submitted audiobook to be narrated by a human unless ACX has authorized otherwise. Unauthorized text-to-speech, AI-generated and automated recordings are not accepted. Other stores have their own rules for AI narration, and those rules are stated on each store&rsquo;s own pages.</p>
+    </div>
+
+    <div id="stellaurator" class="guide-body">
+      <h2>How StellAurator checks a book before export</h2>
+      <p>In StellAurator, choose the output <b>Audiobook master</b> for Audible&rsquo;s ACX and press the five steps in order: Diagnose, Plan, Apply, Check, Export. Each chapter is measured against ACX&rsquo;s numbers for loudness, peaks, noise floor and file format, before and after processing, with a pass or fail on each.</p>
+      <p>After each take, the clicks, plosives, breaths, hum and background noise are marked under it with a suggested fix for each. You hear each fix before you keep it, and a kept fix is undone with one press. The export writes one file per chapter in the format ACX requires.</p>
+      <p>ACX decides what it accepts. Its reviewers also listen to the performance and check the rights to the text.</p>
+    </div>
+
+
+    <div class="guide-body guide-foot">
+      <h2>How this guide was made</h2>
+      <p>The requirements are taken from ACX&rsquo;s own <a href="https://help.acx.com/s/article/acx-audio-submission-requirements" target="_blank" rel="noopener">Audio Submission Requirements</a> page, read on October 12, 2026. ACX&rsquo;s page is the one that counts. This guide carries no product picks and no affiliate links.</p>
+    </div>
+  </section>
+
+  <section class="wrap closing">
+    <div class="frame panel" style="max-width:820px;margin:0 auto;text-align:center">
+      <h2 class="title">Record the book in StellAurator</h2>
+      <p class="lede" style="margin:14px auto 0">StellAurator measures every chapter against the numbers on this page before you upload it. The first seven days are free, with no card.</p>
+      <div class="cta-row" style="justify-content:center;margin-top:24px">
+        <a class="btn btn-gold" href="#" data-download>Start your free 7-day trial</a>
+        <a class="btn btn-line" href="/guides/">All guides</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Site links">
+      <a href="/studio.html">The studio</a>
+      <a href="/narrators.html">For narrators</a>
+      <a href="/voices.html">Voices</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/beta/">Open beta</a>
+      <a href="/about.html">What is StellAurator?</a>
+      <a href="/faq.html">Questions and answers</a>
+      <a href="/compare.html">Compare</a>
+      <a href="/glossary.html">Glossary</a>
+      <a href="/guides/">Guides</a>
+      <a href="/books.html">Books</a>
+      <a href="/themes.html">Themes</a>
+      <a href="/terms.html">License agreement</a>
+      <a href="/terms.html#billing">Subscription terms</a>
+      <a href="/terms.html#privacy">Privacy</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:narrator@stellaurator.com">narrator@stellaurator.com</a>
+    </nav>
+    <p class="trademark" data-elevenlabs-attribution>ElevenLabs and the ElevenLabs logo are registered trademarks or trademarks of ElevenLabs, Inc. Used with permission. StellAurator is not sponsored by, endorsed by, or affiliated with ElevenLabs except as an independent participant in the ElevenLabs Creator Affiliate Program.</p>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
