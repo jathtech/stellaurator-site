@@ -1,0 +1,547 @@
+# StellAurator: questions and answers
+
+> StellAurator is audiobook recording and production software for Windows. Authors and narrators use it to record an audiobook from the manuscript, fix single lines, add music and export chapters in the format Audible’s ACX requires, in one program. Every recording is stored on the line of the manuscript it belongs to.
+
+Source: https://stellaurator.com/faq.html (updated October 22, 2026). Each answer is also on that page.
+
+## Making an audiobook
+
+### How do I turn my book into an audiobook?
+
+You read it aloud, then export the files a store asks for. In StellAurator you bring in the manuscript as a Word file, a PDF or an EPUB and read it from the on-screen script. Any sentence is recorded again on its own, and the export is one MP3 per chapter in ACX's format. Every take is saved under its line. The whole job is written out in [how to make an audiobook of your book](https://stellaurator.com/guides/make-an-audiobook.html).
+
+### Can I make an audiobook of my book myself?
+
+Yes. You need a microphone, closed-back headphones, a quiet room and software that records and exports the files. Every store accepts a book read by its author. The reading is the easy part. The work is keeping hundreds of takes in order and getting every chapter to ACX's numbers. StellAurator was built for that part: every take is filed under its line, and every chapter is measured against ACX before you upload.
+
+### Can I narrate my own audiobook?
+
+Yes, and many authors do. Read every line yourself, or read the narration and invite actors for some of the characters. You keep control of every line either way.
+
+### How do I record an audiobook at home?
+
+Pick the quietest room you have and turn off the fans. Hang something soft on the walls to kill the echo. Put the microphone a hand's width from your mouth and wear closed-back headphones. Make a short test recording, then record a chapter at a time. In StellAurator you read from the on-screen script and record a line again when you stumble, and each recording is filed under its line. The equipment and the room are covered in [the guides](https://stellaurator.com/guides/).
+
+### How do I record an audiobook for Audible?
+
+Audible takes audiobooks through ACX. Record the book, then export one MP3 per chapter to ACX's Audio Submission Requirements. Those are -23 to -18 dB RMS, peaks under -3 dB, a noise floor under -60 dB, and 192 kbps or higher at 44.1 kHz. Upload the files, the cover and a retail sample to ACX, which reviews them before the book goes on sale. ACX requires a human narrator. StellAurator exports in that format and measures every chapter against those numbers before you upload. See [ACX's audio requirements, explained](https://stellaurator.com/guides/acx-requirements.html).
+
+### How much does it cost to make an audiobook?
+
+Hiring it out costs about $3,400 for an 80,000-word novel at ACX's planning figures. Those are $200 a finished hour for the narration and $200 for the editing, at 9,300 words to a finished hour. Doing it yourself costs your time, plus a microphone and headphones. The software is one program; see [pricing](https://stellaurator.com/pricing.html).
+
+### How long does it take to make an audiobook?
+
+Count on two to three hours at the microphone for every finished hour, plus the editing and a listen through the whole book. An 80,000-word novel is about 8.6 finished hours. Most of the time goes into finding things in long files. In StellAurator every take is already under its line, so a fix means recording that line again.
+
+### Can I turn my ebook into an audiobook?
+
+Yes, by reading it aloud. Bring in the EPUB itself, or its PDF or Word file, and record it. StellAurator does not turn an ebook into an audiobook with one click. A computer voice will read your book, but Audible does not accept computer-narrated audiobooks made outside its own programs.
+
+### Is StellAurator an AI audiobook maker?
+
+No. StellAurator is built around a person reading. It includes 26 built-in computer voices, and an AI voice service plugs in if you want one. Those voices are for hearing a scene before you record it, or for standing in for a part until an actor records it. ACX does not accept AI-narrated audiobooks.
+
+### Can I make a full cast audiobook with multiple voices?
+
+Yes. You cast each character and send each actor a free copy that shows their lines alone. Their recordings come back under those lines. You can also record every part yourself and change your voice for each character with a voice conversion service, or use computer voices for a book that will not go to Audible.
+
+### What is the best audiobook recording software?
+
+Anyone who knows audio editing will do every step by hand in Audacity or Reaper. If you want one program that works from the manuscript, StellAurator records from your script and files every take under its line, and each chapter is measured against ACX before you upload. See [audiobook recording software, compared](https://stellaurator.com/compare.html).
+
+### What is the best DAW for audiobooks?
+
+Any DAW will make an audiobook. Reaper is the usual choice, and Audacity is free. A DAW shows the chapter as a waveform on a timeline and leaves the takes to you to keep in order. StellAurator is made for audiobooks alone and shows the book as the manuscript, with every recording on its line.
+
+### What is the best app to record an audiobook?
+
+A program on a computer with a good microphone shows you the waveform and the levels and fixes one line at a time, which a phone app does not. StellAurator runs on Windows 10 and 11. A phone app is planned after the Mac version.
+
+### What software do I need to record audiobooks?
+
+Software that records, cuts out the mistakes, cleans up the noise, sets the levels and exports in the store's format. Many narrators use four or five programs for that. StellAurator does all of it in one, and every recording is saved under its line.
+
+### Does StellAurator do audiobook editing and mastering?
+
+Yes. Every take sits on its line, so you fix one sentence without hunting for it. Clicks and breaths are marked under each take, and so are hum and background noise. For mastering, each chapter is set to the level the store wants. The ACX setting puts a chapter at -20 dB RMS, inside ACX's range of -23 to -18 dB, with the peaks held at -3 dB.
+
+### Is StellAurator good software for audiobook narrators?
+
+Yes. Most narrators record in one program and edit in another. StellAurator is both, in one window, with a teleprompter and a check against ACX before you deliver, and the lines to record again are collected while you listen. See [StellAurator for narrators](https://stellaurator.com/narrators.html).
+
+### What does ACX compliance mean?
+
+The book meets ACX's technical requirements: the loudness, the peaks, the noise floor, the MP3 format, room tone at the start and end, and one chapter per file. ACX checks every file before the book goes on sale. StellAurator measures each chapter against those numbers and brings the levels into range. ACX also reviews the performance.
+
+### What is an audiobook maker or audiobook creator?
+
+Software that takes a manuscript to finished audiobook files. Some read the text with computer voices. StellAurator is for books read by people. It records and cleans up in one program, and exports the files.
+
+### Do I need a professional audiobook studio to create an audiobook?
+
+No. A good microphone and a quiet room with soft surfaces are enough. The room matters more than the microphone. [The room treatment guide](https://stellaurator.com/guides/room-treatment.html) covers what works at each budget.
+
+### How do I self-publish an audiobook and sell it?
+
+When the files are finished, upload them with the cover and the book's details. ACX puts the book on Audible and Amazon, and on Apple Books, exclusive at a higher royalty or non-exclusive at a lower one. Distributors such as Voices by INaudio and Author's Republic send it to other stores and to libraries. You can also sell it from your own website. StellAurator makes the files and is not a distributor. The rates and the choice are in [how to make an audiobook](https://stellaurator.com/guides/make-an-audiobook.html#distribute).
+
+## About StellAurator
+
+### What is StellAurator?
+
+StellAurator is audiobook recording and production software for Windows. You bring in your manuscript, record from it with a teleprompter, fix single lines, add music and export chapters in the format Audible's ACX requires, in one program. Every recording is saved on the line of the manuscript it belongs to.
+
+### Who is StellAurator for?
+
+Authors who narrate or produce their own audiobook, and narrators who want one program for the whole job. Actors you invite record their parts in a free copy that shows their lines alone.
+
+### Who makes StellAurator?
+
+StellAurator is made by Jathtech Digital Consulting LLC. The author J.T. Michaelstar built it after finding no audiobook software made for authors while working on the audiobook of a novel.
+
+### What can I do with StellAurator?
+
+Make a finished audiobook from a manuscript. The steps are bring in the manuscript, record, clean up, score, finish, and listen and save, and your place is saved as you go. See [every part of the studio](https://stellaurator.com/studio.html).
+
+### Is StellAurator a text-to-speech app?
+
+No. StellAurator is a recording program. Everything in it works with your own voice and nothing connected. It also includes 26 built-in computer voices, and a voice service plugs in, for hearing a scene before you record it or standing in for a part until an actor records it.
+
+### Does StellAurator publish or distribute my audiobook?
+
+No. StellAurator makes the finished files. You upload them to ACX or another store yourself.
+
+### How is StellAurator different from Audacity or another audio editor?
+
+Audacity shows a chapter as one long waveform; StellAurator shows it as the manuscript. You read from a teleprompter and each recording lands on its line, where one sentence is fixed or sent to an actor on its own. See [audiobook recording software, compared](https://stellaurator.com/compare.html).
+
+### Can I see StellAurator in action before I download it?
+
+Yes. [The demos page](https://stellaurator.com/demos.html) has a short demo (1:37) and eight longer videos, 63 minutes in all, recorded in October 2026.
+
+## Requirements and installing
+
+### What are StellAurator's system requirements?
+
+64-bit Windows 10 or 11 and a microphone. Most of the download is the optional built-in voices; [the download page](https://stellaurator.com/download.html) shows the installer's version and size. Memory and processor cores are shared out automatically, under Settings, Performance, where the graphics card is a switch for the built-in voices.
+
+### Does StellAurator run on a Mac?
+
+Not yet; it runs on 64-bit Windows 10 and 11. A Mac version is planned. [Leave your email](https://stellaurator.com/coming.html) to hear when it is ready.
+
+### Is there a StellAurator app for iPhone or Android?
+
+Not yet. Phone apps for recording, with the phone's own microphone or one plugged into it, are planned after the Mac version. [Join the waiting list](https://stellaurator.com/coming.html).
+
+### Does StellAurator run on 32-bit Windows?
+
+No. The installer is for 64-bit (x64) Windows 10 and 11.
+
+### Does StellAurator work offline?
+
+Yes. The 26 built-in voices and every part of the studio except the outside services work without an internet connection. StellAurator checks your plan in the background when it is online. Offline long enough for that check to lapse, it becomes read-only until it checks again, and nothing is deleted.
+
+### Is the StellAurator installer signed?
+
+Yes. The installer is signed, and Windows shows the publisher when you run it. StellAurator is new, so Windows SmartScreen shows a warning the first time it runs. Press More info, then Run anyway.
+
+### How do I install StellAurator?
+
+Press Download at the top of any page. On [the download page](https://stellaurator.com/download.html), press Download StellAurator for Windows, run the installer and open StellAurator. There is no account to make first; you make one inside the app the first time you do something that needs it. StellAurator installs for your Windows user alone. The built-in voices, the extra themes and the desktop icon are optional in the installer.
+
+### How do StellAurator updates work?
+
+Updates arrive inside the app. StellAurator checks when it opens and every six hours. An update is offered, never forced; nothing installs until you press Restart now or close the app, and never while you are recording. Updates are signed and checked before they install. The footer of this site shows the current version, and [the download page](https://stellaurator.com/download.html#history) has the notes for every version.
+
+## The trial and the prices
+
+### Is there a free trial of StellAurator?
+
+Yes. StellAurator is free for 7 days with no card, and everything is in the trial except exporting the finished audiobook. There is one trial for each person and one for each computer.
+
+### When does the StellAurator free trial start?
+
+The seven days start the first time you sign in to the installed app with a confirmed email address, not when you download it or make your account. Until the address is confirmed the app is read-only and the trial is not spent. Signing in with Google counts as confirmed.
+
+### What is not included in the StellAurator free trial?
+
+Exporting the finished audiobook needs a plan, and so does Nebula cloud storage. Everything else is in the trial, including Finish and the ACX check.
+
+### What happens when the StellAurator free trial ends?
+
+Nothing is charged, because no card was asked for. When the trial ends, your books stay on your computer and still open and play. Recording, generating and editing wait for a plan.
+
+### Do I need a credit card for the StellAurator trial?
+
+No, and nothing is charged when the trial ends.
+
+### How much does StellAurator cost?
+
+During the open beta StellAurator is $12 a month or $90 a year, instead of the regular $29 a month or $290 a year. The price stays while you stay subscribed, and the beta prices are offered until the beta ends. A plan is for one person on up to three computers. It includes everything in the program and its updates, and you cancel at any time. The first 7 days are free with no card. See [pricing](https://stellaurator.com/pricing.html).
+
+### Is there a one-time purchase or a lifetime license for StellAurator?
+
+Not today. StellAurator is sold as a monthly or a yearly plan. If you have ever paid for a plan, export stays open for the work you made, so a finished audiobook never needs an ongoing subscription.
+
+### Can I cancel my StellAurator subscription at any time?
+
+Yes, without a fee. Sign in on the plans page of your account and press Cancel subscription, or ask through [the contact page](https://stellaurator.com/contact.html). The plan runs to the end of the period you paid for; the unused part is not refunded.
+
+### Does StellAurator offer refunds?
+
+A charge made twice or in error, and a charge after a confirmed cancellation. Also a first purchase where StellAurator will not run on your 64-bit Windows 10 or 11 computer, asked for within 14 days. Ask through the contact page within 30 days of the charge. Stronger rights under your local law still apply. The full terms are in [the subscription terms](https://stellaurator.com/terms.html#billing).
+
+### What happens to my StellAurator projects if I stop paying?
+
+Nothing is deleted. Your books and their recordings stay on your computer, and every one still opens and plays. If you have ever paid for a plan, export stays open for the work you made.
+
+### Do I need to keep paying for StellAurator to keep my audiobook?
+
+No. The files you export are yours and stay on your computer. If you have ever paid for a plan, export of the work you made stays open after the plan ends.
+
+### Does a StellAurator plan renew automatically?
+
+Yes. A plan renews each month or year until you cancel, and a plan bought at a beta price keeps that price as it renews. A price change on a plan you hold is announced by email at least 30 days before it applies. If a renewal payment fails, you are emailed and the payment is tried again; the studio is not switched off the moment a card is declined.
+
+### How many computers can I use StellAurator on?
+
+Three, for one person. They are listed under Settings, Account, where you remove one to make room for another.
+
+### Can several people share one StellAurator account?
+
+No. An account is for one person; a studio with several narrators needs an account for each. Actors you invite do not need an account. Their copy is free.
+
+### Do outside voice services cost extra?
+
+Yes. A voice or AI service you connect bills you directly, and no service is included in a plan. None is required: recording, clean-up, finishing, music, proof listening and export all work with nothing connected.
+
+### What is StellAurator Nebula?
+
+Nebula is optional cloud storage that carries your books between your computers and receives the takes actors send you. Nebula 25 holds 25 GB for $7 a month. Nebula 100 holds 100 GB for $13, and Nebula 500 holds 500 GB for $21. Yearly is half price. It needs a paid plan and is canceled on its own. Each book is encrypted on your computer before it is uploaded, with keys that only your computers hold. The master copy stays on your computer; Nebula is not a backup.
+
+### What is the StellAurator open beta?
+
+A beta key gives a new account the full studio, export included, free until the beta ends, with no card. One key per account, claimed with a confirmed email address on [the beta page](https://stellaurator.com/beta/). When the keys are gone, the 7-day free trial and the beta prices ($12 a month or $90 a year) stay open to everyone.
+
+### Does StellAurator have a referral program?
+
+Yes. Every account has a referral link on its account page. When a new author signs up through your link and first signs in with a confirmed email on a computer that never had a trial, you both get a month free. Their trial is 30 days, and a free month is added to your account. Up to 12 free months a year, and a free month is never paid out in money.
+
+### Can I get StellAurator free for crediting it?
+
+Yes. If your published audiobook credits StellAurator in its closing credits or its store description, one free year is added to your account, once for each published title. Send a link to the published book; once the credit is seen, the year is added.
+
+### Is tax added to the StellAurator price?
+
+Where the law requires it, checkout shows it before you pay, and what checkout shows is what you pay. Payments go through the payment processor; StellAurator never sees or stores your card details.
+
+## Your manuscript
+
+### What manuscript formats does StellAurator accept?
+
+A Word file (.docx), a PDF, an EPUB, a plain-text file (.txt or .md), or text you paste in. An older Word file (.doc) has to be saved as .docx first.
+
+### Can StellAurator import a PDF or an EPUB?
+
+Yes. A PDF's pages come in as the author wrote them: paragraphs joined, running headers and page numbers dropped, words broken at a line end mended. Headings keep their own line, so the chapters are found. A scanned PDF, pictures of pages, has no text to read: export the manuscript from your writing program as .docx, or run the PDF through an OCR program first. An EPUB comes in chapter by chapter in its reading order, with its title and author.
+
+### How does StellAurator find the chapters?
+
+A chapter starts at a heading. A heading is a heading word followed by a number (in digits, Roman numerals or words), a number word on its own, or Prologue, Epilogue, Interlude, Intermission, Afterword, Foreword or Preface. Each paragraph is then split into lines. A chapter is also split or moved by hand, and a deleted chapter waits in the trash.
+
+### Does StellAurator detect who is speaking?
+
+Yes, with no AI service. In a novel each line gets a speaker, which you review. A line whose speaker is in doubt shows "Who says this?" with the candidate names instead of a guess. Nicknames are matched, so "Elizabeth" and "Miss Bennet" count as one person.
+
+### Can I change my manuscript after I have started recording?
+
+Yes. Bring a revised manuscript in as a new edition of the book (Conform to a revised manuscript), or add chapters from a .docx, a PDF, an EPUB, a .txt or pasted text. If a line changes after a chapter was signed off, that line alone needs hearing again.
+
+### Can I tell StellAurator how to pronounce names?
+
+Yes. A name entered once in the pronunciation guide is read that way by every voice, and a human reader, invited actors included, sees the guide where the name occurs.
+
+### What languages does StellAurator support?
+
+StellAurator is made in English. Its screens, its chapter-heading words and its 26 built-in voices are English. Dividing a reading into its lines on your own computer works in English. For another language, connect a transcription service that supports it, or turn on the teleprompter's pause after each line.
+
+## Recording
+
+### Can I record my own audiobook with StellAurator?
+
+Yes. You read from the teleprompter and each recording is filed under its line. The chapters are then finished for ACX. A microphone is the only equipment you need. See [how to make an audiobook](https://stellaurator.com/guides/make-an-audiobook.html).
+
+### Do I need a special microphone to record an audiobook with StellAurator?
+
+No. Any microphone Windows sees works, from a USB microphone to a studio microphone through an audio interface. The choices by budget are in [the microphone guide](https://stellaurator.com/guides/microphones.html).
+
+### Does StellAurator work with audio interfaces and low-latency drivers?
+
+Yes. StellAurator opens your microphone through the driver that came with it, an ASIO driver or Windows WASAPI in exclusive mode, with shared mode as the fallback. No driver is bundled; install your interface maker's driver and it appears in the list. The recording formats offered are the ones the driver reports. See [the audio interface guide](https://stellaurator.com/guides/audio-interfaces.html).
+
+### How does the StellAurator teleprompter work?
+
+It holds the current line in a highlighted band and scrolls at the pace you set, and you read without touching the recording controls. The text size and the band are adjustable too. There is a count-in before recording starts, and if you turn it on the prompter pauses after each line and counts in again when you continue.
+
+### Can I read a whole chapter straight through in StellAurator?
+
+Yes. Read as much as you want in one session, from a page to the whole book. When you stop, the reading is transcribed on your own computer and divided into the manuscript's lines by the words you read. Each piece lands on its line with its waveform and length. There is no service to connect and no key to enter. The recording is divided, never altered.
+
+### Can I record one line at a time in StellAurator?
+
+Yes. Record one line, one character's lines or the whole chapter in one session, and record any single line again on its own after a straight-through read.
+
+### Does StellAurator support punch and roll recording?
+
+Yes. Record again from any line with Record again from here, or use punch-in in the restoration tools, with roll or in and out points and a pre-roll to read into. The original take is kept.
+
+### What happens when I stumble or reread a sentence?
+
+Record the line again. Every take stays on its line until you delete it, and you choose which to keep. In a long reading, Record again from here starts a new reading from the line you pick.
+
+### Does StellAurator remove the click of the key that stops the recording?
+
+Yes. The sound of the key or mouse click that stops a recording is removed on its own. A setting mends the click inside the words or cuts it out.
+
+### Can I hear myself in headphones while recording in StellAurator?
+
+Yes. You hear yourself with no added processing and the least delay your hardware allows, and the headphones stay shared with your other programs. A Reduced delay switch takes the delay down further by giving the headphones to StellAurator alone. See [the headphone guide](https://stellaurator.com/guides/headphones.html).
+
+### Does StellAurator check my recording level and room noise?
+
+Yes. Live meters show the input level and the background noise, with a level check and a test recording. A noise print of your room, taken from a few seconds of silence, feeds the noise reduction, and the room's live noise is drawn beside it. See [the room treatment guide](https://stellaurator.com/guides/room-treatment.html).
+
+### Does StellAurator warn me about problems while I record?
+
+Yes. While a take records, clicks, plosives, harsh S sounds, breaths, hum and background sounds are counted, along with the room floor, and the recording is neither changed nor stopped. When you stop, the take shows a report with the counts, the loudness, the floor and a verdict, with Review and Apply recommended fixes.
+
+### Can I import recordings I made in another program?
+
+Yes. Import an mp3, wav, flac, m4a, m4b or ogg file as a chapter. It is divided into your lines by the words, on your own computer, or at its pauses, and where the recording and the manuscript disagree you decide line by line. The file itself is never changed.
+
+### What recording quality does StellAurator use?
+
+The formats your microphone's driver reports, 32-bit float included where the driver offers it. Every exported format is made from a 32-bit float master and encoded once, at the end.
+
+## Cleaning up and proof listening
+
+### Does StellAurator clean up my recordings?
+
+Yes. Each recording is checked for clicks and pops, for plosives and breaths, and for hum and background noise, and a set of fixes is suggested under it. Review plays the recording before and after, with every fix marked on the waveform. Undo takes any fix back, and the original recording is never changed.
+
+### Does StellAurator remove breaths?
+
+It lowers them, and removes one only when you say so. Dragging across a breath you want to keep leaves it alone.
+
+### Can StellAurator remove background noise?
+
+Yes, where it is steady and audible, from a noise print of your room. A sound under your voice, such as another voice or a dog, is not removed. It is found, and the line is marked for recording again.
+
+### Can StellAurator remove room echo?
+
+No. Room echo does not come out after recording, so StellAurator has no de-reverb tool; a line with echo is marked for a pickup. Echo is solved before recording, in a treated room. See [the room treatment guide](https://stellaurator.com/guides/room-treatment.html).
+
+### Are StellAurator's fixes destructive?
+
+No. A fix is a layer over the recording. You switch it off or remove it later, and an icon on each recording shows what has been applied. A new file is written only when you bake the fixes in or export.
+
+### Which repair and editing tools does StellAurator have?
+
+Noise reduction with a learned noise print, click removal, plosive reduction, hum removal, breath control, room tone matching and fill, and spectral repair, which removes a sound you draw a box around. EQ, a de-esser, a compressor, an expander, a limiter, normalize, crossfades, time stretch, punch-in, comping and saved processing chains, and character effects such as Telephone and Next room. Each works on one recording or every selected line, with before-and-after playback.
+
+### Can I undo in StellAurator?
+
+Yes. Undo and redo are always there, one step per action, with Ctrl+Z and Ctrl+Y, and each chapter keeps 250 steps each way. A deleted take or chapter goes to the trash first, and so does a deleted book.
+
+### Does StellAurator keep every take?
+
+Yes. Every recording of a line is kept until you delete it, and the newest is selected unless you select another. A locked take is never replaced by accident.
+
+### What is a spool in StellAurator?
+
+A spool is one complete reading of the book, made from the recording selected for every line. A book holds more than one, side by side, and the export uses any of them.
+
+### What is proof listening in StellAurator?
+
+Proof listen plays a chapter as it will be exported, pauses included, at up to 1.5 times speed, and ticks off each line as it is heard. Press F on any line to mark it for recording again without stopping. When every line has been heard, you sign the chapter off.
+
+### Does StellAurator check my reading against the manuscript?
+
+Yes. A few seconds after you record a line, the take is transcribed on your own computer and compared with the line. A missing word or a changed one marks the take, and you see what was heard beside the script. You say whether the change was on purpose or a mistake. Names and numbers a transcriber would not know are not counted. Nothing is sent anywhere, and the manuscript changes only when you edit it.
+
+### Can a narrator I hire explain a line they read differently?
+
+Yes. After a take that reads differently, the narrator says why. For a change made on purpose, they are asked to also record the line as written and star the take they prefer, and their reason travels with the takes. You hear both and choose, or ask for a pickup. There is no back and forth.
+
+### How do pickups work in StellAurator?
+
+Lines marked in proof listening collect in the Pickups list, each with the reason, who marked it and when. From there you record each one again or send it back to the actor who recorded it, and Match a pickup sets the new recording's level to the lines around it.
+
+### Does StellAurator fix the pauses between lines?
+
+Yes. On export the pauses between lines are measured and set to the lengths you chose for a sentence, a paragraph and a section break. A pause is filled with the chapter's own room sound, never digital silence.
+
+### Does StellAurator have a timeline?
+
+Yes. On the chapter timeline each line is a block you move and retime. Music and sound effects have their own tracks with mute and solo, and the view switches between one chapter and the whole book.
+
+## ACX and export
+
+### Does StellAurator make files that meet ACX requirements?
+
+Yes, in ACX's format, and each chapter is measured against ACX's numbers first. The ACX export is one MP3 per chapter at 192 kbps constant bit rate, 44.1 kHz, mono, set to -20 dB RMS with the peaks held at -3 dB. The room's own tone goes before the first line and after the last. The noise floor comes from your recording, so the check measures it.
+
+### What does StellAurator's ACX check measure?
+
+For each chapter, loudness (between -23 and -18 dB RMS), peaks (at or under -3 dB) and the noise floor (at or under -60 dB). Each is measured before and after processing, with a pass or a fail. It also checks what ACX's own automated review checks: at least 192 kbps, constant bit rate, 44.1 kHz and the same channel count in every chapter. No two chapters may have identical audio, and no more than 5 seconds of room tone at the head or tail.
+
+### Does passing StellAurator's ACX check mean Audible will accept my book?
+
+No. The check measures each chapter against ACX's published technical requirements. ACX also reviews the performance and the rights to the text, and it does not accept computer-generated narration.
+
+### What export formats does StellAurator have?
+
+One MP3 per chapter in ACX's format (192 to 320 kbps, constant bit rate, mono or stereo). One M4B audiobook file with a chapter mark at the start of each chapter and the book's title and author, for other stores. WAV (16 or 24 bit, or 32-bit float) or FLAC masters, with optional stems for the voice, the music and the sound effects. There are leveling presets for ACX and Findaway, a podcast preset and your own numbers.
+
+### Can StellAurator make an M4B audiobook?
+
+Yes. The single-file export is an M4B (AAC at 128 kbps) with a chapter mark at the start of each chapter and the book's title and author. The chapter MP3s are saved beside it.
+
+### Does StellAurator make the retail sample?
+
+You choose it. Select the lines you want and export an ACX retail sample from them. It has to run 1 to 5 minutes, and it is saved as "<Book title> - Retail Sample.mp3".
+
+### Does StellAurator add opening and closing credits?
+
+No. Record them yourself and put them in the first and last chapters before you submit.
+
+### Does StellAurator split chapters longer than 120 minutes for ACX?
+
+No. ACX allows 120 minutes per file at most; split a chapter that long in the manuscript before recording.
+
+### Can I choose which takes go into the export?
+
+Yes. Export the selected recordings, the alternates or a whole spool, or set an order that walks a spool, the locked-in take, the newest or an alternate, or leaves a line out. A muted track is left out, and the export window warns about lines not yet selected or proof listened before you export.
+
+### Can I export a single line or a selection?
+
+Yes. A selection of lines exports as one joined file or one file per line, in any of the formats, voice alone or with the music. A single take saves as a file too.
+
+### Can I make a podcast or other audio with StellAurator?
+
+Yes. Finish has a Podcast preset beside Clean narration and Audiobook master for ACX, and the leveling presets include a podcast target.
+
+## Voices and actors
+
+### Does StellAurator include computer voices?
+
+Yes. Twenty-six built-in English voices run on your own computer with no account and no internet connection, and the voices built into Windows are there too. They are for hearing a scene before you record it or standing in for a part until an actor records it.
+
+### Can I publish an AI-narrated audiobook on Audible with StellAurator?
+
+Not through ACX. ACX requires a human narrator unless ACX has authorized otherwise, and it does not accept computer-generated narration. Other stores set their own rules. Every file StellAurator exports with a computer-generated voice is marked as containing AI-generated narration.
+
+### Which voice services work with StellAurator?
+
+For voices and voice conversion, ElevenLabs, Murf, Cartesia, Resemble and Respeecher, each on your own account and billed by the service. For AI help, Anthropic, OpenAI, Google Gemini, xAI, Groq, OpenRouter, or Ollama on your own computer. Music and sound effects come from ElevenLabs or Stable Audio. Each is optional. See [the voices and services](https://stellaurator.com/voices.html).
+
+### Can my own reading become the characters' voices in StellAurator?
+
+Yes, with a voice conversion service connected. Record every part in your own voice; each line is sent for conversion and the converted take is stored beside your original, with your timing and your pauses kept. Such a file is marked as a speech-to-speech modified human performance. Each store sets its own rule on such files.
+
+### Can StellAurator clone my voice?
+
+StellAurator does not copy voices. It casts a voice already copied in your own account at a voice service, after you confirm you have permission. A real person's voice is used only with that person's prior written consent, or when it is your own.
+
+### Do I need an AI service to use StellAurator?
+
+No. With nothing connected you import a manuscript, cast every character with a color, a face and a voice, hear any line in the built-in voices, and record with the teleprompter. A reading is divided into its lines on your own computer, and an imported recording is split at its pauses. You clean up and repair, finish and check against ACX, proof listen and record pickups, and send parts to actors. Your own music and sound effects go in, and the export is ACX chapter MP3s and an M4B.
+
+### What do AI services add in StellAurator?
+
+A text AI service names the speaker of a doubtful line, describes your cast and briefs a narrator. It also suggests music cues (Auto Score), sets a mood on every line of a scene (Auto Direct) and lists the sounds the book calls for. An image service paints a character's portrait from the book. You read and edit every instruction before it is sent.
+
+### Can I work with several actors in StellAurator?
+
+Yes, as many as the book needs. Each actor gets an invitation link and a free copy of StellAurator that shows the lines you assign, with your direction and the line before as a cue. Their recordings come back onto their lines in your book, where you accept each one or mark it for another take.
+
+### Do actors need a StellAurator account to record a part?
+
+No. The performer's copy is free, with no account and nothing to pay. The performer accepts the license agreement before recording, and the production stays on your computer throughout.
+
+### How do I direct a performance in StellAurator?
+
+Write direction once, on the scene, on the character in the scene, on the beat or on the single line. Whoever records that line sees it: you, an invited actor or a voice service that takes direction. The emotional web blends up to nine feelings and names the blend for you, and eight delivery faders run from urgency to warmth. Direction never alters a recording.
+
+### What is Auto Direct?
+
+It sets a mood on every line of a scene or chapter, from what comes before each line alone. It needs a text AI service. Lines you directed by hand are left alone, and every line is its own undo step.
+
+### What is Auto Score?
+
+With an AI service connected, it reads each chapter and marks where music belongs. Each cue gets a mood and a one-sentence reason and is tied to the words it belongs to, so it stays in place when the chapter is edited.
+
+### Can I add music and sound effects in StellAurator?
+
+Yes. Bring your own music and sound effects into the sound library, which sorts them by kind, and place them on the chapter's timeline as beds and cues. A service you connect generates music and sound effects too. No music or sound effects ship with StellAurator.
+
+### Can I give my characters faces in StellAurator?
+
+Yes. Each character has a portrait beside its color and its voice. There are 445 portraits in seven galleries, and Best fit auto assign casts everyone at once. You upload your own picture instead, or an image service paints one from the book.
+
+### Does StellAurator label AI-generated audio?
+
+Yes. A file with a computer-generated voice is marked as containing AI-generated narration, and a file with a reading you recorded and converted is marked as a speech-to-speech modified human performance. The export window counts the generated and converted lines before you export. A chapter you read, with generated music under it, is never called AI-narrated.
+
+## Privacy and ownership
+
+### Does StellAurator upload my manuscript?
+
+No. The manuscript stays on your computer. Text goes only to the voice and AI services you connect yourself. The one exception is Nebula, the optional cloud storage. If you turn it on, each book is encrypted on your computer before it is uploaded, and StellAurator cannot open it.
+
+### Who owns the audiobook I make with StellAurator?
+
+You do. Your manuscripts and recordings are yours, and so is the audio you make; a voice service's own terms govern the audio it generates. StellAurator claims no rights in your content.
+
+### Can I sell the audiobooks I make with StellAurator?
+
+Yes. What you make is yours, and the license covers commercial production of audiobooks you have the right to make. The rights to your text, and to any real person's voice you use, are yours to hold.
+
+### Does StellAurator collect data about how I use it?
+
+StellAurator sends no telemetry or crash reports on its own, with two exceptions. Usage reports are off until you turn them on, and they never carry what you record or write, a name, a file name, a path, an email address or a key. An account holding a StellAurator beta pass sends basic usage counts, never text, titles, character names, file names or audio. A bug report goes only when you press Send, and you see everything in it first.
+
+### Where does StellAurator store my API keys?
+
+On your computer alone, sealed by Windows. A key goes only to the service it belongs to, never to StellAurator.
+
+### Does StellAurator use my recordings to train AI?
+
+No. Your recordings and manuscript are never uploaded to StellAurator, and personal information is not sold or used to train anything.
+
+### What does my StellAurator account know about me?
+
+Your email address, your plan and its dates, and the computers you have signed in on. Nothing about your book.
+
+## Help and support
+
+### How do I get help with StellAurator?
+
+Email narrator@stellaurator.com or use [the contact page](https://stellaurator.com/contact.html); the reply comes by email. In the app, the bug button in Settings sends a report straight to us.
+
+### How do I report a bug in StellAurator?
+
+Press the bug button in Settings. A report carries screenshots and, if you choose, the technical details and the recent log, and you see all of it before you press Send. Signed in, you see your reports and their status on your account page.
+
+### Are there guides for making an audiobook?
+
+Yes. [The guides](https://stellaurator.com/guides/) cover making an audiobook, microphones, audio interfaces, headphones, room treatment and ACX's audio requirements, and [the glossary](https://stellaurator.com/glossary.html) explains the words.
+
+### Where can I hear audiobooks made with StellAurator?
+
+[Books made with StellAurator](https://stellaurator.com/books.html) lists audiobooks their authors made in it. Listing is free, and StellAurator earns nothing from the links.
+
+---
+
+ElevenLabs and the ElevenLabs logo are registered trademarks or trademarks of ElevenLabs, Inc. Used with permission. StellAurator is not sponsored by, endorsed by, or affiliated with ElevenLabs except as an independent participant in the ElevenLabs Creator Affiliate Program.

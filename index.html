@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator: Audiobook Recording and Production Software for Windows</title>
+<meta name="description" content="Audiobook recording software for Windows. Record your book from the manuscript and check each chapter against ACX before you upload. Free for 7 days.">
+<link rel="canonical" href="https://stellaurator.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StellAurator">
+<meta property="og:url" content="https://stellaurator.com/">
+<meta property="og:title" content="StellAurator: Audiobook Recording and Production Software for Windows">
+<meta property="og:description" content="Audiobook recording software for Windows. Record your book from the manuscript and check each chapter against ACX before you upload. Free for 7 days.">
+<meta property="og:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="StellAurator audiobook production studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StellAurator: Audiobook Recording and Production Software for Windows">
+<meta name="twitter:description" content="Audiobook recording software for Windows. Record your book from the manuscript and check each chapter against ACX before you upload. Free for 7 days.">
+<meta name="twitter:image" content="https://stellaurator.com/assets/og/stellaurator-og.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stellaurator.com/#organization",
+      "name": "StellAurator",
+      "url": "https://stellaurator.com/",
+      "logo": "https://stellaurator.com/assets/logo.png",
+      "legalName": "Jathtech Digital Consulting LLC",
+      "email": "narrator@stellaurator.com",
+      "founder": {
+        "@type": "Person",
+        "name": "J.T. Michaelstar"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "narrator@stellaurator.com",
+        "url": "https://stellaurator.com/contact.html"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://stellaurator.com/#website",
+      "name": "StellAurator",
+      "url": "https://stellaurator.com/",
+      "publisher": {
+        "@id": "https://stellaurator.com/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://stellaurator.com/#software",
+      "name": "StellAurator",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Windows 10, Windows 11",
+      "url": "https://stellaurator.com/",
+      "image": "https://stellaurator.com/assets/og/stellaurator-og.jpg",
+      "description": "Audiobook recording software for Windows. Record your book from the manuscript and check each chapter against ACX before you upload. Free for 7 days.",
+      "publisher": {
+        "@id": "https://stellaurator.com/#organization"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Monthly plan",
+          "price": "12",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "12",
+            "priceCurrency": "USD",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "MON",
+              "unitText": "month"
+            }
+          },
+          "url": "https://account.stellaurator.com/purchase",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Yearly plan",
+          "price": "90",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "90",
+            "priceCurrency": "USD",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "ANN",
+              "unitText": "year"
+            }
+          },
+          "url": "https://account.stellaurator.com/purchase",
+          "availability": "https://schema.org/InStock"
+        }
+      ],
+      "applicationSubCategory": "Audiobook recording and production software",
+      "softwareRequirements": "64-bit Windows 10 or Windows 11",
+      "featureList": [
+        "Record from the manuscript on screen",
+        "Every recording filed under its line of the manuscript",
+        "Clicks, pops, breaths, hum and background noise found, with fixes you can undo",
+        "Each chapter checked against ACX\u2019s requirements before upload",
+        "Your manuscript and recordings kept on your own computer"
+      ],
+      "downloadUrl": "https://stellaurator.com/download.html",
+      "inLanguage": "en",
+      "screenshot": "https://stellaurator.com/assets/shot-studio@2x.jpg"
+    }
+  ]
+}
+</script>
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="theme.css">
+<script src="config.js"></script>
+<script src="pixel.js"></script>
+<script src="analytics.js"></script>
+</head>
+<body data-page="home">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="page">
+<div data-nav></div>
+<main id="top">
+
+  <!-- 1. The promise -->
+  <section class="wrap hero hero-home">
+    <div class="hero-copy">
+      <p class="eyebrow">StellAurator: audiobook recording software for Windows</p>
+      <h1 class="display">Turn your manuscript into an <em class="gilt-text">audiobook</em>, in your own voice.</h1>
+      <p class="lede">You read your book aloud, line by line, and each take is saved under its line. The clicks and breaths are marked under every take, and before you upload, each chapter is measured against ACX.</p>
+      <div class="cta-row" data-home-download>
+        <a class="btn btn-gold" href="/download.html" data-download-page>Download for Windows</a>
+        <a class="btn btn-line" href="/demos.html#short-demo">Watch the short demo (1:37)</a>
+      </div>
+      <p class="cta-note"><span data-installer-meta>For Windows 10 and 11, 64-bit.</span> Free for 7 days. No credit card. Everything is included except exporting the finished audiobook, which needs a plan. Your work stays on your computer. <span data-account-note>You make your account inside the app.</span></p>
+      <p class="cta-note">A Mac version and phone apps are on the way. <a href="coming.html">Get notified when yours is ready</a>.</p>
+    </div>
+    <figure class="frame frame-hero hero-shot">
+      <img src="assets/shot-studio.jpg" srcset="assets/shot-studio.jpg 1x, assets/shot-studio@2x.jpg 2x" alt="The StellAurator studio: a chapter of Pride and Prejudice, each line with its speaker and its recorded take, the chapter's timeline below" width="1600" height="1100" fetchpriority="high">
+      <figcaption>The studio, with the manuscript on the left and the chapter's timeline along the bottom. Each line shows its speaker and its take.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 2. Hear the results. Rendered only when assets/demo/demo.json lists recordings (see
+       assets/demo/README.txt): an audio product should be heard, but never with stand-ins. -->
+  <section id="hear" class="wrap demo" hidden>
+    <div class="section-head">
+      <p class="eyebrow">Recordings</p>
+      <h2 class="title">A chapter as recorded, and after clean-up</h2>
+      <p class="lede">Real recordings made in StellAurator.</p>
+    </div>
+    <div class="demo-grid" id="demoGrid"></div>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <!-- 3. Three plain benefits (the home page cut of 2026-10-24: docs/HOME_PAGE_CUT_BUILD.md). No app
+       vocabulary here; the detail lives on studio.html. -->
+  <section id="benefits" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What you get</p>
+      <h2 class="title">Three things the studio does</h2>
+    </div>
+    <div class="grid-3">
+      <article class="frame panel">
+        <h3>Your reading, filed under its line</h3>
+        <p>Each line of your book has its own row. When you record a line, the take goes on that row and stays there, with every other take of that line, until you delete one. To fix a sentence, you find its line and read it again. You never scrub through an hour of audio looking for the good take.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Clicks and breaths, marked under each take</h3>
+        <p>A fix for each one is listed under the take. You hear it before and after, then keep it or not. Before you upload, each chapter is measured against ACX&rsquo;s requirements and gets a pass or a fail.</p>
+      </article>
+      <article class="frame panel">
+        <h3>Your book stays on your computer</h3>
+        <p>Your account holds your email address and your plan. When a plan ends, every book still opens and plays, and nothing is deleted.</p>
+      </article>
+    </div>
+    <p class="cta-note"><a href="studio.html">What each part of the studio does</a> &middot; <a href="terms.html#privacy">How your book stays private</a></p>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <!-- 4. What it costs -->
+  <section id="cost" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What it costs</p>
+      <h2 class="title">Hire it out, or make it yourself</h2>
+      <p class="lede">Hiring the production out costs about $3,400 at ACX&rsquo;s planning figures for an 80,000-word novel. With StellAurator you read and produce the book yourself, with your own microphone. A plan bought during the open beta keeps its price while you stay subscribed.</p>
+    </div>
+    <div class="cost-compare">
+      <div class="frame cost-side cost-hire">
+        <p class="eyebrow">If you hire it out</p>
+        <div class="price">$3,400 <small>paid to other people</small></div>
+        <p class="muted">Narration and post-production for one book.</p>
+      </div>
+      <div class="cost-or" aria-hidden="true">or</div>
+      <div class="frame is-lit cost-side cost-studio">
+        <p class="eyebrow">With StellAurator</p>
+        <div class="cost-plans">
+          <div><p class="was">Regular price <s>$29</s> a month</p><div class="price">$12 <small>/ month</small></div><p class="muted">While you are recording and finishing.</p></div>
+          <div><p class="was">Regular price <s>$290</s> a year</p><div class="price">$90 <small>/ year</small></div><p class="muted">Every book you make that year.</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="cta-note"><a href="pricing.html#cost">How the figures are worked out</a> &middot; <a href="pricing.html">The plans</a></p>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <!-- 5. Why I built StellAurator. The owner's own words, signed; kept word for word (docs/HOME_PAGE_CUT_BUILD.md).
+       When he has one, a recording from his own production goes in assets/demo/demo.json (kind "excerpt"). -->
+  <section id="why" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Why I built StellAurator</p>
+      <h2 class="title">I couldn&rsquo;t find audiobook software made for authors, so I built it</h2>
+    </div>
+    <video id="introVideo" class="hero-video brand-film" autoplay muted playsinline preload="metadata" poster="assets/intro-poster.jpg" aria-label="StellAurator">
+      <source src="assets/intro.mp4" type="video/mp4">
+    </video>
+    <div class="frame panel" style="max-width:820px;margin-top:34px">
+      <p>I&rsquo;m an author. When I started working on the audiobook for my novel, I realized pretty quickly that none of the software I was finding was actually made for authors. Everything was designed for recording music or podcasts. I wanted something where I could work directly from my manuscript, record my lines, and have everything organized without having to constantly switch between programs. I couldn&rsquo;t find what I wanted, so I built it myself. That&rsquo;s how StellAurator came about. It&rsquo;s the software I built to make my own audiobooks.</p>
+      <p class="muted" style="margin-top:12px">J.T. Michaelstar</p>
+    </div>
+    <!-- 6. The one button under the story -->
+    <div class="cta-row" style="margin-top:28px" data-home-download>
+      <a class="btn btn-gold" href="/download.html" data-download-page>Download for Windows</a>
+    </div>
+    <p class="cta-note">Free for 7 days, with no card. A practice book and a walkthrough are included. Exporting the finished audiobook comes with a plan.</p>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i></div>
+
+  <!-- 7. Three questions -->
+  <section id="faq" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Questions</p>
+      <h2 class="title">Three questions</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Does StellAurator run on a Mac?</summary><p>Not yet; it runs on 64-bit Windows 10 or 11. A Mac version is coming. <a href="coming.html">Leave your email</a> to hear when it is ready.</p></details>
+      <details><summary>Does StellAurator use AI voices?</summary><p>It records your voice. A character can also be given a computer voice, and those are described on <a href="voices.html">the voices page</a>.</p></details>
+      <details><summary>What does it cost after the seven free days?</summary><p>No card is taken, and nothing is charged. When the trial ends, your books stay on your computer and still open and play. Recording, generating and editing wait for a plan. During the open beta a plan is $12 a month or $90 a year, and you keep that price while you stay subscribed. The regular prices are $29 a month and $290 a year. <a href="pricing.html">The plans, on the pricing page</a>.</p></details>
+    </div>
+    <p class="cta-note"><a href="faq.html">More questions and answers</a> &middot; <a href="pricing.html#faq">Questions about plans</a></p>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>StellAurator · Audiobook Creation Studio<br>© 2026 Jathtech Digital Consulting LLC</span>
+    <nav aria-label="Site links">
+      <a href="studio.html">The studio</a>
+      <a href="narrators.html">For narrators</a>
+      <a href="voices.html">Voices</a>
+      <a href="demos.html">Demos</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="beta/">Open beta</a>
+      <a href="about.html">What is StellAurator?</a>
+      <a href="faq.html">Questions and answers</a>
+      <a href="compare.html">Compare</a>
+      <a href="glossary.html">Glossary</a>
+      <a href="guides/">Guides</a>
+      <a href="books.html">Books</a>
+      <a href="themes.html">Themes</a>
+      <a href="terms.html">License agreement</a>
+      <a href="terms.html#billing">Subscription terms</a>
+      <a href="terms.html#privacy">Privacy</a>
+      <a href="contact.html">Contact</a>
+      <a href="mailto:narrator@stellaurator.com">narrator@stellaurator.com</a>
+    </nav>
+    <p class="trademark" data-elevenlabs-attribution>ElevenLabs and the ElevenLabs logo are registered trademarks or trademarks of ElevenLabs, Inc. Used with permission. StellAurator is not sponsored by, endorsed by, or affiliated with ElevenLabs except as an independent participant in the ElevenLabs Creator Affiliate Program.</p>
+  </div>
+</footer>
+
+</div>
+<script src="sparkle.js"></script>
+<script src="site.js"></script>
+<script>
+(() => {
+  // The logo animation opens the page as a picture, never as a gate: it plays once, muted, and
+  // rests on its last frame (the wordmark). With reduced motion the poster stands in for it.
+  const v = document.getElementById('introVideo');
+  if (v) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+    else { const p = v.play && v.play(); if (p && p.catch) p.catch(() => {}); }
+  }
+  // Hear the difference: assets/demo/demo.json lists real recordings (assets/demo/README.txt).
+  //   { "kind": "cleanup", "line": "...", "before": "a.mp3", "after": "b.mp3" }   as recorded / cleaned and mastered
+  //   { "kind": "voice", "line": "...", "character": "...", "performed": "a.mp3", "converted": "b.mp3" }
+  //   { "kind": "excerpt", "title": "...", "file": "c.mp3" }                      from a finished audiobook
+  //   { "kind": "walkthrough", "title": "...", "video": "d.mp4", "poster": "d.jpg" }   recording to a finished chapter
+  // An entry with "performed" and "converted" and no kind is a voice pair (the first shape this file had).
+  fetch('assets/demo/demo.json').then((r) => (r.ok ? r.json() : [])).then((clips) => {
+    if (!Array.isArray(clips) || !clips.length) return;
+    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const audio = (file) => '<audio controls preload="none" src="assets/demo/' + esc(file) + '"></audio>';
+    const card = (c) => {
+      const kind = c.kind || (c.performed && c.converted ? 'voice' : '');
+      if (kind === 'cleanup' && c.before && c.after) {
+        return '<article class="frame panel demo-card"><p class="demo-line">&ldquo;' + esc(c.line) + '&rdquo;</p>'
+          + '<div class="demo-pair"><label>As recorded' + audio(c.before) + '</label><label>Cleaned and mastered' + audio(c.after) + '</label></div></article>';
+      }
+      if (kind === 'voice' && c.performed && c.converted) {
+        return '<article class="frame panel demo-card"><p class="demo-line">&ldquo;' + esc(c.line) + '&rdquo;</p>'
+          + '<div class="demo-pair"><label>As performed' + audio(c.performed) + '</label><label>As ' + esc(c.character || 'the character') + audio(c.converted) + '</label></div></article>';
+      }
+      if (kind === 'excerpt' && c.file) {
+        return '<article class="frame panel demo-card"><p class="demo-line">' + esc(c.title || 'From a finished audiobook') + '</p>'
+          + '<div class="demo-pair"><label>From a finished audiobook' + audio(c.file) + '</label></div></article>';
+      }
+      if (kind === 'walkthrough' && c.video) {
+        return '<article class="frame panel demo-card"><p class="demo-line">' + esc(c.title || 'From a recording to a finished chapter') + '</p>'
+          + '<video controls preload="none" style="width:100%;border-radius:2px"' + (c.poster ? ' poster="assets/demo/' + esc(c.poster) + '"' : '') + ' src="assets/demo/' + esc(c.video) + '"></video></article>';
+      }
+      return '';
+    };
+    const html = clips.slice(0, 8).map(card).filter(Boolean).join('');
+    if (!html) return;
+    document.getElementById('demoGrid').innerHTML = html;
+    document.getElementById('hear').hidden = false;
+    // one at a time
+    const players = document.querySelectorAll('#demoGrid audio, #demoGrid video');
+    players.forEach((a) => a.addEventListener('play', () => players.forEach((o) => { if (o !== a) o.pause(); })));
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>

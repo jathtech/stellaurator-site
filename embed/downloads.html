@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator - download</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="../theme.css">
+<!--
+  The face of account.stellaurator.com/downloads - see purchase.html for how these screens
+  work. The Wix page (site/wix/pages/downloads.js) knows who is signed in, finds the newest
+  installer on GitHub Releases and mints the one-time sign-in code; this page shows it.
+    this page -> Wix   { t:'ready' } { t:'signin' } { t:'showcode' }
+    Wix -> this page   { t:'state', view:'loading'|'signedout'|'unverified'|'ready'|'error',
+                         email, version, sizeMb, url, welcome, message,
+                         signinApp, bound, link, typedCode, invited }
+  `invited` (README section 18): the referral line, when the visitor came through an author's link.
+
+  A CODE IS NOT PRINTED HERE (docs/SIGNIN_BUILD.md). `link` is a stellaurator://login address and
+  goes in a href, never in text. `bound` means the code inside that link belongs to one copy of the
+  app - the one that put its challenge in the address - and then the hand-off button is the whole
+  screen. `typedCode` is the one code that is ever shown, and only after somebody presses
+  "Show a code to type", which asks Wix for a fresh code with no challenge.
+
+  ?demo=ready|signedout|unverified|bound|welcome|signin shows the faces without Wix around it.
+-->
+<link rel="stylesheet" href="embed.css">
+<!-- The funnel's last step (docs/ANALYTICS.md): events only, no page view, no Clarity, no pixel. -->
+<script src="../config.js"></script>
+<script src="../analytics.js" data-mode="events"></script>
+<script src="../pixel.js" data-mode="events"></script>
+</head>
+<body>
+<div class="acct" id="app" aria-live="polite"></div>
+
+<script>
+(function () {
+  var SITE = 'https://stellaurator.com/';
+  var ACCOUNT = 'https://account.stellaurator.com';
+  var inWix = window.parent !== window;
+  var params = new URLSearchParams(location.search);
+  // Every key Wix may send has to be here already: the merge below copies only
+  // the keys this screen knows, so a new field left out of this object is a
+  // field that silently never arrives. signinApp = the app sent them here and
+  // is waiting for the hand-off; bound = the code belongs to that one copy.
+  var state = { view: 'loading', email: '', version: '', sizeMb: 0, url: '', welcome: '', message: '', signinApp: false, bound: false, link: '', typedCode: '', invited: '' };
+
+  // The sentence a revealed code carries, and the disclosure that reveals it. Both are the
+  // wording of docs/SIGNIN_BUILD.md §2.
+  var TYPE_IT = 'Type it in the app under Settings › Account within 10 minutes. It works once.';
+  var SHOW_CODE = "Can't open the app from here? Show a code to type.";
+
+  function esc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function send(msg) { if (inWix) window.parent.postMessage(msg, '*'); }
+
+  function side(title, lede, extra) {
+    return '<aside class="side">'
+      + '<div class="brand2"><a href="' + SITE + '" target="_top" aria-label="StellAurator website"><img src="../assets/logo.png" alt=""></a><a href="' + SITE + '" target="_top">STELLAURATOR</a></div>'
+      + '<p class="eyebrow">Download</p>'
+      + '<h1 class="title">' + esc(title) + '</h1>'
+      + (lede ? '<p class="lede">' + lede + '</p>' : '')
+      + (extra || '')
+      + '</aside>';
+  }
+
+  function foot() {
+    return '<div class="foot"><p class="fine"><a href="' + ACCOUNT + '/purchase" target="_top">Plans and billing</a> &nbsp;·&nbsp; <a href="' + SITE + 'terms.html#billing" target="_blank" rel="noopener">Subscription terms</a> &nbsp;·&nbsp; <a href="' + SITE + 'contact.html" target="_top">Help</a> &nbsp;·&nbsp; <a href="' + SITE + '" target="_top">Back to the website</a></p></div>';
+  }
+
+  function downloadButton() {
+    if (!state.url) return '';
+    return '<a class="btn btn-gold" href="' + esc(state.url) + '" target="_blank" rel="noopener" data-installer>Download'
+      + (state.version ? ' ' + esc(state.version) : '') + ' for Windows</a>';
+  }
+
+  // A phone (2026-10-13): on a phone the website's free trial button makes the account, and the
+  // installer is for the Windows computer, so the screen says where to go next and offers to email the
+  // link. Nothing here is measured.
+  var PHONE = (function () {
+    try {
+      var n = window.navigator || {};
+      var ua = ((n.userAgentData && n.userAgentData.platform) || n.platform || '') + ' ' + (n.userAgent || '');
+      if (/Windows/i.test(ua)) return false;
+      return /Android|iPhone|iPad|iPod/i.test(ua) || (/Mac/i.test(ua) && (n.maxTouchPoints || 0) > 1);
+    } catch (e) { return false; }
+  })();
+  function phoneNote() {
+    if (!PHONE) return '';
+    var body = 'Download StellAurator on my Windows computer: ' + (state.url || 'https://github.com/jathtech/stellaurator-releases/releases/latest')
+      + '\n\nOr open https://stellaurator.com on that computer and press Download for Windows.';
+    return '<p class="say" data-phone-note><b>On a phone?</b> StellAurator installs on a Windows 10 or 11 computer. On that computer, open stellaurator.com, press Download for Windows, and sign in with '
+      + (state.email ? esc(state.email) : 'the account you make here') + '.</p>'
+      + '<a class="btn btn-line" href="mailto:?subject=' + encodeURIComponent('StellAurator download') + '&amp;body=' + encodeURIComponent(body) + '" target="_top">Email me the link</a>';
+  }
+
+  // The app is waiting. Everything else on this screen - the installer, the
+  // steps - is for someone who has not got it yet, so the hand-off goes first.
+  function handoff() {
+    if (!(state.link && (state.bound || state.signinApp))) return '';
+    return '<div class="handoff" style="grid-column:1/-1;display:grid;gap:10px;justify-items:center;text-align:center;padding:2px 0 6px;">'
+      + '<a class="btn btn-gold" href="' + esc(state.link) + '" target="_top" data-signin-app style="font-size:15px;padding:16px 34px;">Open StellAurator — finish signing in</a>'
+      + '<p style="margin:0;font-size:15px;line-height:1.55;color:var(--ash);">You are signed in here. One more click sends you back to the app.</p>'
+      + '</div>';
+  }
+
+  // One silent attempt, once. A browser will usually refuse to jump to another
+  // program without a click - which is why the button above is the real path -
+  // but when it is allowed the app is already signing itself in.
+  var handedOff = false;
+  function tryHandoff() {
+    if (handedOff || !(state.link && (state.bound || state.signinApp))) return;
+    handedOff = true;
+    var link = state.link;
+    try { window.top.location.href = link; return; } catch (e) { /* another site's frame: not allowed */ }
+    try {
+      var f = document.createElement('iframe');
+      f.style.display = 'none';
+      f.src = link;
+      document.body.appendChild(f);
+    } catch (e2) { /* the button it is */ }
+  }
+
+  // Asked Wix for a code to type. Once per screen: the answer comes back as `typedCode`.
+  var askedForCode = false;
+  var legacyCode = '';   // a code the old Wix page already sent; shown only behind the disclosure
+
+  function render() {
+    var el = document.getElementById('app');
+    var html;
+    if (state.bound && state.link) {
+      // The app made this sign-in and is holding the other half of it. One button, nothing else:
+      // there is no installer to offer (they have it) and no code to show (it is not theirs to read).
+      html = handoff() + side('You are signed in', '',
+          (state.welcome ? '<p class="welcome">' + esc(state.welcome) + '</p>' : '')
+          + '<p class="signed">Signed in as <b>' + esc(state.email) + '</b></p>')
+        + '<div class="cards one"></div>' + foot();
+    } else if (state.view === 'ready') {
+      html = handoff() + side('StellAurator' + (state.version ? ' ' + state.version : '') + ' for Windows', '',
+          (state.welcome ? '<p class="welcome">' + esc(state.welcome) + '</p>' : '')
+          + '<p class="signed">Ready for <b>' + esc(state.email) + '</b></p>'
+          + '<p class="codehint">A pass or a plan is already on your account. Otherwise your seven free days start the first time you sign in with a confirmed email address. Updates arrive inside the app.</p>')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + '<div class="getrow">'
+        + downloadButton()
+        + (state.link ? '<a class="btn btn-line" href="' + esc(state.link) + '" target="_top" data-signin-app>Sign in the app</a>' : '<span></span>')
+        + '</div>'
+        + '<p class="say">Install it, then press Sign in the app.</p>'
+        + phoneNote()
+        + '<details data-typed' + (state.typedCode ? ' open' : '') + ' style="margin-top:14px;">'
+        + '<summary style="cursor:pointer;font-size:13px;line-height:1.5;color:var(--gilt);">' + esc(SHOW_CODE) + '</summary>'
+        + (state.typedCode
+          ? '<p class="code">' + esc(state.typedCode) + '</p><p class="codehint" style="text-align:center;">' + esc(TYPE_IT) + '</p>'
+          : '<p class="codehint" style="text-align:center;">One moment…</p>')
+        + '</details>'
+        + '</div></div>' + foot();
+    } else if (state.view === 'unverified') {
+      // Wix has sent its own confirmation message and it has not been answered yet. The installer
+      // is offered - anybody may download - and there is no sign-in here until the link is pressed.
+      // The download leads (2026-10-12): it is open to anybody, and the confirmation only matters
+      // when the seven days start, inside the app.
+      html = side('Download StellAurator', '',
+          '<p class="status">' + esc('Confirm your email first: we sent a message to ' + state.email + '. Open it and press the link, then come back.') + ' If it is not in your inbox, look in your spam folder.</p>')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + downloadButton()
+        + '<p class="say">You can download and install it now. Your seven free days start once you have pressed the link in that message and pressed Check plan now in the app. Nothing is spent until then.</p>'
+        + phoneNote()
+        + '</div></div>' + foot();
+    } else if (state.view === 'signedout' && state.signinApp) {
+      // THE APP SENT THEM HERE (?signin=app) to make an account or sign in (owner 2026-10-18): they have the
+      // app already, so the account leads, as two plain buttons; no installer.
+      html = side('Make your account', 'StellAurator on your computer sent you here. Make your account or sign in, then go back to the app: it signs you in by itself.', '')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + '<button class="btn btn-gold" data-signin="1" data-mode="signup" data-app-signup>Create my account</button>'
+        + '<p class="say">Already have an account? <a href="#" data-signin="1" data-mode="login">Sign in</a>.</p>'
+        + '</div></div>' + foot();
+    } else if (state.view === 'signedout' && state.url && PHONE) {
+      // A phone (owner, 2026-10-15, the funnel trace): the website's trial button promised "Make your
+      // account here now", and this screen offered a Windows installer and nothing else. On a phone
+      // the account comes first; the installer is for the Windows computer, and the link can be
+      // emailed there. Same account, same seven days, which start at the first sign-in on the computer.
+      var mail = 'Download StellAurator on my Windows computer: ' + state.url
+        + '\n\nOr open https://stellaurator.com on that computer and press Download for Windows.';
+      html = side('Make your account', 'StellAurator installs on a Windows 10 or 11 computer. Make your account here now, free, with no card. Your seven free days start the first time you sign in on your computer.', '')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + '<button class="btn btn-gold" data-signin="1" data-mode="signup" data-phone-signup>Create my account</button>'
+        + '<p class="say">Already have an account? <a href="#" data-signin="1" data-mode="login">Sign in</a>.</p>'
+        + '<p class="say"><b>Then, on your Windows computer:</b> open stellaurator.com, press Download for Windows, and sign in with this account.</p>'
+        + '<a class="btn btn-line" href="mailto:?subject=' + encodeURIComponent('StellAurator download') + '&amp;body=' + encodeURIComponent(mail) + '" target="_top">Email me the link for my computer</a>'
+        + '<p class="say">For Windows 10 and 11, 64-bit. The installer does not run on a phone.</p>'
+        + '</div></div>' + foot();
+    } else if (state.view === 'signedout' && state.url) {
+      // Download first, account later (2026-10-12): the installer is offered before any account,
+      // and the account is made in the app, where the seven free days start.
+      html = side('Download StellAurator', 'The download is free, and there is no card. Install it and open it, then make your account inside the app: your seven free days start the first time you sign in with a confirmed email address.', '')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + downloadButton()
+        + '<p class="say">For Windows 10 and 11, 64-bit. Already have an account? You can sign in here too.</p>'
+        + '<button class="btn btn-line" data-signin="1">Sign in or make an account</button>'
+        + phoneNote()
+        + '</div></div>' + foot();
+    } else if (state.view === 'signedout') {
+      html = side('Sign in to download StellAurator', 'The download is free, and there is no card. Signing in is how the app knows it is you; your seven free days start the first time you sign in with a confirmed email address.', '')
+        + '<div class="cards one"><div class="frame price-card is-lit">'
+        + '<p class="say">One account does it all: the download, the free trial, and your plan if you choose one later.</p>'
+        + '<button class="btn btn-gold" data-signin="1">Sign in or make an account</button>'
+        + '</div></div>' + foot();
+    } else if (state.view === 'error') {
+      html = side('Download StellAurator', '', '<p class="status" data-tone="error">' + esc(state.message || 'Your download could not be prepared.') + '</p>')
+        + '<div class="cards one"><div class="frame price-card"><p class="say">The installers are also listed on the releases page.</p><a class="btn btn-line" href="https://github.com/jathtech/stellaurator-releases/releases/latest" target="_blank" rel="noopener">Open the releases page</a></div></div>'
+        + foot();
+    } else {
+      html = side('Download StellAurator', '', '<p class="status">One moment - checking your account…</p>') + '<div class="cards one"></div>' + foot();
+    }
+    // A visitor who came through an author's referral link (README section 18) is told so at the top.
+    if (state.invited && state.view !== 'loading') html = '<p class="welcome" data-invited style="text-align:center;margin:0 0 12px;">' + esc(state.invited) + '</p>' + html;
+    el.innerHTML = html;
+    // Pressing the disclosure is what asks Wix for a code: none is minted, and so none exists to
+    // be seen, until somebody says they cannot open the app from here.
+    var typed = el.querySelector('details[data-typed]');
+    if (typed) {
+      typed.addEventListener('toggle', function () {
+        if (!typed.open || state.typedCode || askedForCode) return;
+        if (legacyCode) { state.typedCode = legacyCode; render(); return; }
+        askedForCode = true;
+        send({ t: 'showcode' });
+      });
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button, a[data-signin]'); if (!b) return;
+    if (b.dataset.signin) { e.preventDefault(); if (inWix) send({ t: 'signin', mode: b.dataset.mode || '' }); else window.top.location.href = ACCOUNT + '/downloads'; }
+  });
+
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!d || d.t !== 'state') return;
+    Object.keys(state).forEach(function (k) { if (k in d) state[k] = d[k]; });
+    // The Wix page from before docs/SIGNIN_BUILD.md sends `code` and no `link`. Until that page is
+    // re-pasted, build the link from it, and keep the code for the disclosure instead of asking
+    // Wix for one (the old page has no answer to `showcode`).
+    if (d.code && !d.link) {
+      state.link = 'stellaurator://login?code=' + encodeURIComponent(d.code);
+      legacyCode = String(d.code);
+    }
+    render();
+    tryHandoff();
+  });
+
+  // The Meta pixel (loaded above in events mode, no page view): the trial starts with the installer, so its
+  // button sends StartTrial - the step the ads are measured on (owner 2026-10-12).
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-installer]') : null;
+    if (!t) return;
+    try { if (typeof window.fbq === 'function') window.fbq('track', 'StartTrial', { content_name: 'installer' }); } catch (err) { /* measurement never blocks a click */ }
+  }, true);
+
+  var demo = params.get('demo');
+  if (demo === 'ready' || demo === 'welcome' || demo === 'signin' || demo === 'bound') {
+    state = { view: 'ready', email: 'author@example.com', version: '0.23.1', sizeMb: 606, url: 'https://github.com/jathtech/stellaurator-releases/releases/latest', welcome: demo === 'welcome' ? 'Welcome to StellAurator - your subscription is active.' : '', message: '', signinApp: demo === 'signin' || demo === 'bound', bound: demo === 'bound', link: 'stellaurator://login?code=K7QM-24XD', typedCode: '' };
+  }
+  if (demo === 'signedout') state.view = 'signedout';
+  if (demo === 'download') { state.view = 'signedout'; state.url = 'https://github.com/jathtech/stellaurator-releases/releases/latest'; state.version = '0.42.2'; state.sizeMb = 639; }
+  if (demo === 'unverified') { state.view = 'unverified'; state.email = 'author@example.com'; state.url = 'https://github.com/jathtech/stellaurator-releases/releases/latest'; state.version = '0.23.1'; }
+
+  render();
+  send({ t: 'ready' });
+  var tries = 0;
+  var again = setInterval(function () { tries += 1; if (tries > 240) clearInterval(again); else send({ t: 'ready' }); }, 750);
+  window.addEventListener('message', function (e) { if (e.data && e.data.t === 'state') clearInterval(again); });
+})();
+</script>
+</body>
+</html>

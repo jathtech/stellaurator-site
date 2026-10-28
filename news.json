@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2026-10-24",
+    "kind": "update",
+    "title": "StellAurator 0.52.0",
+    "text": "Long jobs show what they are doing: the real step, a bar, the time taken, Cancel, and Keep working in the background.",
+    "href": "https://stellaurator.com/download.html#v0-52-0"
+  },
+  {
+    "date": "2026-10-23",
+    "kind": "announcement",
+    "title": "StellAurator is in open beta",
+    "text": "The whole studio is open to everyone, free for seven days. While the beta runs, a plan is $12 a month or $90 a year instead of $29 and $290, and you keep that price for as long as you stay subscribed.",
+    "href": "https://stellaurator.com/pricing.html"
+  },
+  {
+    "date": "2026-10-20",
+    "kind": "media",
+    "title": "The demos page",
+    "text": "Hear a chapter read by the built-in voices, a recorded reading after the repairs, and the same lines in several voices.",
+    "href": "https://stellaurator.com/demos.html"
+  }
+]

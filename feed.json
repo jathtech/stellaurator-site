@@ -1,0 +1,282 @@
+[
+  {
+    "date": "2026-10-24",
+    "kind": "update",
+    "title": "StellAurator 0.53.0",
+    "text": "The manuscript import keeps the credits. The title page, the copyright page and the by-line become a Credits chapter at the front of the book, with its lines included so the opening credits can be recorded. A manuscript with no credits gets one made from the title and author. A table of contents comes in as a Contents chapter with every line hidden: you see it, and it stays out of the recording. A chapter whose every line is hidden says so in the chapter list.",
+    "href": "https://stellaurator.com/download.html#v0-53-0"
+  },
+  {
+    "date": "2026-10-24",
+    "kind": "update",
+    "title": "StellAurator 0.52.0",
+    "text": "Long jobs show what they are doing: the real step, a bar, the time taken, Cancel, and Keep working in the background.",
+    "href": "https://stellaurator.com/download.html#v0-52-0"
+  },
+  {
+    "date": "2026-10-24",
+    "kind": "update",
+    "title": "StellAurator 0.51.0",
+    "text": "Conform by chapter. Conform to revised manuscript now opens a pairing screen instead of comparing the whole book at once: your chapters on one side, the file's on the other. Let it detect the order automatically or pair them yourself; press Match to see how well a pair matches (\"97 % of the lines matched\", with what changed, and whether chapters were added, removed or reordered before it); then Import changes. The changes go into a new edition, chapter by chapter, and the recorded book is never touched. Choose whether the recordings come along (a changed line's take is marked stale) or the edition is text only.",
+    "href": "https://stellaurator.com/download.html#v0-51-0"
+  },
+  {
+    "date": "2026-10-23",
+    "kind": "announcement",
+    "title": "StellAurator is in open beta",
+    "text": "The whole studio is open to everyone, free for seven days. While the beta runs, a plan is $12 a month or $90 a year instead of $29 and $290, and you keep that price for as long as you stay subscribed.",
+    "href": "https://stellaurator.com/pricing.html"
+  },
+  {
+    "date": "2026-10-23",
+    "kind": "update",
+    "title": "StellAurator 0.50.0",
+    "text": "Finish tells you which lines fail. A chapter's verdict is no longer a sentence you have to go and act on by hand. Press it, or right-click it, and the failing lines are listed with the number that failed and the limit: each one jumps to the line, and Fix these lines… opens Restoration with exactly those lines selected and the ACX processing tool ready. Change the target… opens the export's loudness settings in place.",
+    "href": "https://stellaurator.com/download.html#v0-50-0"
+  },
+  {
+    "date": "2026-10-23",
+    "kind": "update",
+    "title": "StellAurator 0.49.0",
+    "text": "PDF and EPUB manuscripts open. New book and Add a chapter take a .pdf or an .epub as well as .docx, .txt and pasted text. A PDF's pages come in as the author wrote them: the lines of a paragraph joined, words broken at a line end mended, running headers and page numbers dropped, headings kept on their own line so the chapters are found. A PDF that is only pictures of pages (a scan) says so and asks for the manuscript from your writing program. An EPUB comes in chapter by chapter in its reading order, with its title and author.",
+    "href": "https://stellaurator.com/download.html#v0-49-0"
+  },
+  {
+    "date": "2026-10-23",
+    "kind": "update",
+    "title": "StellAurator 0.48.0",
+    "text": "Ducking. Music now dips while the voice speaks, in the exported files and while you listen. On the Score page, next to How much score, choose Continuous (the music goes down as a passage of speech begins, stays down through the small gaps between words, and comes back up in the pauses between lines) or Between the words (it dips under each word and comes back up even in short gaps), and how far it dips. Books start on Continuous at 6 dB. Sound effects are not ducked.",
+    "href": "https://stellaurator.com/download.html#v0-48-0"
+  },
+  {
+    "date": "2026-10-22",
+    "kind": "update",
+    "title": "StellAurator 0.47.0",
+    "text": "Readings are divided into lines on your computer. Read a chapter straight through and StellAurator now divides it into the manuscript's lines by the words you read, with a transcription model that comes with the app. You don't need a transcription service or a key, and nothing is sent anywhere. If you already connected a service, it is still used; to use the built-in one instead, choose On this computer (free) in Settings, API & AI, Transcription. When you import a recording made in another program, Transcribe on this computer is offered first.",
+    "href": "https://stellaurator.com/download.html#v0-47-0"
+  },
+  {
+    "date": "2026-10-20",
+    "kind": "media",
+    "title": "The demos page",
+    "text": "Hear a chapter read by the built-in voices, a recorded reading after the repairs, and the same lines in several voices.",
+    "href": "https://stellaurator.com/demos.html"
+  },
+  {
+    "date": "2026-10-20",
+    "kind": "update",
+    "title": "StellAurator 0.46.3",
+    "text": "Create bed. The timeline on the Score page has a Create bed button at the top. Press it and it changes to Select area: drag across the timeline where the music should play, over the music lane or anywhere else. The start and end are set from your drag and shown in the bed form above, with the length. Fill in the mood and the rest as usual and press Create this bed. Press the button again, or Esc, to stop without making one.",
+    "href": "https://stellaurator.com/download.html#v0-46-3"
+  },
+  {
+    "date": "2026-10-20",
+    "kind": "update",
+    "title": "StellAurator 0.46.2",
+    "text": "No more stutter in the pauses. Since 0.46.0 the pauses between lines could stutter: they were filled by repeating a tiny piece of sound from the edge of a line, sometimes the end of a word, or by turning a very quiet noise print up too far. Now each chapter's room sound is made from the quiet moments inside its own lines, and a pause plays whole stretches of it joined smoothly, so nothing repeats. It works on every book, old or new, with nothing to set up. If you captured a noise print of your room, it is used when it matches the room your lines were recorded in. Exports and the ACX file use the same pauses you hear.",
+    "href": "https://stellaurator.com/download.html#v0-46-2"
+  },
+  {
+    "date": "2026-10-20",
+    "kind": "update",
+    "title": "StellAurator 0.46.1",
+    "text": "Shift-click on the Restoration and batch processing list. Click a line, then Shift-click another to select every line between them. Shift works on the checkboxes too, and before you have clicked anything it starts from the clip shown. Shift no longer highlights the words on the page.",
+    "href": "https://stellaurator.com/download.html#v0-46-1"
+  },
+  {
+    "date": "2026-10-20",
+    "kind": "update",
+    "title": "StellAurator 0.46.0",
+    "text": "Pauses sound like your room. The pause between two lines is now your book's own room recording (your captured noise print), set to the level at the end of the line before and the start of the line after. The export lays it in every pause, and you hear the same thing when you listen, so the sound runs on through a pause instead of dropping out. The playhead keeps moving through the pause instead of jumping to the next line.",
+    "href": "https://stellaurator.com/download.html#v0-46-0"
+  },
+  {
+    "date": "2026-10-19",
+    "kind": "update",
+    "title": "StellAurator 0.45.0",
+    "text": "Restoration is now a chain under the clip. The right side of the Restoration page is the toolbox only: presets at the top, a search box, and the tools in groups (Audio Cleanup, Dynamics & Volume, Tone & Effects, Recording & Editing, Mastering & Compliance, Export & Delivery), each with a one-line description. Click a tool to add it to the chain under the clip, or drag it in between steps. Each step opens right there with its settings.",
+    "href": "https://stellaurator.com/download.html#v0-45-0"
+  },
+  {
+    "date": "2026-10-18",
+    "kind": "update",
+    "title": "StellAurator 0.44.0",
+    "text": "Nebula has its own tab. Settings now has a Nebula tab. When Nebula is off, it is the sign-up page. When it is on, it shows your plan, Cancel, and your whole library as a tree: every book, and inside it the manuscript, the recordings and the sound effects, with a check on whatever is in Nebula. Check what you want kept there, down to one take, and press Update Nebula; nothing moves before that. Rules choose what a new book sends. A take in the delete queue is never uploaded. A book taken down on another computer marks every take that stayed behind as Not on this computer.",
+    "href": "https://stellaurator.com/download.html#v0-44-0"
+  },
+  {
+    "date": "2026-10-18",
+    "kind": "update",
+    "title": "StellAurator 0.43.6",
+    "text": "Speech and floor shows every pause. On the Restoration page, Speech and floor now colors the quiet inside a phrase as floor too: the short pauses between phrases and a quiet hum no longer draw as speech. The colors are worked out again for every clip the first time you open it.",
+    "href": "https://stellaurator.com/download.html#v0-43-6"
+  },
+  {
+    "date": "2026-10-18",
+    "kind": "update",
+    "title": "StellAurator 0.43.5",
+    "text": "The processing chain. On the Restoration page, the list of tools you build up and apply as one change is now called the processing chain: \"Add to processing chain\", \"Processing chain · 3 steps\", \"Save the processing chain as a preset\". Finish's Custom row reads \"Or take the repairs from a saved processing chain\" and \"Make a processing chain in Restoration\". Auto sequence calls its step a processing chain too. Your saved presets keep their names, and nothing about how they work has changed.",
+    "href": "https://stellaurator.com/download.html#v0-43-5"
+  },
+  {
+    "date": "2026-10-18",
+    "kind": "update",
+    "title": "StellAurator 0.43.4",
+    "text": "See what is in each clip. In Restoration and batch processing, a new switch just above the waveform reads Plain, Speech and floor, and Every sound. Speech and floor shows the words in one color and the pauses and room in another. Every sound also shows breaths, mouth clicks, pops, static, background noise and background sounds, each in its own color, with hum as a strip along the bottom. A key under the waveform names each color and how many were found, for example \"3 breaths, 1 pop\". Sound effect takes have their own color. The colors work in every look, and the color-blind option uses a color-blind safe set.",
+    "href": "https://stellaurator.com/download.html#v0-43-4"
+  },
+  {
+    "date": "2026-10-17",
+    "kind": "update",
+    "title": "StellAurator 0.43.3",
+    "text": "Restoration and batch processing, rebuilt. The page now works left to right: the lines, the clip shown in the middle, then the tool, the toolbox and Apply to on the right.",
+    "href": "https://stellaurator.com/download.html#v0-43-3"
+  },
+  {
+    "date": "2026-10-17",
+    "kind": "update",
+    "title": "StellAurator 0.43.2",
+    "text": "Add a cue without copying anything. In Score, Add a cue now marks where the cue goes: drag across the lines on the timeline, click a line, or Shift+click to extend what you marked. In the manuscript, select lines and press Add a cue for these lines. The cue stops on the last word of what you marked.",
+    "href": "https://stellaurator.com/download.html#v0-43-2"
+  },
+  {
+    "date": "2026-10-16",
+    "kind": "update",
+    "title": "StellAurator 0.43.1",
+    "text": "The music that would not pause. A music bed whose start was still waiting on the output device could begin after a pause had stopped it, and then nothing could stop it. A bed now starts only while it is still the one the player holds.",
+    "href": "https://stellaurator.com/download.html#v0-43-1"
+  },
+  {
+    "date": "2026-10-16",
+    "kind": "update",
+    "title": "StellAurator 0.43.0",
+    "text": "The character sheet is a character sheet. Each character's sheet now has two columns. On the left: Look (hair, eyes, skin, build, age, height and weight, each with a suggestion list that never limits what you type, so \"tall for a dwarf\" is fine), Attributes (your own rows, or Fill from a well-known set such as the six D&D abilities), and five personality systems behind checkmarks: Myers-Briggs, the Four Temperaments, DISC, the Big Five and the Enneagram. Tick a system to open its panel with sliders, a graphic, a one-line description and a link to its source; untick it and the values are kept. The main column keeps Voice, Gender, Pronouns, Description and Notes, adds a Background section (origin, family, occupation, affiliations, goals, fears, story), and folds the parts the book fills in (the counts, How you last played them, Where they are in the story) behind one In this book button. The Character Tags board has a Character sheet button beside each character.",
+    "href": "https://stellaurator.com/download.html#v0-43-0"
+  },
+  {
+    "date": "2026-10-16",
+    "kind": "update",
+    "title": "StellAurator 0.42.6",
+    "text": "A driver that will not start is tried again in a fresh helper. RØDE's NT1 5th Gen drivers could refuse to start (\"ASIO Driver open Failure!\") after the other NT1 entry had been used in the same session, with nothing else holding the microphone. The app now restarts its audio helper and asks once more on its own, and says so in the Recording panel. A driver that refuses a second time is reported as before.",
+    "href": "https://stellaurator.com/download.html#v0-42-6"
+  },
+  {
+    "date": "2026-10-15",
+    "kind": "update",
+    "title": "StellAurator 0.42.5",
+    "text": "Signing in works again. Since 0.42.0 the sign-in form could stop the studio with \"acct is not defined\": when Settings opened on the Account tab before the account had been read, when you were signed out, and on a fresh install's first sign-in. The form is fixed, and a test now draws it signed out so it cannot come back.",
+    "href": "https://stellaurator.com/download.html#v0-42-5"
+  },
+  {
+    "date": "2026-10-15",
+    "kind": "update",
+    "title": "StellAurator 0.42.4",
+    "text": "Clip gain is one press. In the waveform editor, select a stretch, set the gain, press Apply. The change is kept on the take at once, as one of its changes, with a red line beside the tile that says what was applied. Nothing is saved as a new take. Every clip gain shows as a band on the waveform: click its label to select exactly that stretch, then Delete, Reset, or Remove this clip gain to take it off. The edits panel has a Remove beside every change too.",
+    "href": "https://stellaurator.com/download.html#v0-42-4"
+  },
+  {
+    "date": "2026-10-12",
+    "kind": "update",
+    "title": "StellAurator 0.42.3",
+    "text": "The license agreement now names the usage reports. Version 1.5 of the agreement says which reports the app sends on its own: the alpha usage reports, for alpha accounts while the alpha runs, and the usage reports you choose to turn on in Settings > Privacy. It also says that books you put on Nebula are uploaded sealed, so we cannot open them. Nothing the app sends has changed. You will be asked to accept the agreement again the next time you open the app.",
+    "href": "https://stellaurator.com/download.html#v0-42-3"
+  },
+  {
+    "date": "2026-10-12",
+    "kind": "update",
+    "title": "StellAurator 0.42.2",
+    "text": "No more blank window when a screen hits an error. If Proof listen or another screen runs into a problem while it is drawing, the window now says which screen stopped, shows the error, and offers Close and Reload instead of going blank. The error is also saved in the engine log, so a bug report from Settings carries it.",
+    "href": "https://stellaurator.com/download.html#v0-42-2"
+  },
+  {
+    "date": "2026-10-11",
+    "kind": "update",
+    "title": "StellAurator 0.42.1",
+    "text": "Guides on the website. The Help menu in the library has a new entry, Guides on the website. It lists the buying and how-to guides on stellaurator.com: choosing a microphone, audio interfaces, headphones, Audible's ACX requirements, and treating a room. Each guide opens in your own browser.",
+    "href": "https://stellaurator.com/download.html#v0-42-1"
+  },
+  {
+    "date": "2026-10-11",
+    "kind": "update",
+    "title": "StellAurator 0.42.0",
+    "text": "Ready for the One-Book Pass. This release carries the machinery for a one-time purchase that opens the whole studio for one book, for good: record, edit, finish and save that book with no deadline, while other books stay read-only. Nothing changes in the app until the pass goes on sale on the account site. When it does, the Subscribe buttons name its price, a pass can be put on a book from the book's menu in the library (it stays on that book for good), the book's row wears a One-Book Pass tag, and the account panel says which book the pass is on.",
+    "href": "https://stellaurator.com/download.html#v0-42-0"
+  },
+  {
+    "date": "2026-10-10",
+    "kind": "update",
+    "title": "StellAurator 0.41.0",
+    "text": "Problems counted while you record. The recording bar now counts clicks, plosives, harsh S sounds, breaths, hum, background sounds and the room's noise level as you record, with a mark on the strip where each was heard. It is a running estimate that costs the computer almost nothing, it never changes the recording, and it pauses itself if the computer is busy. Settings, Recording, Count problems while recording turns it off.",
+    "href": "https://stellaurator.com/download.html#v0-41-0"
+  },
+  {
+    "date": "2026-10-10",
+    "kind": "update",
+    "title": "StellAurator 0.40.0",
+    "text": "Every clip says what was done to it. A small icon now sits on every place a clip appears: the take box in the clip pool, the waveform editor, the clip editor, Restoration and Comp takes, Proof listen's line, and the timeline's blocks and track pieces. It is grey when nothing has been done to the clip and lit when the clip has been edited or repaired. Hover it to read the list, such as de-clicked, de-essed, trimmed. Click it to open the panel.",
+    "href": "https://stellaurator.com/download.html#v0-40-0"
+  },
+  {
+    "date": "2026-10-10",
+    "kind": "update",
+    "title": "StellAurator 0.39.1",
+    "text": "Playback waits for nothing. While a line plays, the next four lines are made ready one after another, so a line whose repairs still had to be rendered is ready before its turn. The listen in the manuscript and Proof listen both do this. A line made ready once is not made again.",
+    "href": "https://stellaurator.com/download.html#v0-39-1"
+  },
+  {
+    "date": "2026-10-10",
+    "kind": "update",
+    "title": "StellAurator 0.39.0",
+    "text": "Tracks beside the clip pool. Every track your timeline has, Sound effects, Music and any numbered track, gets its own narrow column beside the clip pool and its own check mark directly above it in the clip pool bar. Tick any number of them. A track shows in its column with its name written along the top; click it to open it wide. Drag a take onto a column to make a sound effect at that moment, drag a piece up or down to move when it plays, or drag it back onto a line to make it a take again. The old dropdown is gone.",
+    "href": "https://stellaurator.com/download.html#v0-39-0"
+  },
+  {
+    "date": "2026-10-09",
+    "kind": "update",
+    "title": "StellAurator 0.38.0",
+    "text": "The noise print panel. Every recording area now has a small panel beside the level meter. It shows the room the engine believes in, the saved noise print, and the room the microphone hears right now, the live print, both drawn over the frequency display. When the two drift apart it tells you. Press Capture a new noise print: it counts down from three, records the room alone for ten seconds while asking you to stay quiet, and keeps the result as the book's print. The automatic pass and Finish clean with your print instead of guessing the room from each take, and a take whose room no longer matches falls back to its own pauses and says so.",
+    "href": "https://stellaurator.com/download.html#v0-38-0"
+  },
+  {
+    "date": "2026-10-09",
+    "kind": "update",
+    "title": "StellAurator 0.37.0",
+    "text": "Who says this line. When your manuscript comes in, the studio now works out who speaks each line on its own, by looking at who is in the scene and how the conversation goes back and forth. The lines it is not sure about are ranked, with the most likely name first, and Review in order walks you through them one by one. Confirm likely lines lets you accept the probable ones in a batch.",
+    "href": "https://stellaurator.com/download.html#v0-37-0"
+  },
+  {
+    "date": "2026-10-08",
+    "kind": "update",
+    "title": "StellAurator 0.36.1",
+    "text": "Musical identity. On the Score screen, the spotting notes gain a Musical identity button. It opens a window where you write the music of the book in your own words, click tags into it (low droning dramatic, orchestral adventurous, synth pulse, solo piano, and more), add references to films, series and games whose music is close to what you want, and press Describe to have your text model lay out each one's music in musical terms, which you can add to the identity. Suggest references names works that would suit this book from its plot and genre. The identity then guides every cue's music prompt loosely (beds most, stings lighter, sound effects not at all) and Find the beats considers it. A Follow the identity slider on the Score bar sets how closely each chapter keeps to it, from loosely to tightly. The music service only ever receives musical terms, never a title or a composer's name.",
+    "href": "https://stellaurator.com/download.html#v0-36-1"
+  },
+  {
+    "date": "2026-10-08",
+    "kind": "update",
+    "title": "StellAurator 0.36.0",
+    "text": "Nothing of ours silences anyone. Monitoring now opens your headphones in shared mode, so every other program keeps its sound while you hear yourself. The shortest path is still there: tick Reduced delay beside the Monitoring slider; its hover tip says what it costs: it disables shared output from other apps. With Reduced delay on, the app plays your clips itself through the headphones' own stream, so playback never goes quiet because the monitor is on.",
+    "href": "https://stellaurator.com/download.html#v0-36-0"
+  },
+  {
+    "date": "2026-10-07",
+    "kind": "update",
+    "title": "StellAurator 0.35.2",
+    "text": "Finish says what it is doing. A chapter or the whole book sits in its own card above Diagnose with its stats, so the subject is never in doubt. While Diagnose, Apply or Check runs, the step expands with a live list of every line as it is checked, repaired or measured, with a running tally; when it ends the list stays behind \"What was checked\". Leave the screen while a job runs and come back: the progress and Stop are still there. Custom lets you custom: tick the repairs you want, Force into ACX compliance, and the export target, or take the repairs from a chain, and the choice is remembered per book. Every step has its own Show me tour; the 5-minute walkthrough is untouched. The Finish stage's steps now run in working order: Finish, Restoration and batch processing, Proof listen, Pickups, Export, because pickups are made in Proof listen.",
+    "href": "https://stellaurator.com/download.html#v0-35-2"
+  },
+  {
+    "date": "2026-10-07",
+    "kind": "update",
+    "title": "StellAurator 0.35.1",
+    "text": "The Monitoring slider always does what it says. On the Native (studio) engine the slider in the top bar is the one switch for hearing yourself: set it to anything but Off and Low-latency monitoring turns on with it. The app now watches the engine's own state and turns the monitoring back on by itself whenever the microphone was closed or opened again behind it (a format change, a take, the helper starting again). When it cannot start, the pill says so: \"MONITORING · NOT ON\" in red, the reason as the first sentence of its tip (\"The microphone is in use by another program: RØDE Connect. Close it, or choose another microphone in the Recording panel.\"), and one message the first time. An app that started before the native helper answered no longer stays on the fallback engine for the whole session: it asks again and switches to Native (studio) the moment the helper is there.",
+    "href": "https://stellaurator.com/download.html#v0-35-1"
+  },
+  {
+    "date": "2026-10-06",
+    "kind": "update",
+    "title": "StellAurator 0.35.0",
+    "text": "Spools. What the app called a version column is now a spool. Takes you have recorded or generated wait in a line's clip pool; the one chosen for each line is wound onto a spool, and a spool is one complete reading of the book that you can switch to or export whole. Spool A, spool B and as many as you add work exactly as the columns did: the headings, the Add spool button, the lock sentences, the Export dialog's sources and the tour all say spool now. Nothing you saved changes.",
+    "href": "https://stellaurator.com/download.html#v0-35-0"
+  }
+]

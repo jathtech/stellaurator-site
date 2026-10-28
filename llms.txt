@@ -1,0 +1,52 @@
+# StellAurator
+
+> StellAurator is audiobook recording and production software for Windows. Authors and narrators use it to record an audiobook from the manuscript, fix single lines, add music and export chapters in the format Audible’s ACX requires, in one program. Every recording is stored on the line of the manuscript it belongs to.
+
+StellAurator runs on 64-bit Windows 10 and 11. It is free for 7 days with no card (everything except exporting the finished audiobook), then $12 a month or $90 a year during the open beta (regular price $29 a month or $290 a year). The manuscript and recordings stay on the user's computer. Made by Jathtech Digital Consulting LLC. Contact: narrator@stellaurator.com.
+
+## Key facts
+
+- What it is: Audiobook recording and production software, a desktop application
+- Made for: Authors who narrate or manage their own audiobook, and narrators who want one program for the whole job
+- Runs on: 64-bit Windows 10 and Windows 11. A Mac version is on the way
+- Manuscripts: Word (.docx), PDF, EPUB, plain text (.txt, .md) or pasted text; chapters found at their headings, speakers detected
+- Recording: A teleprompter; a straight read is divided into its lines by the words, on your computer; every take is kept on its line and checked against the script
+- Clean-up: Clicks and pops, breaths, hum, background noise, each found and fixed, every fix with an undo
+- Music: Beds and cues on the chapter timeline from your own sound library, or generated through a service you connect
+- Checking: Loudness, peaks, noise floor and file format measured against ACX’s requirements
+- Export: One MP3 per chapter in ACX’s format, or one M4B with chapter marks; WAV or FLAC masters
+- Voices: 26 built-in English computer voices that run offline; optional voice services under your own account
+- Actors: Each invited actor records in a free copy that shows only their lines
+- Trial: 7 days, no card, everything except exporting the finished audiobook
+- Price: $12 a month or $90 a year during the open beta, kept while you stay subscribed; regular price $29 a month or $290 a year; one person on three computers
+- Privacy: Your manuscript and recordings stay on your computer unless you turn on Nebula, the optional encrypted cloud storage
+- Maker: Jathtech Digital Consulting LLC; built by the author J.T. Michaelstar
+- Contact: narrator@stellaurator.com
+
+## Pages
+
+- [What is StellAurator?](https://stellaurator.com/about.html): the definition, the facts at a glance, what it does and does not do
+- [Questions and answers](https://stellaurator.com/faq.html): 129 questions answered (requirements, trial, prices, recording, ACX, voices, privacy)
+- [The studio](https://stellaurator.com/studio.html): every part of StellAurator, explained
+- [For narrators](https://stellaurator.com/narrators.html): recording sessions organized around the script
+- [Voices and services](https://stellaurator.com/voices.html): the built-in voices and the optional outside services
+- [Pricing](https://stellaurator.com/pricing.html): plans, the free trial and Nebula cloud storage
+- [Download StellAurator for Windows](https://stellaurator.com/download.html): the current version, what you need before you install, and the release notes of every version
+- [Demos](https://stellaurator.com/demos.html): a short demo and eight demonstration videos
+- [Audiobook software compared](https://stellaurator.com/compare.html): StellAurator beside general audio editors, spoken-word editors, hiring a narrator and text to speech
+- [Audiobook production glossary](https://stellaurator.com/glossary.html): the words of audiobook recording, editing and delivery
+
+## Guides
+
+- [How to make an audiobook](https://stellaurator.com/guides/make-an-audiobook.html)
+- [ACX audio requirements, explained](https://stellaurator.com/guides/acx-requirements.html)
+- [Microphones for audiobooks](https://stellaurator.com/guides/microphones.html)
+- [Audio interfaces](https://stellaurator.com/guides/audio-interfaces.html)
+- [Headphones](https://stellaurator.com/guides/headphones.html)
+- [Room treatment](https://stellaurator.com/guides/room-treatment.html)
+
+## Optional
+
+- [Full text of the questions and answers](https://stellaurator.com/llms-full.txt)
+- [License agreement, subscription terms and privacy policy](https://stellaurator.com/terms.html)
+- [Contact](https://stellaurator.com/contact.html)
