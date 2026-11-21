@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator - your account</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="../theme.css">
+<!--
+  The face of account.stellaurator.com/account (site/wix/README.md section 17). The Wix page
+  (site/wix/pages/account.js) knows who is signed in and asks backend/account.web.js for the account;
+  this page shows it, in the website's own design.
+    this page -> Wix   { t:'ready' } { t:'cancel' } { t:'billing' } { t:'switch', period }
+                       { t:'choosePlan' } { t:'download' } { t:'removeComputer', seatId }
+                       { t:'rate', stars, comment, quoteOk } { t:'send', text } { t:'checkMessages' }
+                       { t:'dataRequest', kind } { t:'emailUpdates', on } { t:'signout' }
+    Wix -> this page   { t:'state', view:'loading'|'ready'|'error', account, busy, notice }
+
+  Everything that cannot be taken back (cancel, remove a computer, the two data requests) asks for a
+  second press here before anything is sent; the backend checks the member and the seat whatever is sent.
+
+  ?demo=trial|alpha|monthly|canceled|none shows the faces without Wix around it, for screenshots.
+-->
+<link rel="stylesheet" href="embed.css">
+<style>
+  /* An account console, not a scrolling page (owner, 2026-10-13: "Should we be putting everything on
+     one page like that? ... use professional account layout"). A rail on the left holds who is signed in
+     and the sections, grouped; the pane on the right shows ONE section at a time, chosen in the rail or
+     by the address's #fragment. Below 760 px the rail becomes a strip of tabs above the pane. */
+  .acct.account { display: block; max-width: 980px; min-height: 100vh; padding: 0; margin: 0 auto; }
+  .console { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100vh; }
+
+  /* ---- the rail ---- */
+  .rail { position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 18px; padding: 22px 14px 18px;
+    background: var(--velvet); border-right: 1px solid rgba(var(--silver), .10); }
+  .rail .brand2 img { width: 34px; height: 34px; }
+  .rail .brand2 a { font-size: 11px; letter-spacing: .3em; }
+  .member { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; align-items: center;
+    padding: 12px 10px; border: 1px solid rgba(var(--silver), .12); border-radius: var(--r); background: rgba(255, 255, 255, .02); }
+  .initials { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+    border: 1px solid rgba(var(--glow), .6); color: var(--gilt); font-family: var(--font-caps); font-size: 13px; letter-spacing: .06em; }
+  .member > div b { display: block; font-size: 14px; font-weight: 600; color: var(--ivory); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .member > div span { display: block; font-size: 12px; color: var(--ash); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav { display: grid; gap: 14px; }
+  .nav .grp { display: grid; gap: 1px; }
+  .nav .grp > p { margin: 0 0 4px; padding: 0 10px; font-family: var(--font-caps); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--pewter); }
+  .nav a { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 10px; border-radius: var(--r);
+    font-size: 13.5px; line-height: 1.3; color: var(--sterling); text-decoration: none; }
+  .nav a:hover { color: var(--ivory); background: rgba(var(--silver), .05); text-decoration: none; }
+  .nav a[aria-current="page"] { color: var(--ivory); background: rgba(var(--glow), .09); box-shadow: inset 2px 0 0 var(--gilt); }
+  .nav a:focus-visible, .tile:focus-visible, .railfoot a:focus-visible, .railfoot button:focus-visible { outline: 2px solid var(--candle); outline-offset: 1px; }
+  .badge { min-width: 18px; padding: 1px 6px; border-radius: 9px; box-sizing: border-box; text-align: center;
+    font-size: 11px; font-variant-numeric: tabular-nums; color: #1A1406; background: var(--gilt); }
+  .railfoot { margin-top: auto; display: grid; gap: 6px; padding: 12px 10px 0; border-top: 1px solid rgba(var(--silver), .10); }
+  .railfoot a, .railfoot button { justify-self: start; background: none; border: 0; padding: 0; cursor: pointer; font: 400 12.5px/1.4 var(--font-body); color: var(--ash); }
+  .railfoot a:hover, .railfoot button:hover { color: var(--gilt); }
+
+  /* ---- the pane ---- */
+  .pane { min-width: 0; padding: 30px 34px 40px; box-sizing: border-box; }
+  .vhead { margin: 0 0 22px; padding-bottom: 18px; border-bottom: 1px solid rgba(var(--silver), .10); }
+  .vhead .eyebrow { margin: 0 0 8px; font-size: 10.5px; }
+  .vhead h1 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 34px; line-height: 1.1; color: var(--ivory); text-wrap: balance; }
+  .vhead h1:focus { outline: none; }
+  .vhead p { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--ash); max-width: 62ch; }
+  .view { display: grid; gap: 30px; }
+  .sect { min-width: 0; }
+  .view.single .sect > h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .view .sect + .sect { padding-top: 26px; border-top: 1px solid rgba(var(--silver), .10); }
+  .sect h2 { margin: 0 0 12px; font-family: var(--font-display); font-weight: 600; font-size: 23px; line-height: 1.15; color: var(--ivory); }
+  .sect p { margin: 0 0 10px; font-size: 15px; line-height: 1.55; color: var(--ash); max-width: 66ch; }
+  .sect p b, .sect td b { color: var(--ivory); font-weight: 600; }
+
+  /* settings rows: a label and its value, ruled like a statement */
+  .facts { display: grid; grid-template-columns: 170px minmax(0, 1fr); margin: 0 0 8px; font-size: 15px; border-top: 1px solid rgba(var(--silver), .10); }
+  .facts dt, .facts dd { padding: 11px 0; border-bottom: 1px solid rgba(var(--silver), .10); }
+  .facts dt { color: var(--pewter); }
+  .facts dd { margin: 0; color: var(--ivory); overflow-wrap: anywhere; }
+
+  /* the overview: the four things people come to check, then what to do next */
+  .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .tile { display: grid; align-content: start; gap: 4px; padding: 14px 14px 13px; text-align: left; cursor: pointer; color: inherit; font: inherit;
+    border: 1px solid rgba(var(--silver), .14); border-radius: var(--r); background: rgba(255, 255, 255, .02); transition: border-color .2s, background .2s; }
+  .tile:hover { border-color: rgba(var(--glow), .55); background: rgba(var(--glow), .04); }
+  .tile .k { font-family: var(--font-caps); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--pewter); }
+  .tile .v { font-family: var(--font-display); font-size: 22px; line-height: 1.15; color: var(--ivory); overflow-wrap: anywhere; }
+  .tile .s { font-size: 12.5px; line-height: 1.4; color: var(--ash); }
+  .tile .go { margin-top: 6px; font-size: 12.5px; color: var(--gilt); }
+  .callout { margin: 0; padding: 12px 14px; border: 1px solid rgba(255, 179, 189, .45); border-radius: var(--r); background: rgba(255, 122, 138, .06); font-size: 14px; line-height: 1.5; color: #FFD3D9; }
+  .latest { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .latest p { margin: 0; }
+
+  .plantitle { margin: 0 0 6px; font-family: var(--font-caps); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--gilt); }
+  .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .acts .btn { padding: 11px 18px; font-size: 11.5px; }
+  .btn.is-armed { border-color: #FF7A8A; color: #FFD3D9; box-shadow: 0 0 22px rgba(255, 122, 138, .25); }
+  .confirm { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: #FFB3BD; }
+  .note { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--ash); }
+  .note[data-tone="error"] { color: #FF7A8A; }
+  .note[data-tone="ok"] { color: #7BD48B; }
+  table.rows { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  table.rows th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: .04em; color: var(--pewter); padding: 6px 10px 8px 0; border-bottom: 1px solid rgba(var(--silver), .14); }
+  table.rows td { padding: 10px 10px 10px 0; color: var(--ash); border-bottom: 1px solid rgba(var(--silver), .08); vertical-align: middle; overflow-wrap: anywhere; }
+  .rows .btn { padding: 8px 12px; font-size: 10.5px; }
+  .bar { height: 8px; border-radius: 4px; background: rgba(var(--silver), .10); overflow: hidden; margin: 6px 0 10px; }
+  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--bullion), var(--gilt)); }
+  .checks { list-style: none; padding: 0; margin: 0 0 10px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; }
+  .checks li { display: flex; gap: 10px; font-size: 14.5px; line-height: 1.45; }
+  .checks li::before { content: '\2726'; color: var(--gilt); }
+  .checks a { color: var(--ivory); }
+  fieldset.stars { border: 0; padding: 0; margin: 0 0 10px; display: flex; gap: 4px; }
+  fieldset.stars legend { padding: 0; margin: 0 0 6px; font-size: 14px; color: var(--ash); }
+  .stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .stars label { font-size: 32px; line-height: 1; color: rgba(var(--silver), .35); cursor: pointer; padding: 2px; }
+  .stars label.on { color: var(--gilt); text-shadow: 0 0 14px rgba(var(--glow), .45); }
+  .stars input:focus-visible + label { outline: 2px solid var(--candle); outline-offset: 2px; }
+  textarea { font: 400 15px/1.5 var(--font-body); color: var(--ivory); background: rgba(255, 255, 255, .035); border: 1px solid rgba(var(--silver), .28); border-radius: var(--r); padding: 10px 12px; width: 100%; box-sizing: border-box; resize: vertical; }
+  textarea:focus { outline: none; border-color: var(--gilt); box-shadow: 0 0 18px rgba(var(--glow), .2); }
+  .tick { display: flex; gap: 9px; align-items: baseline; margin: 10px 0 0; font-size: 14px; color: var(--ash); }
+  .tick input { accent-color: var(--gilt); }
+  .count { font-size: 12px; color: var(--pewter); text-align: right; margin: 4px 0 0; }
+  .thread { display: grid; gap: 10px; max-height: 360px; overflow-y: auto; margin: 0 0 12px; padding: 14px; border: 1px solid rgba(var(--silver), .10); border-radius: var(--r); background: rgba(255, 255, 255, .015); }
+  .msg { max-width: 82%; padding: 10px 13px; border-radius: 3px; font-size: 14.5px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .msg.you { justify-self: end; background: rgba(var(--glow), .08); border: 1px solid rgba(var(--glow), .35); color: var(--ivory); }
+  .msg.them { justify-self: start; background: rgba(var(--silver), .05); border: 1px solid rgba(var(--silver), .2); color: var(--ivory); }
+  .msg small { display: block; margin-top: 5px; font-size: 11.5px; color: var(--pewter); }
+  .empty { font-size: 14px; color: var(--pewter); }
+  .sect p.asterisk { margin: -4px 0 14px; font-family: var(--font-display); font-size: 22px; line-height: 1.3; color: var(--ivory); }
+  .reflink { font: 400 15px/1.5 var(--font-body); color: var(--ivory); background: rgba(255, 255, 255, .035); border: 1px solid rgba(var(--silver), .28); border-radius: var(--r); padding: 10px 12px; width: 100%; box-sizing: border-box; }
+  .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .wait { padding: 30px 0; }
+
+  @media (max-width: 760px) {
+    .console { grid-template-columns: 1fr; }
+    .rail { position: static; height: auto; gap: 12px; padding: 14px 14px 10px; border-right: 0; border-bottom: 1px solid rgba(var(--silver), .10); }
+    .nav { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 4px; }
+    .nav .grp { display: flex; gap: 4px; }
+    .nav .grp > p, .railfoot { display: none; }
+    .nav a { white-space: nowrap; border: 1px solid rgba(var(--silver), .14); }
+    .pane { padding: 20px 14px 30px; }
+    .tiles, .checks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .facts { grid-template-columns: 1fr; } .facts dt { padding-bottom: 0; border-bottom: 0; }
+    .msg { max-width: 100%; } table.rows th:nth-child(4), table.rows td:nth-child(4) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tile, .btn { transition: none; } }
+</style>
+</head>
+<body>
+<div class="acct account" id="app" aria-live="polite"></div>
+
+<script>
+(function () {
+  var SITE = 'https://stellaurator.com/';
+  var ACCOUNT = 'https://account.stellaurator.com';
+  var inWix = window.parent !== window;
+  var params = new URLSearchParams(location.search);
+  var state = { view: 'loading', account: null, busy: '', notice: null };
+
+  // Drafts survive a re-render; the second press of a destructive button is remembered here.
+  var drafts = { stars: 0, comment: '', quoteOk: false, message: '', editingRating: false };
+  var armed = '';
+  var armTimer = null;
+
+  var COMMENT_MAX = 1000;
+  var MESSAGE_MAX = 4000;
+
+  function esc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function send(msg) { if (inWix) window.parent.postMessage(msg, '*'); else demoAnswer(msg); }
+  function dayText(v) {
+    var t = Date.parse(v || '');
+    return isFinite(t) ? new Date(t).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '';
+  }
+  function timeText(v) {
+    var t = Date.parse(v || '');
+    return isFinite(t) ? new Date(t).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
+  }
+  function noteFor(area) {
+    var n = state.notice;
+    if (!n || n.area !== area) return '';
+    return '<p class="note" role="status" data-tone="' + esc(n.tone) + '">' + esc(n.text) + '</p>';
+  }
+  function busy(area) { return state.busy === area ? ' disabled aria-busy="true"' : ''; }
+  function arm(key) {
+    armed = key;
+    clearTimeout(armTimer);
+    armTimer = setTimeout(function () { armed = ''; render(); }, 10000);
+  }
+
+  function panel(id, title, body) {
+    return '<section class="sect" id="' + id + '" aria-labelledby="' + id + '-h"><h2 id="' + id + '-h">' + esc(title) + '</h2>' + body + '</section>';
+  }
+
+  // ---- the sections, in order --------------------------------------------------------------
+  function accountPanel(a) {
+    return panel('account', 'Your account',
+      '<dl class="facts"><dt>Email</dt><dd data-email>' + esc(a.email) + '</dd>'
+      + (a.name ? '<dt>Name</dt><dd>' + esc(a.name) + '</dd>' : '')
+      + (a.memberSince ? '<dt>Member since</dt><dd>' + esc(dayText(a.memberSince)) + '</dd>' : '')
+      + '<dt>Email confirmed</dt><dd>' + (a.emailConfirmed ? 'Yes' : 'Not yet') + '</dd></dl>'
+      + (a.emailConfirmed ? '' : '<p data-unconfirmed>' + esc(a.unconfirmedLine) + '</p>'));
+  }
+
+  function planPanel(a) {
+    var p = a.plan;
+    if (!p) return panel('plan', 'Your plan', '<p class="note" data-tone="error">Your plan could not be read just now. Reload the page in a minute.</p>');
+    var buttons = (p.actions || []).map(function (act) {
+      if (act.id === 'cancel') {
+        var on = armed === 'cancel';
+        return '<button class="btn btn-line' + (on ? ' is-armed' : '') + '" data-act="cancel"' + busy('plan') + '>' + (on ? 'Press again to cancel my plan' : esc(act.label)) + '</button>';
+      }
+      var gold = act.id === 'choosePlan' || act.id === 'download' && !(p.actions || []).some(function (x) { return x.id === 'choosePlan'; });
+      return '<button class="btn ' + (gold ? 'btn-gold' : 'btn-line') + '" data-act="' + esc(act.id) + '"' + busy('plan') + '>' + esc(act.label) + '</button>';
+    }).join('');
+    return panel('plan', 'Your plan',
+      '<p class="plantitle" data-plan-kind="' + esc(p.kind) + '">' + esc(p.title) + '</p>'
+      + '<p>' + esc(p.line) + '</p>'
+      + '<div class="acts">' + buttons + '</div>'
+      + (armed === 'cancel' && p.cancelConfirm ? '<p class="confirm" role="alert">' + esc(p.cancelConfirm) + '</p>' : '')
+      + noteFor('plan'));
+  }
+
+  function alphaPanel(a) {
+    var g = a.alpha;
+    if (!g) return '';
+    // the panel id stays 'alpha' (the protocol); the words say beta (decree 185)
+    return panel('alpha', 'Beta progress',
+      '<p><b>' + esc(g.count) + '</b></p>'
+      + '<div class="bar" role="progressbar" aria-label="Words recorded toward the free year" aria-valuemin="0" aria-valuemax="' + esc(g.goal) + '" aria-valuenow="' + esc(Math.min(g.words, g.goal)) + '"><span style="width:' + esc(g.pct) + '%"></span></div>'
+      + '<p>' + esc(g.line) + '</p>');
+  }
+
+  function computersPanel(a) {
+    var c = a.computers;
+    if (!c) return panel('computers', 'Your computers', '<p class="note" data-tone="error">Your computers could not be read just now. Reload the page in a minute.</p>');
+    var rows = c.list.map(function (s) {
+      var key = 'remove:' + s.id;
+      var on = armed === key;
+      return '<tr><td><b>' + esc(s.name) + '</b></td><td>' + esc(s.lastSeenText || 'Not yet') + '</td><td>' + esc(s.appVersion || '') + '</td>'
+        + '<td><button class="btn btn-line' + (on ? ' is-armed' : '') + '" data-act="remove" data-seat="' + esc(s.id) + '"' + busy('computers') + '>' + (on ? 'Press again to remove' : 'Remove this computer') + '</button></td></tr>';
+    }).join('');
+    var confirm = armed.indexOf('remove:') === 0 ? '<p class="confirm" role="alert">' + esc('Press again to remove it. The app on that computer signs out the next time it checks in, and its place is free at once.') + '</p>' : '';
+    return panel('computers', 'Your computers',
+      '<p data-seat-count>' + esc(c.line) + '. Your account works on up to three computers at once.</p>'
+      + (c.list.length
+        ? '<table class="rows"><thead><tr><th>Computer</th><th>Last seen</th><th>App version</th><th><span class="sr">Action</span></th></tr></thead><tbody>' + rows + '</tbody></table>'
+        : '<p class="empty">No computer is signed in yet. Download the app and sign in with this email address.</p>')
+      + confirm + noteFor('computers'));
+  }
+
+  function startedPanel(a) {
+    var l = a.latest || {};
+    var items = (a.gettingStarted || []).map(function (s) { return '<li><a href="' + esc(s.href) + '" target="_top">' + esc(s.label) + '</a></li>'; }).join('');
+    return panel('started', 'Getting started',
+      '<ul class="checks">' + items + '</ul>'
+      + (l.line ? '<p>' + esc(l.line) + ' <a href="' + esc(l.url) + '" target="_blank" rel="noopener">What&rsquo;s new</a></p>' : ''));
+  }
+
+  function billingPanel(a) {
+    var b = a.billing;
+    if (!b) return panel('billing', 'Billing history', '<p class="note" data-tone="error">Your billing history could not be read just now. Reload the page in a minute.</p>');
+    var hasManage = a.plan && (a.plan.actions || []).some(function (x) { return x.id === 'manageBilling'; });
+    return panel('billing', 'Billing history',
+      (b.length
+        ? '<table class="rows"><thead><tr><th>Date</th><th>Plan</th><th>Amount</th><th>Status</th></tr></thead><tbody>'
+          + b.map(function (r) { return '<tr><td>' + esc(r.date) + '</td><td><b>' + esc(r.plan) + '</b></td><td>' + esc(r.amount) + '</td><td>' + esc(r.status) + '</td></tr>'; }).join('')
+          + '</tbody></table>'
+        : '<p class="empty">No plans or payments yet.</p>')
+      + (hasManage ? '<p class="note">Receipts and the card on file for a card subscription are under Manage billing in Your plan.</p>' : ''));
+  }
+
+  function invitesPanel(a) {
+    var v = a.invites;
+    if (!v) return panel('invites', 'People you invited', '<p class="note" data-tone="error">Your invitations could not be read just now. Reload the page in a minute.</p>');
+    if (!v.length) return panel('invites', 'People you invited', '<p class="empty">You have not invited a narrator or an actor yet. Invitations are sent from the app.</p>');
+    return panel('invites', 'People you invited',
+      '<p>The narrators and actors you invited from the app. To send an invitation again, use the app.</p>'
+      + '<table class="rows"><thead><tr><th>Performer</th><th>Book</th><th>Invited</th><th>Status</th></tr></thead><tbody>'
+      + v.map(function (r) { return '<tr><td><b>' + esc(r.email) + '</b></td><td>' + esc(r.book) + '</td><td>' + esc(r.date) + '</td><td>' + esc(r.status) + '</td></tr>'; }).join('')
+      + '</tbody></table>');
+  }
+
+  // README section 18: the member's referral link, Copy the link, the rule, and the referrals they made.
+  function referPanel(a) {
+    var r = a.referral;
+    if (!r) return panel('refer', 'Refer an author', '<p class="note" data-tone="error">Your referral link could not be read just now. Reload the page in a minute.</p>');
+    var list = r.list || [];
+    return panel('refer', 'Refer an author',
+      '<p data-referral-rule>' + esc(r.rule) + '</p>'
+      + '<label for="refLink" class="sr">Your referral link</label>'
+      + '<input id="refLink" class="reflink" type="text" readonly value="' + esc(r.link) + '" data-referral-link>'
+      + '<div class="acts"><button class="btn btn-gold" data-act="copyRef">Copy the link</button></div>'
+      + '<p class="note">' + esc(r.cap) + '</p>'
+      + noteFor('refer')
+      + (list.length
+        ? '<table class="rows"><thead><tr><th>Author</th><th>Status</th><th>Date</th></tr></thead><tbody>'
+          + list.map(function (x) { return '<tr><td><b>' + esc(x.email) + '</b></td><td>' + esc(x.status) + '</td><td>' + esc(x.date) + '</td></tr>'; }).join('')
+          + '</tbody></table>'
+        : '<p class="empty">Nobody has signed up through your link yet.</p>'));
+  }
+
+  // README section 18: email updates, one box, unticked unless Wix says this address is subscribed.
+  function emailPanel(a) {
+    var u = a.emailUpdates || {};
+    return panel('email', 'Email updates',
+      '<label class="tick"><input type="checkbox" id="emailUpdates" data-email-updates' + (u.on === true ? ' checked' : '') + (state.busy === 'email' ? ' disabled' : '') + '> ' + esc(u.label || 'Email me when there is a new version or news about StellAurator') + '</label>'
+      + '<p class="note">' + esc(u.hint || '') + '</p>'
+      + (u.unreadable ? '<p class="note" data-tone="error">Your choice could not be read just now, so the box shows unticked. Reload the page in a minute.</p>' : '')
+      + noteFor('email'));
+  }
+
+  // README section 18: the bug reports this member sent from the app, and the credits they earned.
+  function bugsPanel(a) {
+    var b = a.bugReports;
+    if (!b) return panel('bugs', 'Your bug reports', '<p class="note" data-tone="error">Your bug reports could not be read just now. Reload the page in a minute.</p>');
+    var list = b.list || [];
+    return panel('bugs', 'Your bug reports',
+      '<p class="plantitle" data-credits>' + esc(b.creditsText) + '</p>'
+      + '<p data-credits-line>' + esc(b.creditsLine) + '</p>'
+      + '<p>' + esc(b.line) + '</p>'
+      + (list.length
+        ? '<table class="rows"><thead><tr><th>Sent</th><th>Report</th><th>Status</th></tr></thead><tbody>'
+          + list.map(function (x) {
+            return '<tr><td>' + esc(x.date) + '</td><td>' + esc(x.excerpt) + '</td><td><b>' + esc(x.status) + '</b>'
+              + (x.ownerNote ? '<br><span class="note">' + esc(x.ownerNote) + '</span>' : '') + '</td></tr>';
+          }).join('')
+          + '</tbody></table>'
+        : ''));
+  }
+
+  function dataPanel(a) {
+    var d = a.dataRequests || {};
+    function btn(kind) {
+      var r = d[kind] || {};
+      var on = armed === 'data:' + kind;
+      return '<button class="btn btn-line' + (on ? ' is-armed' : '') + '" data-act="data" data-kind="' + kind + '"' + busy('data') + '>' + (on ? 'Press again to send the request' : esc(r.label)) + '</button>';
+    }
+    var on = armed.indexOf('data:') === 0 ? d[armed.slice(5)] : null;
+    return panel('data', 'Your data',
+      '<p>You can ask for a copy of what StellAurator holds about you, or ask us to delete your account. Each button sends a message to StellAurator, which answers by email within 30 days. Nothing is deleted by this page.</p>'
+      + '<div class="acts">' + btn('copy') + btn('delete') + '</div>'
+      + (on ? '<p class="confirm" role="alert">' + esc(on.confirm) + '</p>' : '')
+      + noteFor('data'));
+  }
+
+  // README section 18, the owner's asterisk: "we're in alpha, rate how we're doing." (The open beta since
+  // 2026-10-22, decree 185: the asterisk says so.)
+  var RATE_TITLE = 'Rate how we\'re doing*';
+  var RATE_ASTERISK = '<p class="asterisk" data-rate-asterisk>*We\'re in open beta. Tell us how it\'s going so far.</p>';
+  function ratePanel(a) {
+    var r = a.rating;
+    if (r && !drafts.editingRating) {
+      return panel('rate', RATE_TITLE, RATE_ASTERISK +
+        '<p data-saved-rating>Your rating: <b>' + esc(r.stars) + (r.stars === 1 ? ' star' : ' stars') + '</b>' + (r.at ? ', saved ' + esc(dayText(r.at)) : '') + '.</p>'
+        + (r.comment ? '<p>&ldquo;' + esc(r.comment) + '&rdquo;</p>' : '')
+        + '<p class="note">' + (r.quoteOk ? 'StellAurator may show it on its website with your first name.' : 'It stays private: it is not shown on the website.') + '</p>'
+        + '<div class="acts"><button class="btn btn-line" data-act="changeRating">Change</button></div>'
+        + noteFor('rating'));
+    }
+    var stars = '';
+    for (var i = 1; i <= 5; i += 1) {
+      stars += '<input type="radio" name="stars" id="star' + i + '" value="' + i + '"' + (drafts.stars === i ? ' checked' : '') + '>'
+        + '<label for="star' + i + '" class="' + (i <= drafts.stars ? 'on' : '') + '" title="' + i + (i === 1 ? ' star' : ' stars') + '"><span aria-hidden="true">&#9733;</span><span class="sr">' + i + (i === 1 ? ' star' : ' stars') + '</span></label>';
+    }
+    return panel('rate', RATE_TITLE, RATE_ASTERISK +
+      '<fieldset class="stars" role="radiogroup" aria-label="Stars, from one to five"><legend>How many stars do you give StellAurator?</legend>' + stars + '</fieldset>'
+      + '<label for="comment" class="sr">A comment (optional)</label>'
+      + '<textarea id="comment" rows="3" maxlength="' + COMMENT_MAX + '" placeholder="A comment, if you like (optional)">' + esc(drafts.comment) + '</textarea>'
+      + '<p class="count" data-count="comment">' + drafts.comment.length + ' of ' + COMMENT_MAX.toLocaleString('en-US') + '</p>'
+      + '<label class="tick"><input type="checkbox" id="quoteOk"' + (drafts.quoteOk ? ' checked' : '') + '> StellAurator may show this rating and comment on its website with my first name</label>'
+      + '<div class="acts"><button class="btn btn-gold" data-act="rate"' + busy('rating') + '>Save my rating</button>'
+      + (r ? '<button class="btn btn-line" data-act="cancelRating">Keep my rating as it is</button>' : '') + '</div>'
+      + noteFor('rating'));
+  }
+
+  function messagesPanel(a) {
+    var t = a.thread;
+    var body;
+    if (!t) body = '<p class="note" data-tone="error">Your messages could not be read just now. Press Check for replies in a minute.</p>';
+    else if (!t.length) body = '<p class="empty">No messages yet. Write to StellAurator here: a question, a problem, an idea.</p>';
+    else {
+      body = '<div class="thread" id="thread" tabindex="0" aria-label="Your messages with StellAurator">' + t.map(function (m) {
+        return '<div class="msg ' + (m.from === 'you' ? 'you' : 'them') + '">' + esc(m.text) + '<small>' + (m.from === 'you' ? 'You' : 'StellAurator') + (m.at ? ', ' + esc(timeText(m.at)) : '') + '</small></div>';
+      }).join('') + '</div>';
+    }
+    return panel('messages', 'Messages',
+      '<p>' + esc('Replies from StellAurator appear here and by email.') + '</p>'
+      + body
+      + '<label for="message" class="sr">Your message</label>'
+      + '<textarea id="message" rows="4" maxlength="' + MESSAGE_MAX + '" placeholder="Write to StellAurator">' + esc(drafts.message) + '</textarea>'
+      + '<p class="count" data-count="message">' + drafts.message.length + ' of ' + MESSAGE_MAX.toLocaleString('en-US') + '</p>'
+      + '<div class="acts"><button class="btn btn-gold" data-act="send"' + busy('messages') + '>Send</button>'
+      + '<button class="btn btn-line" data-act="check"' + busy('messages') + '>Check for replies</button></div>'
+      + noteFor('messages'));
+  }
+
+  // ---- the console: the rail, and the one section on screen -----------------------------------
+  // Every id here is also a #fragment, so a link can open a section: /account#messages.
+  var VIEWS = [
+    { id: 'overview', label: 'Overview', group: '' },
+    { id: 'plan', label: 'Plan & billing', group: '' },
+    { id: 'computers', label: 'Computers', group: '' },
+    { id: 'messages', label: 'Messages', group: '' },
+    { id: 'refer', label: 'Refer an author', group: 'Rewards', lede: 'Give another author a free month, and get one yourself.' },
+    { id: 'alpha', label: 'Beta progress', group: 'Rewards', only: function (a) { return !!a.alpha; } },
+    { id: 'bugs', label: 'Bug reports', group: 'Rewards' },
+    { id: 'books', label: 'My books', group: 'Rewards', href: ACCOUNT + '/my-books' },
+    { id: 'rate', label: RATE_TITLE, group: 'Feedback' },
+    { id: 'profile', label: 'Profile & email', group: 'Settings', lede: 'The details on your account, and the email StellAurator sends you.' },
+    { id: 'invites', label: 'People you invited', group: 'Settings' },
+    { id: 'data', label: 'Privacy & data', group: 'Settings' },
+  ];
+  // The fragments of the old one-page layout still land on their section.
+  var ALIAS = { account: 'profile', email: 'profile', billing: 'plan', started: 'overview' };
+
+  function viewsFor(a) { return VIEWS.filter(function (v) { return !v.only || v.only(a); }); }
+  function currentView(a) {
+    var want = String(location.hash || '').replace(/^#/, '');
+    want = ALIAS[want] || want;
+    return viewsFor(a).some(function (v) { return v.id === want && !v.href; }) ? want : 'overview';
+  }
+  function firstName(a) { return String((a && a.name) || '').trim().split(/\s+/)[0] || ''; }
+  function initialsOf(a) {
+    var words = String(a.name || '').trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return String(a.email || '?').charAt(0).toUpperCase();
+    return (words[0].charAt(0) + (words.length > 1 ? words[words.length - 1].charAt(0) : '')).toUpperCase();
+  }
+
+  function tile(go, k, v, s, more) {
+    return '<button class="tile" type="button" data-go="' + go + '"><span class="k">' + esc(k) + '</span><span class="v">' + esc(v) + '</span>'
+      + (s ? '<span class="s">' + esc(s) + '</span>' : '') + '<span class="go">' + esc(more) + ' &rarr;</span></button>';
+  }
+  // The overview: the four things people come to check, each opening its section.
+  function overviewPanel(a) {
+    var p = a.plan || {};
+    var c = a.computers || {};
+    var t = a.thread || [];
+    var b = a.bugReports || {};
+    var last = t.length ? t[t.length - 1] : null;
+    return panel('overview', 'At a glance',
+      (a.emailConfirmed ? '' : '<p class="callout" data-unconfirmed>' + esc(a.unconfirmedLine) + '</p>')
+      + '<div class="tiles">'
+      + tile('plan', 'Plan', p.title || 'Not read just now', '', 'Plan & billing')
+      + tile('computers', 'Computers', (c.count || 0) + ' of ' + (c.max || 3), 'signed in to the app', 'Your computers')
+      + tile('messages', 'Messages', t.length ? t.length + (t.length === 1 ? ' message' : ' messages') : 'None yet',
+        last ? (last.from === 'you' ? 'You wrote ' : 'StellAurator wrote ') + timeText(last.at) : 'Write to StellAurator', 'Open messages')
+      + tile('bugs', 'Credits', String(b.credits || 0), 'one for each confirmed bug report', 'Bug reports')
+      + '</div>');
+  }
+
+  function sectionsOf(id, a) {
+    if (id === 'overview') return [overviewPanel(a), alphaPanel(a), startedPanel(a)];
+    if (id === 'plan') return [planPanel(a), billingPanel(a)];
+    if (id === 'profile') return [accountPanel(a), emailPanel(a)];
+    var one = { computers: computersPanel, messages: messagesPanel, refer: referPanel, alpha: alphaPanel, bugs: bugsPanel, rate: ratePanel, invites: invitesPanel, data: dataPanel }[id];
+    return one ? [one(a)] : [];
+  }
+
+  function railHtml(a, current) {
+    var brand = '<div class="brand2"><a href="' + SITE + '" target="_top" aria-label="StellAurator website"><img src="../assets/logo.png" alt=""></a><a href="' + SITE + '" target="_top">STELLAURATOR</a></div>';
+    var who = a ? '<div class="member"><span class="initials" aria-hidden="true">' + esc(initialsOf(a)) + '</span><div><b>' + esc(a.name || a.email) + '</b><span>' + esc(a.email) + '</span></div></div>' : '';
+    var groups = [];
+    (a ? viewsFor(a) : []).forEach(function (v) {
+      var g = groups[groups.length - 1];
+      if (!g || g.name !== v.group) { g = { name: v.group, items: [] }; groups.push(g); }
+      g.items.push(v);
+    });
+    var credits = a && a.bugReports && a.bugReports.credits ? a.bugReports.credits : 0;
+    var nav = groups.length ? '<nav class="nav" aria-label="Account sections">' + groups.map(function (g) {
+      return '<div class="grp">' + (g.name ? '<p>' + esc(g.name) + '</p>' : '') + g.items.map(function (v) {
+        if (v.href) return '<a href="' + esc(v.href) + '" target="_top"><span>' + esc(v.label) + '</span></a>';
+        var badge = v.id === 'bugs' && credits ? '<span class="badge" title="' + esc(credits) + (credits === 1 ? ' credit' : ' credits') + '">' + esc(credits) + '</span>' : '';
+        return '<a href="#' + v.id + '" data-go="' + v.id + '"' + (v.id === current ? ' aria-current="page"' : '') + '><span>' + esc(v.label) + '</span>' + badge + '</a>';
+      }).join('') + '</div>';
+    }).join('') + '</nav>' : '';
+    var foot = '<div class="railfoot">'
+      + (a ? '<button type="button" data-act="download">Download the app</button>' : '')
+      + '<a href="' + ACCOUNT + '/purchase" target="_top">Plans</a>'
+      + '<a href="' + SITE + 'contact.html" target="_top">Help</a>'
+      + '<a href="' + SITE + 'terms.html#privacy" target="_blank" rel="noopener">Privacy</a>'
+      + '<a href="' + SITE + '" target="_top">Back to the website</a>'
+      + (a ? '<button type="button" data-act="signout">Sign out</button>' : '')
+      + '</div>';
+    return '<aside class="rail">' + brand + who + nav + foot + '</aside>';
+  }
+
+  function render() {
+    var el = document.getElementById('app');
+    var a = state.view === 'ready' ? state.account : null;
+    if (!a) {
+      var msg = state.view === 'error'
+        ? '<p class="status" data-tone="error">' + esc((state.notice && state.notice.text) || 'Your account could not be read. Reload the page.') + '</p>'
+        : '<p class="status">One moment, reading your account&hellip;</p>';
+      el.innerHTML = '<div class="console">' + railHtml(null, '') + '<main class="pane"><div class="vhead"><p class="eyebrow">Account</p><h1>Your account</h1></div><div class="wait">' + msg + '</div></main></div>';
+      return;
+    }
+    var current = currentView(a);
+    var v = VIEWS.filter(function (x) { return x.id === current; })[0];
+    var sects = sectionsOf(current, a).filter(Boolean);
+    var title = current === 'overview' ? (firstName(a) ? 'Welcome back, ' + firstName(a) : 'Your account') : v.label;
+    var lede = current === 'overview' ? (a.plan && a.plan.line) : v.lede;
+    var head = '<div class="vhead"><p class="eyebrow">' + esc(v.group || 'Account') + '</p><h1 id="vtitle">' + esc(title) + '</h1>' + (lede ? '<p>' + esc(lede) + '</p>' : '') + '</div>';
+    var keep = document.activeElement && document.activeElement.id;
+    var threadEl = document.getElementById('thread');
+    var atEnd = !threadEl || threadEl.scrollTop + threadEl.clientHeight >= threadEl.scrollHeight - 8;
+    el.innerHTML = '<div class="console">' + railHtml(a, current)
+      + '<main class="pane" aria-labelledby="vtitle">' + head + noteFor('page')
+      + '<div class="view' + (sects.length === 1 ? ' single' : '') + '">' + sects.join('') + '</div></main></div>';
+    var t = document.getElementById('thread');
+    if (t && atEnd) t.scrollTop = t.scrollHeight;   // newest at the bottom, in view
+    if (keep && document.getElementById(keep)) document.getElementById(keep).focus();
+  }
+
+  // The rail and the overview's tiles open a section; Back returns to the one before.
+  function go(id) {
+    if (location.hash !== '#' + id) { try { history.pushState(null, '', '#' + id); } catch (e) { location.hash = id; } }
+    armed = '';
+    state.notice = null;
+    render();
+    window.scrollTo(0, 0);
+    var h = document.getElementById('vtitle');
+    if (h) { h.setAttribute('tabindex', '-1'); try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); } }
+  }
+  window.addEventListener('popstate', function () { render(); });
+  window.addEventListener('hashchange', function () { render(); });
+
+  document.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.id === 'comment') { drafts.comment = t.value; var c = document.querySelector('[data-count="comment"]'); if (c) c.textContent = t.value.length + ' of ' + COMMENT_MAX.toLocaleString('en-US'); }
+    if (t.id === 'message') { drafts.message = t.value; var m = document.querySelector('[data-count="message"]'); if (m) m.textContent = t.value.length + ' of ' + MESSAGE_MAX.toLocaleString('en-US'); }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.name === 'stars') { drafts.stars = Number(t.value); render(); var r = document.getElementById('star' + drafts.stars); if (r) r.focus(); }
+    if (t.id === 'quoteOk') drafts.quoteOk = !!t.checked;
+    if (t.id === 'emailUpdates') { state.notice = null; state.busy = 'email'; send({ t: 'emailUpdates', on: !!t.checked }); if (state.account) state.account.emailUpdates = Object.assign({}, state.account.emailUpdates, { on: !!t.checked }); render(); }
+  });
+
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-go]');
+    if (g) { e.preventDefault(); go(g.getAttribute('data-go')); return; }
+    var b = e.target.closest('button[data-act]');
+    if (!b || b.disabled) return;
+    var act = b.getAttribute('data-act');
+    state.notice = null;
+    if (act === 'cancel') {
+      if (armed !== 'cancel') { arm('cancel'); render(); return; }
+      armed = ''; send({ t: 'cancel' }); render(); return;
+    }
+    if (act === 'remove') {
+      var key = 'remove:' + b.getAttribute('data-seat');
+      if (armed !== key) { arm(key); render(); return; }
+      armed = ''; send({ t: 'removeComputer', seatId: b.getAttribute('data-seat') }); render(); return;
+    }
+    if (act === 'data') {
+      var dk = 'data:' + b.getAttribute('data-kind');
+      if (armed !== dk) { arm(dk); render(); return; }
+      armed = ''; send({ t: 'dataRequest', kind: b.getAttribute('data-kind') }); render(); return;
+    }
+    armed = '';
+    if (act === 'copyRef') {
+      var input = document.getElementById('refLink');
+      var link = input ? input.value : '';
+      var done = function (ok) {
+        state.notice = { area: 'refer', tone: ok ? 'ok' : 'error', text: ok ? 'Copied. Paste it into an email or a message to another author.' : 'Select the link above and copy it.' };
+        render();
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(link).then(function () { done(true); }, function () { if (input) { input.select(); done(document.execCommand && document.execCommand('copy')); } else done(false); }); return; }
+      } catch (err) { /* the older way below */ }
+      if (input) { input.select(); done(!!(document.execCommand && document.execCommand('copy'))); } else done(false);
+      return;
+    }
+    if (act === 'switchYearly') send({ t: 'switch', period: 'yearly' });
+    else if (act === 'switchMonthly') send({ t: 'switch', period: 'monthly' });
+    else if (act === 'manageBilling') send({ t: 'billing' });
+    else if (act === 'choosePlan') { if (inWix) send({ t: 'choosePlan' }); else window.top.location.href = ACCOUNT + '/purchase'; }
+    else if (act === 'download') { if (inWix) send({ t: 'download' }); else window.top.location.href = ACCOUNT + '/downloads'; }
+    else if (act === 'signout') { if (inWix) send({ t: 'signout' }); else window.top.location.href = SITE; }
+    else if (act === 'changeRating') {
+      var r = state.account.rating || {};
+      drafts = Object.assign(drafts, { stars: r.stars || 0, comment: r.comment || '', quoteOk: !!r.quoteOk, editingRating: true });
+    } else if (act === 'cancelRating') drafts.editingRating = false;
+    else if (act === 'rate') {
+      var text = drafts.comment.trim();
+      if (!drafts.stars) state.notice = { area: 'rating', tone: 'error', text: 'Choose from one to five stars, then press Save my rating.' };
+      else if (text.length > COMMENT_MAX) state.notice = { area: 'rating', tone: 'error', text: 'Shorten the comment to 1,000 characters or fewer.' };
+      else { send({ t: 'rate', stars: drafts.stars, comment: text, quoteOk: drafts.quoteOk }); state.busy = 'rating'; }
+    } else if (act === 'send') {
+      var msg = drafts.message.trim();
+      if (!msg) state.notice = { area: 'messages', tone: 'error', text: 'Write a message first, then press Send.' };
+      else if (msg.length > MESSAGE_MAX) state.notice = { area: 'messages', tone: 'error', text: 'Shorten the message to 4,000 characters or fewer, or send it in two parts.' };
+      else { send({ t: 'send', text: msg }); state.busy = 'messages'; }
+    } else if (act === 'check') { send({ t: 'checkMessages' }); state.busy = 'messages'; }
+    render();
+  });
+
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!d || d.t !== 'state') return;
+    var before = state.account;
+    ['view', 'account', 'busy', 'notice'].forEach(function (k) { if (k in d) state[k] = d[k]; });
+    // A saved rating closes the editor; a sent message empties the box.
+    if (d.notice && d.notice.tone === 'ok' && d.notice.area === 'rating') drafts.editingRating = false;
+    if (d.notice && d.notice.tone === 'ok' && d.notice.area === 'messages' && before && state.account && (state.account.thread || []).length > (before.thread || []).length) drafts.message = '';
+    render();
+  });
+
+  // ---- ?demo= faces, for screenshots (no Wix around them) --------------------------------------
+  var DAY = 86400000;
+  var now = Date.now();
+  var at = function (d) { return new Date(now + d * DAY).toISOString(); };
+  function demoAccount(kind) {
+    var plans = {
+      trial: { kind: 'trial', title: 'Seven-day free trial', line: 'Your free trial has 4 days left. It ends on ' + dayText(at(4)) + '. Choose a plan before then to keep recording, generating and exporting.', actions: [{ id: 'choosePlan', label: 'Choose a plan' }, { id: 'download', label: 'Download the app' }] },
+      alpha: { kind: 'alpha', title: 'Beta pass', line: 'You are testing the StellAurator open beta. Your beta pass is free until the beta ends.', actions: [{ id: 'choosePlan', label: 'Choose a plan' }, { id: 'download', label: 'Download the app' }] },
+      monthly: { kind: 'subscription', title: 'Monthly plan', line: 'Your monthly plan is active. It renews on ' + dayText(at(18)) + '.', actions: [{ id: 'switchYearly', label: 'Switch to yearly' }, { id: 'cancel', label: 'Cancel my plan' }, { id: 'download', label: 'Download the app' }], cancelConfirm: 'Press again to cancel. Your plan stops renewing and stays active until ' + dayText(at(18)) + '. Nothing more is charged.' },
+      canceled: { kind: 'canceled', title: 'Canceled plan', line: 'Your monthly plan is canceled and will not renew. It stays active until ' + dayText(at(18)) + '.', actions: [{ id: 'choosePlan', label: 'Choose a plan' }, { id: 'download', label: 'Download the app' }] },
+      none: { kind: 'none', title: 'No plan yet', line: 'There is no plan on this account. Download the app and sign in to start your seven free days, or choose a plan.', actions: [{ id: 'choosePlan', label: 'Choose a plan' }, { id: 'download', label: 'Download the app' }] },
+    };
+    var paid = kind === 'monthly' || kind === 'canceled';
+    return {
+      ok: true, email: 'author@example.com', name: 'Ann Author', memberSince: at(-40), emailConfirmed: kind !== 'none',
+      unconfirmedLine: 'Your email address is not confirmed yet. Open the message Wix sent you and press the link in it, then reload this page. If it is not in your inbox, look in your spam folder.',
+      plan: plans[kind] || plans.none,
+      computers: { line: (kind === 'none' ? 0 : 2) + ' of 3 computers', count: kind === 'none' ? 0 : 2, max: 3, list: kind === 'none' ? [] : [
+        { id: 'seat1', name: 'STUDIO-PC', appVersion: '0.42.3', lastSeenText: dayText(at(0)) },
+        { id: 'seat2', name: 'LAPTOP', appVersion: '0.42.1', lastSeenText: dayText(at(-6)) },
+      ] },
+      latest: { version: '0.42.3', date: dayText(at(-1)), url: 'https://github.com/jathtech/stellaurator-releases/releases/latest', line: 'The newest version is 0.42.3, released ' + dayText(at(-1)) + '.' },
+      rating: kind === 'monthly' ? { stars: 5, comment: 'The suggested repairs saved me a week of editing.', quoteOk: true, at: at(-3) } : null,
+      thread: kind === 'none' ? [] : [
+        { id: 'm1', from: 'you', text: 'Hi! Can I move my plan to a new computer?', at: at(-2) },
+        { id: 'm2', from: 'stellaurator', text: 'Yes. Remove the old computer under Your computers, then sign in on the new one.', at: at(-1.9) },
+      ],
+      alpha: kind === 'alpha' ? { words: 12400, goal: 20000, pct: 62, reached: false, count: '12,400 of 20,000 words', line: 'Record 7,600 more words of your own book during the beta and your first year is free. The app counts the words of the lines you record and sends the count, never the text.' } : null,
+      gettingStarted: [
+        { label: 'Download and install StellAurator', href: ACCOUNT + '/downloads' },
+        { label: 'Sign in to the app with this email address', href: ACCOUNT + '/downloads' },
+        { label: 'Import your manuscript', href: SITE + 'studio.html' },
+        { label: 'Set up your microphone', href: SITE + 'guides/microphones.html' },
+        { label: 'Treat your room', href: SITE + 'guides/room-treatment.html' },
+        { label: 'Check the ACX requirements', href: SITE + 'guides/acx-requirements.html' },
+      ],
+      billing: paid ? [
+        { id: 'o2', date: dayText(at(-12)), plan: 'StellAurator Monthly', amount: '$29.00', status: kind === 'canceled' ? 'Active, paid' : 'Active, paid' },
+        { id: 'o1', date: dayText(at(-40)), plan: 'StellAurator Beta (until the beta ends)', amount: 'Free', status: 'Ended' },
+      ] : kind === 'alpha' ? [{ id: 'o1', date: dayText(at(-10)), plan: 'StellAurator Beta (until the beta ends)', amount: 'Free', status: 'Active' }] : [],
+      bugReports: { credits: paid ? 1 : 0, creditsText: 'Credits: ' + (paid ? 1 : 0), creditsLine: 'You earn one credit for each bug report we confirm. What credits can be used for is coming soon.',
+        line: paid ? 'The bug reports you sent from the app, newest first.' : 'You have not sent a bug report yet. In the app, open Settings and press Report a bug.',
+        list: paid ? [{ id: 'b1', date: dayText(at(-6)), excerpt: 'The waveform stopped scrolling after I split a chapter.', status: 'Fixed.', ownerNote: 'Thank you. Fixed in 0.42.3.' }] : [] },
+      emailUpdates: { on: false, label: 'Email me when there is a new version or news about StellAurator', hint: 'We write only to people who tick this box, and every message has a link to stop them.' },
+      referral: { code: 'K7QM24XD', link: 'https://stellaurator.com/?ref=K7QM24XD', rule: 'When an author signs up through your link and signs in to StellAurator for the first time, you both get a month free.', cap: 'Up to 12 free months a year. A month is added after your current plan or pass ends.',
+        list: paid ? [{ id: 'r1', email: 'n***@example.com', status: 'You both got a free month', date: dayText(at(-5)) }, { id: 'r2', email: 'j***@example.com', status: 'Signed up, waiting for their first sign-in in the app', date: dayText(at(-1)) }] : [] },
+      invites: paid ? [{ id: 'i1', email: 'narrator@example.com', book: 'The Lighthouse', date: dayText(at(-8)), accepted: true, status: 'Accepted' }] : [],
+      dataRequests: {
+        copy: { label: 'Ask for a copy of your data', confirm: 'Press again to send the request. StellAurator answers by email within 30 days.', done: 'Your request is sent. StellAurator answers by email within 30 days.' },
+        delete: { label: 'Ask us to delete your account', confirm: 'Press again to send the request. Nothing is deleted by this page: StellAurator answers by email within 30 days, and payment records the law requires us to keep are the one exception.', done: 'Your request is sent. StellAurator answers by email within 30 days.' },
+      },
+      failed: [],
+    };
+  }
+  // In the demo the buttons answer as Wix would, and change nothing anywhere.
+  function demoAnswer(msg) {
+    if (!state.account || params.get('demo') == null) return;
+    setTimeout(function () {
+      var a = state.account;
+      if (msg.t === 'send') { a.thread = (a.thread || []).concat([{ id: 'd' + Date.now(), from: 'you', text: msg.text, at: new Date().toISOString() }]); drafts.message = ''; state.notice = { area: 'messages', tone: 'ok', text: 'Sent. StellAurator answers here and by email.' }; }
+      else if (msg.t === 'rate') { a.rating = { stars: msg.stars, comment: msg.comment, quoteOk: msg.quoteOk, at: new Date().toISOString() }; drafts.editingRating = false; state.notice = { area: 'rating', tone: 'ok', text: 'Thank you. Your rating is saved.' }; }
+      else if (msg.t === 'checkMessages') state.notice = { area: 'messages', tone: 'ok', text: 'Up to date.' };
+      else if (msg.t === 'removeComputer') { a.computers.list = a.computers.list.filter(function (s) { return s.id !== msg.seatId; }); a.computers.line = a.computers.list.length + ' of 3 computers'; state.notice = { area: 'computers', tone: 'ok', text: 'The computer is removed. Its place on your account is free now.' }; }
+      else if (msg.t === 'cancel') state.notice = { area: 'plan', tone: 'ok', text: 'Your plan is canceled. It stays active until ' + dayText(at(18)) + ', and nothing more is charged.' };
+      else if (msg.t === 'emailUpdates') { a.emailUpdates.on = !!msg.on; state.notice = { area: 'email', tone: 'ok', text: msg.on ? 'Saved. We will email you when there is a new version or news.' : 'Saved. We will not email you news. Messages about your account and your plan still come.' }; }
+      else if (msg.t === 'dataRequest') state.notice = { area: 'data', tone: 'ok', text: 'Your request is sent. StellAurator answers by email within 30 days.' };
+      state.busy = '';
+      render();
+    }, 300);
+  }
+
+  var demo = params.get('demo');
+  if (demo === 'trial' || demo === 'alpha' || demo === 'monthly' || demo === 'canceled' || demo === 'none') {
+    state = { view: 'ready', account: demoAccount(demo), busy: '', notice: null };
+  }
+
+  render();
+  if (inWix) {
+    send({ t: 'ready' });
+    var tries = 0;
+    var again = setInterval(function () { tries += 1; if (tries > 240) clearInterval(again); else send({ t: 'ready' }); }, 750);
+    window.addEventListener('message', function (e) { if (e.data && e.data.t === 'state') clearInterval(again); });
+  }
+})();
+</script>
+</body>
+</html>

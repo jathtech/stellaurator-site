@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StellAurator - my books</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="../theme.css">
+<!--
+  The face of account.stellaurator.com/my-books (site/wix/README.md section 19): an author's books on
+  "Books made with StellAurator". The Wix page (site/wix/pages/my-books.js) carries these messages to
+  backend/showcase.web.js, which always works on the signed-in member and nobody else.
+    this page -> Wix   { t:'ready' } { t:'save', entry } { t:'cover', base64, type, ref } { t:'remove', id }
+    Wix -> this page   { t:'state', view:'loading'|'ready'|'error', books, atCap, message }
+                       { t:'saved', ok, errors, error, book } { t:'cover', ref, ok, coverUrl, error }
+                       { t:'removed', id, ok, error }
+
+  The words are backend/showcaseLogic.js's; tests/authorBookshelf.test.mjs holds the two copies equal.
+  Remove asks for a second press before anything is sent.
+
+  ?demo=empty|pending|live shows the faces without Wix around it, for screenshots.
+-->
+<link rel="stylesheet" href="embed.css">
+<style>
+  .acct.books { display: block; max-width: 980px; padding: 14px 10px 24px; min-height: 0; }
+  .ahead { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+  .ahead h1 { margin: 2px 0 0; font-size: 32px; line-height: 1.1; }
+  .rule { margin: 6px 0 16px; font-size: 15px; line-height: 1.55; color: var(--ash); max-width: 760px; }
+  .list { display: grid; gap: 14px; }
+  .frame.book { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; padding: 16px 18px; }
+  .book img, .book .nocover { width: 74px; height: 111px; object-fit: cover; border-radius: 2px; border: 1px solid rgba(var(--silver), .2); background: rgba(255, 255, 255, .03); }
+  .book h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 23px; line-height: 1.15; color: var(--ivory); }
+  .book p { margin: 4px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--ash); }
+  .pill { display: inline-block; margin-top: 6px; padding: 3px 9px; border-radius: 2px; font-family: var(--font-caps); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid rgba(var(--glow), .45); color: var(--gilt); }
+  .pill[data-status="live"] { border-color: rgba(123, 212, 139, .6); color: #7BD48B; }
+  .pill[data-status="hidden"] { border-color: rgba(255, 122, 138, .55); color: #FFB3BD; }
+  .credit { font-size: 13.5px; }
+  .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .acts .btn { padding: 9px 14px; font-size: 11.5px; }
+  .btn.is-armed { border-color: #FF7A8A; color: #FFD3D9; box-shadow: 0 0 22px rgba(255, 122, 138, .25); }
+  .confirm { margin: 8px 0 0; font-size: 14px; color: #FFB3BD; }
+  .note { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--ash); }
+  .note[data-tone="error"] { color: #FF7A8A; }
+  .note[data-tone="ok"] { color: #7BD48B; }
+  .empty { font-size: 15px; color: var(--ash); }
+  form.frame { padding: 20px 22px; display: grid; gap: 14px; }
+  form h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 25px; color: var(--ivory); }
+  .field { display: grid; gap: 6px; }
+  .field > span, fieldset legend { font-family: var(--font-caps); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--sterling); }
+  fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+  input[type=text], input[type=url], textarea { font: 400 15px/1.5 var(--font-body); color: var(--ivory); background: rgba(255, 255, 255, .035); border: 1px solid rgba(var(--silver), .28); border-radius: var(--r); padding: 10px 12px; width: 100%; box-sizing: border-box; }
+  textarea { resize: vertical; min-height: 96px; }
+  input:focus, textarea:focus { outline: none; border-color: var(--gilt); box-shadow: 0 0 18px rgba(var(--glow), .2); }
+  .tick { display: flex; gap: 9px; align-items: baseline; font-size: 14.5px; line-height: 1.45; color: var(--ivory); }
+  .tick input { accent-color: var(--gilt); }
+  .row3 { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .hint { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ash); }
+  .count { font-size: 12px; color: var(--pewter); text-align: right; }
+  .cover { display: flex; gap: 14px; align-items: center; }
+  .cover img { width: 80px; height: 120px; object-fit: cover; border: 1px solid rgba(var(--silver), .2); border-radius: 2px; }
+  .creditbox { border: 1px solid rgba(var(--glow), .3); border-radius: var(--r); padding: 12px 14px; display: grid; gap: 10px; }
+  .creditbox .reward { color: var(--ivory); font-size: 14.5px; line-height: 1.5; margin: 0; }
+  .wording { font-family: ui-monospace, Consolas, monospace; color: var(--gilt); }
+  .errors { margin: 0; padding-left: 18px; color: #FF7A8A; font-size: 14px; line-height: 1.5; }
+  @media (max-width: 640px) { .frame.book { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .frame::before { animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="acct books" id="app" aria-live="polite"></div>
+
+<script>
+(function () {
+  var SITE = 'https://stellaurator.com/';
+  var inWix = window.parent !== window;
+  var params = new URLSearchParams(location.search);
+  var state = { view: 'loading', books: [], atCap: false, message: '' };
+
+  // The words (backend/showcaseLogic.js says the same; the tests hold them equal).
+  var FREE_SENTENCE = 'Books made with StellAurator is free. Your links go straight to your stores; StellAurator takes no commission. A book appears after we look at it, usually within a few days.';
+  var MADE_WITH_BOX = 'This audiobook was made with StellAurator';
+  var CREDIT_BOX = 'My audiobook credits StellAurator';
+  var CREDIT_WORDING = 'Recorded with StellAurator, stellaurator.com';
+  var CREDIT_REWARD = 'Credit StellAurator in your published audiobook and get a year of StellAurator free. Books that credit StellAurator will also be first in line for our promotions page when it opens.';
+  var CREDIT_ORDER = 'The audio\'s required credits come first: the title, the author, the narrator, and "The End". Put the StellAurator line after "The End" in the closing credits, or in the store description.';
+  var PROMO_HOW = 'Audible and ACX give rights holders free promo codes for their own audiobook: on ACX, open your title, then Promo Codes, and request a code for the United States. Other distributors offer the same. We use the code once, on StellAurator\'s own account, only to listen to the closing credits. If you would rather gift a copy, tick the box and we will email you where to send it.';
+  var STATUS_WORDS = { pending: 'Waiting for approval', live: 'On Books made with StellAurator', hidden: 'Hidden by StellAurator' };
+  var CREDIT_WORDS = { claimed: 'We are checking your credit', verified: 'Verified: your free year is on your account', declined: 'We could not find the credit' };
+  var FORMATS = [['audiobook', 'Audiobook'], ['ebook', 'Ebook'], ['print', 'Print']];
+  var LIMITS = { title: 120, author: 80, description: 600, links: 5, cover: 2 * 1024 * 1024 };
+
+  var editing = null;      // null = the list; {} = a new book; a book = editing it
+  var draft = null;        // the form's values, kept across re-renders
+  var armed = '';          // the id whose Remove was pressed once
+  var armTimer = null;
+  var notice = null;       // { tone, text }
+  var errors = [];
+  var busy = false;
+  var coverRef = 0;
+
+  function esc(t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+  function send(msg) { if (inWix) window.parent.postMessage(msg, '*'); else demoAnswer(msg); }
+  function safeCover(u) { return /^https:\/\/static\.wixstatic\.com\/media\/[A-Za-z0-9_~.%-]+$/.test(String(u || '')) ? u : ''; }
+
+  function newDraft(b) {
+    b = b || {};
+    var c = b.credit || null;
+    var links = (b.links || []).map(function (l) { return l.url; });
+    if (!links.length) links = [''];
+    return {
+      id: b.id || '', title: b.title || '', author: b.author || '', description: b.description || '',
+      formats: (b.formats && b.formats.length) ? b.formats.slice() : ['audiobook'], links: links,
+      coverUrl: b.coverUrl || '', preview: '', madeWith: !!b.id,
+      credits: !!c, where: c ? c.where : '', creditLink: c ? (c.link || '') : '', promoCode: c ? (c.promoCode || '') : '', gifted: c ? !!c.gifted : false,
+    };
+  }
+
+  function header() {
+    return '<div class="ahead"><div><p class="eyebrow"><a href="' + SITE + 'books.html" target="_top">Books made with StellAurator</a></p><h1 class="title">My books</h1></div>'
+      + (editing ? '' : '<button class="btn btn-gold" data-act="add"' + (state.atCap || state.view !== 'ready' ? ' disabled' : '') + '>Add a book</button>')
+      + '</div><p class="rule" data-rule>' + esc(FREE_SENTENCE) + '</p>';
+  }
+
+  function noteHtml() {
+    return notice ? '<p class="note" role="status" data-tone="' + esc(notice.tone) + '">' + esc(notice.text) + '</p>' : '';
+  }
+
+  function bookHtml(b) {
+    var on = armed === b.id;
+    var cover = safeCover(b.coverUrl);
+    var credit = b.credit ? '<p class="credit" data-credit="' + esc(b.credit.status) + '">' + esc(CREDIT_WORDS[b.credit.status] || CREDIT_WORDS.claimed) + '</p>' : '';
+    var formats = (b.formats || []).map(function (f) { var x = FORMATS.filter(function (p) { return p[0] === f; })[0]; return x ? x[1] : f; }).join(', ');
+    return '<article class="frame book" data-book="' + esc(b.id) + '">'
+      + (cover ? '<img src="' + esc(cover) + '" alt="">' : '<div class="nocover" aria-hidden="true"></div>')
+      + '<div><h2>' + esc(b.title) + '</h2><p>' + esc(b.author) + ' &middot; ' + esc(formats) + '</p>'
+      + '<span class="pill" data-status="' + esc(b.status) + '">' + esc(STATUS_WORDS[b.status] || b.status) + '</span>'
+      + credit
+      + '<div class="acts"><button class="btn btn-line" data-act="edit" data-id="' + esc(b.id) + '">Edit</button>'
+      + '<button class="btn btn-line' + (on ? ' is-armed' : '') + '" data-act="remove" data-id="' + esc(b.id) + '">' + (on ? 'Press again to remove' : 'Remove') + '</button></div>'
+      + (on ? '<p class="confirm" role="alert">Press again to remove this book from Books made with StellAurator. You can add it again later.</p>' : '')
+      + '</div></article>';
+  }
+
+  function listHtml() {
+    if (state.view === 'loading') return '<p class="empty">One moment, finding your books&hellip;</p>';
+    if (state.view === 'error') return '<p class="note" data-tone="error">' + esc(state.message || 'Your books could not be loaded.') + '</p>';
+    var books = state.books || [];
+    var cap = state.atCap ? '<p class="note">You can list up to 10 books. Remove one to add another.</p>' : '';
+    if (!books.length) return '<p class="empty" data-empty>You have not added a book yet. Press Add a book to list an audiobook you made with StellAurator.</p>' + cap;
+    return '<div class="list">' + books.map(bookHtml).join('') + '</div>' + cap;
+  }
+
+  function formHtml() {
+    var d = draft;
+    var fmt = FORMATS.map(function (f) {
+      return '<label class="tick"><input type="checkbox" data-format="' + f[0] + '"' + (d.formats.indexOf(f[0]) >= 0 ? ' checked' : '') + '> ' + f[1] + '</label>';
+    }).join('');
+    var links = d.links.map(function (l, i) {
+      return '<input type="url" inputmode="url" data-link="' + i + '" value="' + esc(l) + '" placeholder="https://www.audible.com/pd/..." aria-label="Link ' + (i + 1) + '">';
+    }).join('');
+    var preview = d.preview || safeCover(d.coverUrl);
+    var credit = d.credits
+      ? '<fieldset><legend>Where is the credit?</legend>'
+        + '<label class="tick"><input type="radio" name="where" value="description"' + (d.where === 'description' ? ' checked' : '') + '> In the store description</label>'
+        + '<label class="tick"><input type="radio" name="where" value="closing"' + (d.where === 'closing' ? ' checked' : '') + '> In the closing credits of the audio</label></fieldset>'
+        + (d.where === 'description' ? '<label class="field"><span>The store page whose description says it</span><input type="url" data-f="creditLink" value="' + esc(d.creditLink) + '" placeholder="https://"></label><p class="hint">We read the description there; nobody needs to buy the book.</p>' : '')
+        + (d.where === 'closing' ? '<label class="field"><span>A free promo code for the audiobook</span><input type="text" data-f="promoCode" value="' + esc(d.promoCode) + '" autocomplete="off" spellcheck="false"></label>'
+          + '<p class="hint" data-promo-how>' + esc(PROMO_HOW) + '</p>'
+          + '<label class="tick"><input type="checkbox" data-f="gifted"' + (d.gifted ? ' checked' : '') + '> I will gift a copy instead of a promo code</label>'
+          + '<p class="hint">The code is private: only StellAurator sees it, and it is never shown on the website.</p>' : '')
+      : '';
+    return '<form class="frame" novalidate data-form>'
+      + '<h2>' + (d.id ? 'Edit your book' : 'Add a book') + '</h2>'
+      + (errors.length ? '<ul class="errors" role="alert">' + errors.map(function (e) { return '<li>' + esc(e) + '</li>'; }).join('') + '</ul>' : '')
+      + '<label class="field"><span>Title</span><input type="text" data-f="title" maxlength="' + LIMITS.title + '" value="' + esc(d.title) + '" required></label>'
+      + '<label class="field"><span>Author name</span><input type="text" data-f="author" maxlength="' + LIMITS.author + '" value="' + esc(d.author) + '" required></label>'
+      + '<fieldset><legend>Format</legend><div class="row3">' + fmt + '</div><p class="hint">The audiobook is the book listed here. Ebook and print links can sit beside it.</p></fieldset>'
+      + '<label class="field"><span>Description</span><textarea data-f="description" maxlength="' + LIMITS.description + '">' + esc(d.description) + '</textarea><span class="count" data-count>' + d.description.length + ' / ' + LIMITS.description + '</span></label>'
+      + '<fieldset><legend>Links to your stores or your own site</legend>' + links
+      + (d.links.length < LIMITS.links ? '<button type="button" class="btn btn-line" data-act="addlink">Add another link</button>' : '')
+      + '<p class="hint">Paste the store page\'s full address. Tracking and affiliate parts are taken out, and nothing is added.</p></fieldset>'
+      + '<div class="field"><span>Cover</span><div class="cover">' + (preview ? '<img src="' + esc(preview) + '" alt="Cover preview" data-preview>' : '')
+      + '<input type="file" accept="image/jpeg,image/png" data-cover aria-label="Choose a cover image"></div><p class="hint">A JPEG or PNG, at most 2 MB, square or taller than it is wide.</p></div>'
+      + '<label class="tick"><input type="checkbox" data-f="madeWith"' + (d.madeWith ? ' checked' : '') + ' required> ' + esc(MADE_WITH_BOX) + '</label>'
+      + '<div class="creditbox"><p class="reward" data-reward>' + esc(CREDIT_REWARD) + '</p>'
+      + '<label class="tick"><input type="checkbox" data-f="credits"' + (d.credits ? ' checked' : '') + '> ' + esc(CREDIT_BOX) + '</label>'
+      + '<p class="hint">Suggested wording: <span class="wording" data-wording>' + esc(CREDIT_WORDING) + '</span></p>'
+      + '<p class="hint">' + esc(CREDIT_ORDER) + '</p>'
+      + credit + '</div>'
+      + '<div class="acts"><button type="submit" class="btn btn-gold"' + (busy ? ' disabled' : '') + '>' + (busy ? 'Sending&hellip;' : (d.id ? 'Save and send for review' : 'Send for review')) + '</button>'
+      + '<button type="button" class="btn btn-line" data-act="cancel">Cancel</button></div>'
+      + '</form>';
+  }
+
+  function render() {
+    var el = document.getElementById('app');
+    el.innerHTML = header() + noteHtml() + (editing ? formHtml() : listHtml());
+  }
+
+  function entryOf(d) {
+    return {
+      id: d.id || undefined, title: d.title, author: d.author, description: d.description, formats: d.formats,
+      links: d.links.filter(function (l) { return String(l).trim(); }), coverUrl: d.coverUrl, madeWith: d.madeWith === true,
+      credit: d.credits ? { credits: true, where: d.where, link: d.where === 'description' ? (d.creditLink || d.links[0] || '') : '', promoCode: d.where === 'closing' ? d.promoCode : '', gifted: d.where === 'closing' && d.gifted } : { credits: false },
+    };
+  }
+
+  // ---- input: kept in the draft without re-rendering, so typing never loses focus ----
+  document.addEventListener('input', function (e) {
+    if (!draft) return;
+    var t = e.target;
+    if (t.dataset.f && t.type !== 'checkbox') {
+      draft[t.dataset.f] = t.value;
+      if (t.dataset.f === 'description') { var c = document.querySelector('[data-count]'); if (c) c.textContent = t.value.length + ' / ' + LIMITS.description; }
+    }
+    if (t.dataset.link != null) draft.links[Number(t.dataset.link)] = t.value;
+  });
+
+  document.addEventListener('change', function (e) {
+    if (!draft) return;
+    var t = e.target;
+    if (t.dataset.format) {
+      var f = t.dataset.format;
+      draft.formats = draft.formats.filter(function (x) { return x !== f; });
+      if (t.checked) draft.formats.push(f);
+    } else if (t.dataset.f === 'madeWith' || t.dataset.f === 'gifted') {
+      draft[t.dataset.f] = t.checked;
+    } else if (t.dataset.f === 'credits') {
+      draft.credits = t.checked; render();
+    } else if (t.name === 'where') {
+      draft.where = t.value; render();
+    } else if (t.dataset.cover != null) {
+      pickCover(t.files && t.files[0]);
+    }
+  });
+
+  function pickCover(file) {
+    if (!file) return;
+    if (['image/jpeg', 'image/png'].indexOf(file.type) < 0) { errors = ['The cover must be a JPEG or PNG image.']; render(); return; }
+    if (file.size > LIMITS.cover) { errors = ['The cover is larger than 2 MB. Save it smaller and try again.']; render(); return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var url = String(reader.result || '');
+      var img = new Image();
+      img.onload = function () {
+        if (img.naturalWidth > img.naturalHeight) { errors = ['The cover must be square or taller than it is wide, like a book cover.']; render(); return; }
+        errors = [];
+        draft.preview = url;
+        coverRef += 1;
+        notice = { tone: '', text: 'Uploading the cover…' };
+        render();
+        send({ t: 'cover', base64: url.replace(/^data:[^,]*,/, ''), type: file.type, ref: coverRef });
+      };
+      img.onerror = function () { errors = ['The cover could not be read. Choose a JPEG or PNG image.']; render(); };
+      img.src = url;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  document.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!draft || busy) return;
+    var d = draft;
+    var local = [];
+    if (!d.title.trim()) local.push('Add the book\'s title.');
+    if (!d.author.trim()) local.push('Add the author\'s name.');
+    if (d.formats.indexOf('audiobook') < 0) local.push('Books made with StellAurator lists audiobooks. Tick Audiobook; you can add ebook and print links beside it.');
+    if (!d.madeWith) local.push('Tick "' + MADE_WITH_BOX + '". Only books made with StellAurator are listed here.');
+    if (local.length) { errors = local; render(); return; }
+    errors = []; busy = true; notice = null; render();
+    send({ t: 'save', entry: entryOf(d) });
+  });
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-act]'); if (!b) return;
+    var act = b.dataset.act;
+    if (act === 'add') { editing = {}; draft = newDraft(null); errors = []; notice = null; render(); }
+    else if (act === 'edit') {
+      var book = (state.books || []).filter(function (x) { return x.id === b.dataset.id; })[0];
+      if (book) { editing = book; draft = newDraft(book); errors = []; notice = null; render(); }
+    } else if (act === 'cancel') { editing = null; draft = null; errors = []; render(); }
+    else if (act === 'addlink') { if (draft.links.length < LIMITS.links) { draft.links.push(''); render(); } }
+    else if (act === 'remove') {
+      var id = b.dataset.id;
+      if (armed !== id) {
+        armed = id; clearTimeout(armTimer);
+        armTimer = setTimeout(function () { armed = ''; render(); }, 6000);
+        render(); return;
+      }
+      armed = ''; clearTimeout(armTimer);
+      send({ t: 'remove', id: id });
+    }
+  });
+
+  window.addEventListener('message', function (e) {
+    var d = e.data;
+    if (!d || !d.t) return;
+    if (d.t === 'state') {
+      Object.keys(state).forEach(function (k) { if (k in d) state[k] = d[k]; });
+      render();
+    } else if (d.t === 'saved') {
+      busy = false;
+      if (d.ok) { editing = null; draft = null; errors = []; notice = { tone: 'ok', text: 'Sent. Your book appears after we look at it, usually within a few days.' }; }
+      else { errors = d.errors && d.errors.length ? d.errors : [d.error || 'Your book could not be sent. Try again in a minute.']; }
+      render();
+    } else if (d.t === 'cover') {
+      if (d.ref !== coverRef || !draft) return;
+      if (d.ok) { draft.coverUrl = d.coverUrl; notice = { tone: 'ok', text: 'The cover is uploaded.' }; }
+      else { draft.preview = ''; notice = null; errors = [d.error || 'The cover could not be uploaded. Try again in a minute.']; }
+      render();
+    } else if (d.t === 'removed') {
+      notice = d.ok ? { tone: 'ok', text: 'Removed.' } : { tone: 'error', text: d.error || 'That book could not be removed.' };
+      render();
+    }
+  });
+
+  // ---- demo faces, for screenshots: ?demo=empty|pending|live ----
+  var demo = params.get('demo');
+  var DEMO_BOOK = {
+    id: 'demo1', title: 'The Lantern Orchard', author: 'Ada Example', description: 'A small town, a long winter, and a lantern that will not go out.',
+    formats: ['audiobook', 'ebook'], links: [{ url: 'https://www.audible.com/pd/The-Lantern-Orchard/B0EXAMPLE1', label: 'Audible' }], coverUrl: '',
+  };
+  function demoAnswer(msg) {
+    setTimeout(function () {
+      var reply = null;
+      if (msg.t === 'save') { reply = { t: 'saved', ok: true }; state.books = [Object.assign({}, msg.entry, { id: 'demo' + Date.now(), status: 'pending', links: (msg.entry.links || []).map(function (u) { return { url: u }; }) })].concat(state.books); }
+      if (msg.t === 'cover') reply = { t: 'cover', ref: msg.ref, ok: false, error: 'Covers are uploaded on the account site.' };
+      if (msg.t === 'remove') { reply = { t: 'removed', id: msg.id, ok: true }; state.books = state.books.filter(function (b) { return b.id !== msg.id; }); }
+      if (reply) window.postMessage(reply, '*');
+    }, 300);
+  }
+  if (demo === 'empty') state = { view: 'ready', books: [], atCap: false, message: '' };
+  if (demo === 'pending') state = { view: 'ready', books: [Object.assign({}, DEMO_BOOK, { status: 'pending', credit: { where: 'closing', promoCode: 'EXAMPLE7Q2K', status: 'claimed' } })], atCap: false, message: '' };
+  if (demo === 'live') state = { view: 'ready', books: [Object.assign({}, DEMO_BOOK, { status: 'live', credit: { where: 'description', link: DEMO_BOOK.links[0].url, status: 'verified' } })], atCap: false, message: '' };
+
+  render();
+  if (inWix) {
+    send({ t: 'ready' });
+    var tries = 0;
+    var again = setInterval(function () { tries += 1; if (tries > 240) clearInterval(again); else send({ t: 'ready' }); }, 750);
+    window.addEventListener('message', function (e) { if (e.data && e.data.t === 'state') clearInterval(again); });
+  }
+})();
+</script>
+</body>
+</html>
